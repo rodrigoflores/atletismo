@@ -1,0 +1,26 @@
+<h2>Itens de treino</h2>
+
+
+<table>
+  <tr>
+    <th>Descrição</th>
+	<th>Repetição</th>
+	<th>Distância</th>
+	<th>Intensidade</th>
+	<th>Descanso</th>
+  </tr>  
+
+  <%@itensTreino.each do |item|%>
+  <tr>
+    <td><%=h item.descricao%></td> 
+	<td><%=h item.repeticao%></td>
+	<td><%=h item.distancia%></td>
+	<td><%=h item.intensidade%></td>
+	<td><%=h item.descanso%></td> 
+	<td><%= link_to 'Remover', item_treino_path(item), :confirm => 'Você tem certeza?', :method => :delete %></td>   
+  </tr>  
+  <%end%>
+</table>
+
+<%=link_to "Criar novo item", new_item_treino_path()%>
+

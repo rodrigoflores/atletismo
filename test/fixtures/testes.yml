@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nome: MyString
+  data: 2009-04-28
+  minutos: 1
+  segundos: 1
+  decimos: 1
+  metros: 1
+  centimetros: 1
+  kg: 9.99
+  clima: MyString
+  periodo: MyString
+  comentarios: MyText
+
+two:
+  nome: MyString
+  data: 2009-04-28
+  minutos: 1
+  segundos: 1
+  decimos: 1
+  metros: 1
+  centimetros: 1
+  kg: 9.99
+  clima: MyString
+  periodo: MyString
+  comentarios: MyText

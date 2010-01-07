@@ -1,0 +1,13 @@
+<% if @provas_distancia %>
+<form action="provas/distancia/" method="GET" accept-charset="utf-8">
+		<% if @voltar_link %>
+        <label> Listando as provas de <%= @distancia %> metros. (<%= link_to 'Apagar o filtro', atleta_provas_path(@atleta)  %>)</label>
+        <br />
+		<% end %>
+	 	<p><label>Filtrar por distância: </label>
+		<input type="text" name="distancia" />  
+		<input type="submit" value="Filtrar" />
+		
+<br /><br /></p>
+</form>
+<% end %>

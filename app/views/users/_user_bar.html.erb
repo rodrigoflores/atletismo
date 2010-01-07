@@ -1,0 +1,23 @@
+
+<div id="menu">
+  		<ul>
+  			<%if !logged_in?%>
+				<% if request.path != "/" %>
+				<li><%= link_to "Home", :controller => 'welcome'%></li>
+				<%end%>
+				<% if request.path != "/signup" %>
+				<li><%= link_to "Cadastre-se", :controller => 'users', :action => 'new' %></li>
+				<% end %>
+			<%end%>
+			
+  		</ul>
+  	</div>
+	
+	<div id="login" >
+		<% if logged_in? %>
+		  <%= current_user.email %>(<%= link_to "Sair", logout_path, { :title => "Log out" }    %>)		
+		<% else %>
+			<%= render :partial => 'sessions/new' %>
+		<% end %>
+	</div>
+	

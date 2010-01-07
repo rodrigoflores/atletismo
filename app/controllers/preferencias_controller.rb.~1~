@@ -1,0 +1,223 @@
+# encoding: utf-8
+
+class PreferenciasController < ApplicationController
+
+  def index
+    if list_exercicio
+      @mostrar_exercicios = true
+    elsif list_metodo
+      @mostrar_metodos = true
+    elsif list_tipos
+      @mostrar_tipos = true
+    end
+    
+    @corPeriodo = CorPeriodo.find(:all, :conditions => {:treinador_id => current_treinador.id})   
+    @all_treino_cores = CorTreino.find(:all) # :conditions => {:treinador_id => current_treinador.id} não funciona
+    @treino_cores = []
+    @all_treino_cores.each do |treino_cor|
+      
+      if treino_cor.tipo.treinador.id == current_treinador.id
+        @treino_cores << treino_cor
+      end
+    end
+    
+  end
+  
+
+  def novoPeriodoCor
+      @corPeriodo = CorPeriodo.new
+  end
+
+  def novoTipoTreinoCor
+      @corTreino = CorTreino.new
+      @listagem_tipo = Tipo.find(:all, :conditions => {:treinador_id => current_treinador.id})
+      if @tipo_id = params[:tipo_id]
+      end
+  end
+
+
+  def criaPeriodoCor
+    @corPeriodo = CorPeriodo.new(params[:cor_periodo])
+    @corPeriodo.save
+    redirect_to :action => "index"
+  end
+
+  def criaTreinoCor    
+    if @corTreino = CorTreino.find_by_tipo_id(params[:tipo_id])
+      @corTreino.cor = params[:cor_treino][:cor]
+    else
+      @corTreino = CorTreino.new(params[:cor_treino])    
+      @corTreino.tipo_id = params[:tipo_id]
+    end
+    @corTreino.save
+    
+    redirect_to :action => "index"
+  end
+
+  def removePeriodoCor
+    @corPeriodo = CorPeriodo.find(params[:id])
+    @corPeriodo.cor = "FFFFFF"
+    @corPeriodo.save 
+    redirect_to :action => "index"
+  end
+
+  def removeTipoTreinoCor
+    @corTreino = CorTreino.find(params[:id])
+    @corTreino.cor = "FFFFFF"
+    @corTreino.save
+    redirect_to :action => "index"
+  end
+
+  def alterarTipoTreinoCor
+    @treino_cores = CorTreino.find(:all) ### attention: somente do treinador logado
+    @corTreino = CorTreino.find(params[:id])
+  end
+  
+  def apagarTipoTreinoCor
+    @corTreino = CorTreino.find(params[:id])
+    @corTreino.destroy
+    redirect_to :action => "index"
+  end
+
+  def alterarPeriodoCor
+    @corPeriodo = CorPeriodo.find(params[:id])
+  end
+
+
+  def atualizaPeriodoCor
+    @corPeriodo = CorPeriodo.find(params[:id])
+    @corPeriodo.periodo = params[:cor_periodo][:periodo]
+    @corPeriodo.cor = params[:cor_periodo][:cor] 
+    di = params[:cor_periodo]['inicio(1i)'] + '-' + params[:cor_periodo]['inicio(2i)'] + '-' + params[:cor_periodo]['inicio(3i)']
+    df = params[:cor_periodo]['fim(1i)'] + '-' + params[:cor_periodo]['fim(2i)'] + '-' + params[:cor_periodo]['fim(3i)']
+    @corPeriodo.inicio = Date.parse(di)
+    @corPeriodo.fim = Date.parse(df) 
+    
+    @corPeriodo.save
+    redirect_to :action => "index"
+  end
+  
+
+  def create_tipo
+    @tipo = Tipo.new(params[:tipo])
+    @tipo_existe = Tipo.first(:conditions => {:treinador_id => current_treinador.id, :nome => @tipo.nome})
+    if not @tipo_existe
+      @tipo.treinador_id = current_treinador.id
+      @tipo.save
+      @metodo = Metodo.new()
+      @metodo.nome = "nenhum"
+      @metodo.tipo_id = @tipo.id
+      @metodo.save
+      @exercicio = Exercicio.new()
+      @exercicio.nome = "nenhum"
+      @exercicio.metodo_id = @metodo.id
+      @exercicio.save
+      
+      @corTreino = CorTreino.new()
+      @corTreino.cor = "#FFFFFF"
+      @corTreino.tipo_id = @tipo.id
+      @corTreino.save
+      
+      
+      flash[:notice] = "O tipo ", @tipo.nome, " foi criado."  
+      redirect_to :action => "index", :tipo_id => @tipo.id
+    else
+      flash[:notice] = "O tipo ", @tipo.nome, " foi selecionado." 
+      redirect_to :action => "index", :tipo_id => @tipo_existe.id
+    end
+    
+  end
+
+  def create_metodo
+    @metodo = Metodo.new(params[:metodo])
+    @metodo_existe = Metodo.first(:conditions => {:tipo_id => params[:tipo_id], :nome => @metodo.nome})
+    if not @metodo_existe
+      @metodo.tipo_id = params[:tipo_id]
+      @metodo.save
+      @exercicio = Exercicio.new()
+      @exercicio.nome = "nenhum"
+      @exercicio.metodo_id = @metodo.id
+      @exercicio.save
+      flash[:notice] = "O metodo ", @metodo.nome, " foi criado."  
+      redirect_to :action => "index", :metodo_id => @metodo.id
+    else
+      flash[:notice] = "O metodo ", @metodo.nome, " foi selecionado."  
+      redirect_to :action => "index", :metodo_id => @metodo_existe.id
+    end
+  end
+
+  def create_exercicio
+    @exercicio = Exercicio.new(params[:exercicio])
+    @exercicio_existe = Exercicio.first(:conditions => {:metodo_id => params[:metodo_id], :nome => @exercicio.nome})
+    if not @exercicio_existe
+      @exercicio.metodo_id = params[:metodo_id]
+      @exercicio.save
+      flash[:notice] = "O exercicio ", @exercicio.nome, " foi criado."
+      redirect_to :action => "index" 
+    else
+      flash[:notice] = "O exercicio ", @exercicio.nome, " já existe..."
+      redirect_to :action => "index", :metodo_id => @exercicio.metodo_id   
+    end
+    
+  end
+  
+
+  def destroy_tipo
+    @tipo = Tipo.find_by_id(params[:id])
+    @corTreino = CorTreino.find_by_tipo_id(params[:id])
+    ItemTreino.each_by_cor_treino_id(@corTreino.id) do |item_treino|
+      cor_treino = CorTreino.new
+      cor_treino.cor = "FFFFFF"
+      cor_treino.save
+      item_treino.cor_treino = cor_treino
+    end
+    #implementar: modificar o item_treino (senao da erro)
+        
+    @corTreino.destroy    
+    @tipo.destroy
+      
+    redirect_to :action => "index"    
+  end
+  
+  def destroy_metodo
+    @metodo = Metodo.find_by_id(params[:id])
+    @metodo.destroy
+    #implementar: modificar o item_treino (senao da erro)
+    
+    redirect_to :action => "index"    
+  end
+  
+  def destroy_exercicio
+    @exercicio = Exercicio.find_by_id(params[:id])
+    @exercicio.destroy
+    #implementar: modificar o item_treino (senao da erro)
+    
+    redirect_to :action => "index"
+  end  
+  
+  protected
+  
+  def list_tipos
+    if @tipos = Tipo.find(:all,:conditions => {:treinador_id => current_treinador.id})    
+      return true
+    end
+  end
+  
+  def list_metodo    
+    if @tipo = Tipo.find_by_id(params[:tipo_id])
+      @metodos = Metodo.find(:all,:conditions =>  ['tipo_id = ? and nome not like ?', @tipo.id, "nenhum"])
+      return true
+    end
+  end
+  
+  def list_exercicio    
+    if @metodo = Metodo.find_by_id(params[:metodo_id])
+      @tipo = @metodos.tipo
+      @exercicios = Exercicio.find(:all,:conditions =>  ['metodo_id = ? and nome not like ?', @metodo.id, "nenhum"] )
+      return true
+    end
+  end
+  
+
+
+end

@@ -1,0 +1,47 @@
+<h1>Editando o teste</h1>
+
+<% form_for([  @atleta, @teste ]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :data %><br />
+    <%= f.date_select :data %>
+  </p>
+   <p>
+  	<p>
+  	<label>Tempo: </label>
+         <%= f.text_field(:minutos, :size => 5) %> <label>' </label>
+         <%= f.text_field (:segundos, :size => 5) %> <label>'' </label> 
+         <%= f.text_field (:decimos, :size => 5) %>
+  </p>
+    <%= f.label :metros %><br />
+    <%= f.text_field :metros %>
+  </p>
+  <p>
+    <%= f.label :centimetros, "Centímetros" %><br />
+    <%= f.text_field :centimetros %>
+  </p>
+  <p>
+    <%= f.label :kg %><br />
+    <%= f.text_field :kg %>
+  </p>
+  <p>
+    <%= f.label :clima %><br />
+    <%= f.text_field :clima %>
+  </p>
+  <p>
+    <%= f.label :periodo, "Período" %><br />
+    <%= f.text_field :periodo %>
+  </p>
+  <p>
+    <%= f.label :comentarios, "Comentários" %><br />
+    <%= f.text_area :comentarios %>
+  </p>
+  <p>
+    <%= f.submit 'Atualizar' %>
+  </p>
+<% end %>

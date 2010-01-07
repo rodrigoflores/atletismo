@@ -1,0 +1,44 @@
+
+<table class="preferencies">
+  <thead>
+    <th>
+      Período
+    </th>
+	<th>
+		Início
+	</th>
+	<th>
+		Fim
+	</th>
+    <th>
+      Cor
+    </th>
+  </thead>
+  <tbody>
+    <% @corPeriodo.each do |cp| %>
+      <tr>
+        <td>
+          <%= cp.periodo %>
+        </td>
+		<td>
+		  <%= cp.inicio %>
+		</td>
+		<td>
+		  <%= cp.fim %>
+		</td>
+        <td style="background-color: #<%= cp.cor %>"  >
+                
+        </td>
+        <td>
+          <%= link_to "Alterar",  :action => "alterarPeriodoCor" , :id => cp.id%>
+        </td>
+
+        <td>
+          <%= link_to "Restaurar padrão",  :action => "removePeriodoCor" , :id => cp.id%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Criar nova preferência", :action => "novoPeriodoCor" %>

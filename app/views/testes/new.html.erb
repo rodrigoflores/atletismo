@@ -1,0 +1,46 @@
+<h1>Novo teste</h1>
+
+<% form_for([  @atleta, @teste ]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :data %><br />
+    <%= f.date_select :data %>
+  </p>
+  <p>
+  	<label>Tempo: </label>
+         <%= f.text_field(:minutos, :size => 5) %> <label>' </label>
+         <%= f.text_field (:segundos, :size => 5) %> <label>'' </label> 
+         <%= f.text_field (:decimos, :size => 5) %>
+  </p>
+  <p>
+    <label>Distância: </label>
+    <%= f.text_field :metros, :size => 5 %><label> m </label> 
+    <%= f.text_field :centimetros, :size => 5 %> <label> cm </label>
+</p>
+  
+<p>
+     <label>Peso: </label>
+     <%= f.text_field :kg , :size => 5%> <label>kg</label>
+  </p>
+  <p>
+    <%= f.label :clima %><br />
+    <%= f.text_field :clima %>
+  </p>
+  <p>
+    <%= f.label :periodo, "Período de treinamento" %><br />
+    <%= f.text_field :periodo %>
+  </p>
+  <p>
+    <%= f.label :comentarios, "Comentários" %><br />
+    <%= f.text_area :comentarios, :rows => 5  %>
+  </p>
+  <p>
+    <%= f.submit 'Criar' %>
+  </p>
+<% end %>
+

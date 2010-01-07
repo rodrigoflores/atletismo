@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt_BR" lang="pt_BR">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Virtual Trainer</title>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "prototype" , "effects" %>
+  <%= active_scaffold_includes %>
+  <%= stylesheet_link_tag 'vt' %>
+</head>
+
+<% if (request.path == "/")
+bodyclass="page_home"
+else
+bodyclass=request.path.split("/").collect{|a| " page_" + a + " "}.to_s
+end %>
+
+<body class="<%= bodyclass %>">
+<div id="geral">
+  <div id="banner">
+  	<div id="banner-esq"></div>
+  	<div id="vt"> <%= image_tag "vt.png" %></div>
+  	<div id="banner-dir"></div>
+  </div>  
+  <div id="barra">
+  	
+	<%= render :partial => 'users/user_bar' %>
+  </div>
+	<div id="lateral">
+		<div id="content_top">
+			<div id="content_top_left"></div>
+			<div id="content_top_right"></div>
+		</div>
+		<div id="lateral-texto">
+			 <% if user_is_atleta? %>
+			 <%= render :partial => "atletas/side_menu"   %>
+			<% else %>
+			 <%= render :partial => "treinadores/side_menu" %>
+			<% end %>
+		</div>
+	  	<div id="content_bottom">
+	  		<div id="content_bottom_left"></div>
+			<div id="content_bottom_right"></div>
+	  	</div>
+    </div>
+  <div id="conteudo">
+  		<div id="content_top">
+			<div id="content_top_left"></div>
+			<div id="content_top_right"></div>
+		</div>
+		<div id="conteudo-texto">
+			<p style="color: green"><%= flash[:notice] %></p>
+			<p style="color: red"><%= flash[:error] %></p>
+			<p style="color: red"><%= flash[:alert] %></p>
+			<%= yield  %>
+		</div>
+		<div id="content_bottom">
+	  		<div id="content_bottom_left"></div>
+			<div id="content_bottom_right"></div>
+	  	</div>
+  </div>
+	<div id="rodape">
+  	<div id="rodape-esq"></div>
+  	<div id="rodape-text">Laboratório de Programação eXtrema - IME-USP</div>
+  	<div id="rodape-dir"></div>
+  </div>  
+</div>  
+
+</body>
+</html>

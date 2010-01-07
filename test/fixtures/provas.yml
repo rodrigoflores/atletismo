@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  data: 2009-03-26
+  competicao: MyString
+  atleta: 
+
+two:
+  data: 2009-03-26
+  competicao: MyString
+  atleta: 

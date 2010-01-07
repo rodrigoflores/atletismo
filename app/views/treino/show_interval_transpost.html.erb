@@ -1,0 +1,45 @@
+<h1>Calendário de <%=h @atleta.usuario.name %></h1>
+
+<%= link_to 'Treino deste mês', :action => 'show_month', :atleta_id => @atleta, :data => Date.current %> <br />
+<table border=1 height="100%" width="100%">
+  <thead>
+    <th>
+      Dia/Semana  
+    </th>
+   <%@matrizDeTreinos.each_with_index do |semana,index|%>
+        <th>
+            <%=@data.beginning_of_month.beginning_of_week + index*7%> até
+            <%=@data.beginning_of_month.beginning_of_week + index*7 + 6%>
+        </th>
+  <%end%>
+  </thead>  
+  <tbody> 
+  <%@diasDaSemana.each_with_index do |dia,index|%>
+    <tr>
+      <td>
+        <%=dia%>
+      </td>
+      <%(0...@matrizDeTreinos.size).each do |semana|%>
+        <td>
+          <%a = @matrizDeTreinos[semana] %>
+          <%a[index].itens_treino.each do |item_treino|%>
+              <div style="background-color:#<%=item_treino.cor_treino.cor%>">
+              <%=item_treino.metodo%> 
+			  <%=item_treino.exercicio%>
+              <%=item_treino.repeticao%> 
+              <%=item_treino.series%> 
+              <%=item_treino.volume%> 
+              <%=item_treino.pausa%>
+			  <%=item_treino.intervalo%> 
+              <br />
+            <%end%>  
+
+        </td>
+      <%end%>
+    </tr>
+  <%end%>
+ 
+  </tbody>
+</table>
+<br/>
+<%= link_to "Voltar", :controller => "treino", :action => "treino_atleta", :atleta_id => @atleta %>

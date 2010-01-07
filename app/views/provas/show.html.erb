@@ -1,0 +1,49 @@
+<p>
+  <b>Competicao:</b>
+  <%=h @prova.competicao %>
+</p>
+<% if @prova.distancia %>
+	<p>
+	  <b>Distância:</b>	
+	  <%=h @prova.distancia %>m
+	</p>
+<% end %>
+<% if @prova.data %>
+	<p>
+	  <b>Data:</b>
+	  <%=h @prova.data %>
+	</p>
+<% end %>
+<p>
+  <b>Tempo:</b>
+  <%=h @prova.tempo %>
+</p>
+
+<% if @prova.tipoTempo %>
+	<p>
+     <b>Tipo: </b>
+     <%=h @prova.tipoTempo %>
+    </p>
+<% end %>
+
+<% if @prova.clima != "" %>
+	<p>
+  		<b>Clima:</b>
+ 		<%=h @prova.clima %>
+	</p>
+<% end %>
+
+<% if @prova.colocacao %>
+	<p>
+	  <b>Colocação:</b>
+	  <%=h @prova.colocacao %>
+	</p>
+<% end %>
+
+<% if @prova.comentarios != "" %>
+	<p>
+	  <b>Comentários:</b>
+	  <%=h @prova.comentarios %>
+	</p>
+<% end %>
+

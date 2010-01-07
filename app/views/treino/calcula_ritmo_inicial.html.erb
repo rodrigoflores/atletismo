@@ -1,0 +1,52 @@
+<h1>Cálculo de ritmo</h1>
+
+<% form_tag :action => :calcula_ritmo do %>
+	<table>
+		<tr>
+			<th>Minutos</th>
+			<th>Segundos</th>
+			<th>Décimos</th>
+			<th>Distância</th>
+			<th>Intensidade</th>
+		</tr>
+		<tr>
+			<td><%= text_field(name = :tempo, value = :minutos, :size => 5, :maxlength => 4) %></td>
+			<td><%= text_field(name = :tempo, value = :segundos, :size => 5, :maxlength => 2) %></td>
+			<td><%= text_field(name = :tempo, value = :decimos, :size => 5, :maxlength => 1) %></td>
+			<td><%= text_field(name = :tempo, value = :distancia, :size => 5, :maxlength => 6) %></td>
+			<td><%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %></td>
+		</tr>
+	</table>
+	<font color="red">
+		<%=params[:error1]%>
+	</font>
+	<br/>
+	<%= submit_tag 'Calcular' %><br/>
+<% end %>
+
+<hr/>
+
+<% form_tag :action => :calcula_ritmo_parcial do %>
+	<table>
+		<tr>
+			<th>Ritmo Minutos</th>
+			<th>Ritmo Segundos</th>
+			<th>Ritmo Décimos</th>
+			<th>Distância do Tiro / Prova (m)</th>
+			<th>Parcial</th>
+		</tr>
+		<tr>
+			<td><%= text_field(name = :tempo, value = :minutos, :size => 5, :maxlength => 4) %></td>
+			<td><%= text_field(name = :tempo, value = :segundos, :size => 5, :maxlength => 2) %></td>
+			<td><%= text_field(name = :tempo, value = :decimos, :size => 5, :maxlength => 1) %></td>
+			<td><%= text_field(name = :tempo, value = :distancia, :size => 5, :maxlength => 6) %></td>
+			<td><%= text_field(name = :tempo, value = :parcial, :size => 5, :maxlength => 6) %></td>
+		</tr>
+	</table>
+	<font color="red">
+		<%=params[:error2]%>
+	</font>
+	<br/>
+	<%= submit_tag 'Calcular'%><br/>
+<% end %>
+

@@ -1,0 +1,10 @@
+class CorPeriodo < ActiveRecord::Base
+  belongs_to :treinador
+  validate :periodoValido
+  
+  def periodoValido
+    if self.fim < self.inicio
+      errors.add_to_base("Fim deve ser maior que início.")
+    end
+  end
+end

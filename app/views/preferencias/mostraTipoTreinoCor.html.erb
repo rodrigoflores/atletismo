@@ -1,0 +1,32 @@
+<table class="preferencies">
+  <thead>
+    <th>
+      Tipo
+    </th>
+    <th>
+      Cor
+    </th>
+  </thead>
+
+  <tbody>
+    <% @corTreino.each do |cp| %>
+      <tr>
+        <td>
+          <%= cp.tipo %>
+        </td>
+
+        <td style="background-color: #<%= cp.cor %>"  >
+                
+        </td>
+        <td>
+          <%= link_to "Alterar cor",  :action => "alterarTipoTreinoCor" , :id => cp.id%>
+        </td>
+        <td>
+          <%= link_to "Restaurar padrão",  :action => "removeTipoTreinoCor" , :id => cp.id%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Criar nova preferência", :action => "novoTipoTreinoCor" %>

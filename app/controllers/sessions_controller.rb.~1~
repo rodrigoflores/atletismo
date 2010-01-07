@@ -1,0 +1,64 @@
+# encoding: utf-8
+
+# This controller handles the login/logout function of the site.  
+class SessionsController < ApplicationController
+  # Be sure to include AuthenticationSystem in Application Controller instead
+  include AuthenticatedSystem
+
+  # render new.rhtml
+  def new
+    redirect_to "/"
+  end
+
+  def create
+    logout_keeping_session!
+    user = User.authenticate(params[:email], params[:password])
+    if user 
+      if !user.active?
+        flash[:error] = "Seu usuário não está ativado. Verifique seu e-mail pelo código de ativação"
+        redirect_to "/"
+        return 
+      end
+      
+      # Protects against session fixation attacks, causes request forgery
+      # protection if user resubmits an earlier form using back
+      # button. Uncomment if you understand the tradeoffs.
+      # reset_session
+      self.current_user = user
+      new_cookie_flag = (params[:remember_me] == "1")
+      handle_remember_cookie! new_cookie_flag
+
+      if user.treinador
+#        redirect_to('/users')
+        redirect_to :controller => "treinadores", :action => "index"
+
+      elsif user.atleta
+        atleta = Atleta.find_by_user_id(user.id)
+        if atleta.nasc.nil? || atleta.peso.nil? || atleta.altura.nil?
+          redirect_to :controller => "atletas", :action => "edit", :id => atleta
+          return
+        end
+        redirect_to :controller => "atletas", :action => "index"
+      end
+    
+    else
+      note_failed_signin
+      @email       = params[:email]
+      @remember_me = params[:remember_me]
+      flash[:notice] = "Usuário não cadastrado!"
+      redirect_back_or_default('/')
+    end
+  end
+
+  def destroy
+    logout_killing_session!
+    redirect_back_or_default('/')
+  end
+
+protected
+  # Track failed login attempts
+  def note_failed_signin
+    flash[:error] = "Não foi possível efetuar login como '#{params[:email]}'"
+    logger.warn "Failed login for '#{params[:email]}' from #{request.remote_ip} at #{Time.now.utc}"
+  end
+end

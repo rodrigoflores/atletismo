@@ -1,0 +1,40 @@
+<script type="text/javascript">
+function disableUserType(type_true,type_false) {
+	document.getElementById(type_false).checked=false;
+	document.getElementById(type_true).checked=true;
+	if(type_true == 'user_treinador')
+		document.getElementById('atleta_treinador_id').disabled=true;	
+	else
+		document.getElementById('atleta_treinador_id').disabled=false;	
+}
+</script>
+
+<h1>Cadastro de usuário</h1>
+<% @user.password = @user.password_confirmation = nil %>
+
+<%= error_messages_for :user, :header_message => "Erro!" , :message => "Há erros com os seguintes campos:" %>
+<% form_for :user, :url => users_path do |f| -%>
+
+<p><%= label_tag 'Nome:' %><br/>
+<%= f.text_field :name %></p>
+
+<p><%= label_tag 'E-mail:' %><br/>
+<%= f.text_field :email %></p>
+
+<p><%= label_tag 'Senha:' %><br/>
+<%= f.password_field :password %></p>
+
+<p><%= label_tag 'password_confirmation', 'Confirme sua senha:' %><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><%=	f.check_box :atleta, {:onclick => "disableUserType('user_atleta','user_treinador')"} %><%= label_tag 'Atleta' %>
+	<% if !@treinadores.nil? %>
+	- Treinadores: 
+		<%= select :atleta, :treinador_id, @treinadores.collect { |p| [p.usuario.name, p.id]},  { :include_blank => true }, {:disabled => true } %>
+	<% end %>
+</p>
+<p><%=	f.check_box :treinador, {:onclick => "disableUserType('user_treinador','user_atleta')"} %><%= label_tag 'Treinador' %></p>
+	
+<p>&nbsp;</p>
+<p><%= submit_tag 'Cadastrar-se' %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpar Dados" /></p>
+<% end -%>

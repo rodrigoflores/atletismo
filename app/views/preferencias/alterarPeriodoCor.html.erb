@@ -1,0 +1,43 @@
+<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js" type="text/javascript"></script>
+<script src="/javascripts/prototype.js"     type="text/javascript"></script>
+<script src="/javascripts/scriptaculous/src/scriptaculous.js" type="text/javascript"></script>
+<script src="/javascripts/yahoo.color.js"   type="text/javascript"></script>
+<script src="/javascripts/colorPicker.js"   type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/colorPicker.css">
+
+
+
+<% form_for @corPeriodo , :url => {:controller => "preferencias", :action => "atualizaPeriodoCor", :id => @corPeriodo.id }  do |c| %>
+	<%= c.error_messages %>
+  <p>
+    <%= label :periodo, "Periodo"%> <br />
+    <%= c.text_field :periodo, :value => @corPeriodo.periodo %>
+  </p>
+  <p>
+  	<%= label :inicio, "Início" %><br />
+	<%= c.date_select :inicio, :value => @corPeriodo.inicio %>
+  </p>	
+  <p>
+  	<%= label :fim, "Fim" %><br />
+	<%= c.date_select :fim, :value => @corPeriodo.fim %>
+  </p>	
+	
+  <p>
+    <%= label :cor, "Cor"%> <br />
+    <%= c.text_field :cor, :value => @corPeriodo.cor %> 
+    <script type="text/javascript">
+      new Control.ColorPicker('cor_periodo_cor', {
+      IMAGE_BASE: "/images/"
+    });
+    </script>
+  </p>
+  
+
+
+  <%= c.hidden_field :treinador_id, :value => self.current_user.id %>
+
+  <%= c.submit "Enviar" %>
+<% end%>
+
+
