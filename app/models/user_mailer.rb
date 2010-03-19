@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   EMAILPROJETO = "dontreply@atletismo.rodrigoflores.org"
   ASSUNTO_EMAIL = "Virtual Trainer - "
-  ENDERECO_SITE = "http://atletismo.rodrigoflores.org/"
+  ENDERECO_SITE = "http://atletismo.farok.net/"
   
   def signup_notification(user)
     setup_email(user)
