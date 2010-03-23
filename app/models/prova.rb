@@ -1,7 +1,8 @@
 class Prova < ActiveRecord::Base
   belongs_to :atleta
   
-  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
+  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, 
+  				  :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
 
   validate :default_values
 
@@ -10,6 +11,7 @@ class Prova < ActiveRecord::Base
   validates_numericality_of :minutos, :less_than => 60, :message => " deve ser menor do que 60."
   validates_numericality_of :segundos, :less_than => 60, :message => " deve ser menor do que 60."
   validates_numericality_of :decimos, :less_than => 10, :message => " deve ser menor do que 10."
+
 
   def default_values
     self.horas = 0 if self.horas.nil?

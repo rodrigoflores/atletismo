@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Prova do
   before(:each) do
-    @valid_attributes = {
-    }
     @prova = Prova.new
   end
 
@@ -13,7 +11,23 @@ describe Prova do
      @prova.tempo.should == "10' "
    end
    
+    it "should return a string with only the minutes if we have minutes different of zero and the others are zero" do
+     @prova.horas = 0
+     @prova.segundos = 0
+     @prova.decimos = 0
+     @prova.minutos = 10
+     @prova.tempo.should == "10' "
+   end
+
    it "should return a string with only the seconds if we only have seconds" do
+     @prova.segundos = 12
+     @prova.tempo.should == "12'' "
+   end
+
+   it "should return a string with only the seconds if we have seconds different of zero and the others are zero" do
+   	 @prova.horas = 0
+   	 @prova.minutos = 0
+   	 @prova.decimos = 0
      @prova.segundos = 12
      @prova.tempo.should == "12'' "
    end
