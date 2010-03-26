@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'
   map.signup '/cadastro', :controller => 'users', :action => 'new'
-  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.reset_password '/reset_password/:id', :controller => 'users', :action => 'reset_password_request'      
 
 
