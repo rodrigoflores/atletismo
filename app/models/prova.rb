@@ -22,10 +22,10 @@ class Prova < ActiveRecord::Base
 
   def tempo
     tmp = ""
-    tmp << "#{self.horas} h " if self.horas && self.horas != 0
-    tmp << "#{self.minutos}' " if self.minutos && self.minutos != 0
-    tmp << "#{self.segundos}'' " if self.segundos && self.segundos != 0
-    tmp << "#{self.decimos}" if self.decimos && self.decimos != 0
+    tmp << "#{self.horas} h " if (self.horas != nil) && self.horas != 0
+    tmp << "#{self.minutos}' " if (self.minutos != nil) && self.minutos != 0
+    tmp << "#{self.segundos}'' " if (self.segundos != nil) && self.segundos != 0
+    tmp << "#{self.decimos}" if (self.decimos != nil) && self.decimos != 0
     return tmp
   end
   
@@ -39,8 +39,7 @@ class Prova < ActiveRecord::Base
     min += self.horas*60.0 if self.horas
     return min
   end
-  
-  
+
 end
 
 

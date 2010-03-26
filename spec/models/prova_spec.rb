@@ -37,7 +37,23 @@ describe Prova do
      @prova.tempo.should == "1"
    end
    
+   it "should return a string with only the decimals if we have decimals different of zero and the others are zero" do
+     @prova.horas = 0
+     @prova.segundos = 0
+     @prova.decimos = 10
+     @prova.minutos = 0
+     @prova.tempo.should == "10"
+   end
+   
    it "should return a string with the seconds and minutes if we have both" do
+     @prova.minutos = 12
+     @prova.segundos = 15
+     @prova.tempo.should == "12' 15'' "
+   end
+   
+   it "should return a string with the seconds and minutes if we have both different of zero and the others are zero" do
+	 @prova.horas = 0
+	 @prova.decimos = 0
      @prova.minutos = 12
      @prova.segundos = 15
      @prova.tempo.should == "12' 15'' "
@@ -48,12 +64,43 @@ describe Prova do
      @prova.decimos = 9
      @prova.tempo.should == "12'' 9"
    end
+
+   it "should return a string with the seconds and decimals if we have both different of zero and the others are zero" do
+	 @prova.horas = 0
+	 @prova.decimos = 9
+     @prova.minutos = 0
+     @prova.segundos = 12
+     @prova.tempo.should == "12'' 9"
+   end
+   
+   it "should return a string with hours and seconds if we have they both" do
+   	@prova.horas = 4
+   	@prova.segundos = 15
+   	@prova.tempo.should == "4 h 15'' "
+   end
+
+   it "should return a string with hours and seconds if we have both different of zero and the others are zero" do
+   	@prova.horas = 4
+   	@prova.minutos = 0
+   	@prova.segundos = 15
+   	@prova.decimos = 0
+   	@prova.tempo.should == "4 h 15'' "
+   end   
    
    it "should return a string with the decimals and minutes if we have both" do
      @prova.minutos = 51
      @prova.decimos = 8
      @prova.tempo.should == "51' 8"
    end
+   
+   it "should return a string with the decimals and minutes if we have both different of zero and the others are zero" do
+     @prova.horas = 0
+     @prova.minutos = 51
+     @prova.segundos = 0
+     @prova.decimos = 8
+     @prova.tempo.should == "51' 8"
+   end
+   
  end
  
  describe "tempo em decimos" do
@@ -157,10 +204,16 @@ describe Prova do
      @prova.tempo_em_minutos.should == 23.1
    end
 
-
-
  end
-
-  
-
+ 
+ describe "default_values" do
+ 	it "should assign 0 if nil" do
+ 		@prova.valid?
+ 		@prova.horas.should == 0
+ 		@prova.minutos.should == 0
+ 		@prova.segundos.should == 0
+ 		@prova.decimos.should == 0
+ 	end
+ end
+ 
 end
