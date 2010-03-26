@@ -15,6 +15,17 @@ describe Atleta do
   }
   end
 
+  pending ("pending should have_one :user") do
+    it { should have_one :user }
+  end
+  it { should have_many :treinos }
+  it { should have_many :provas }
+  it { should have_many :testes }
+  pending ("pending should have_one :treinador") do
+    it { should have_one :treinador }
+  end
+  it { should have_many :participa_provas }
+
   it "should create a new instance given valid attributes" do
     Atleta.create!(@valid_attributes)
   end

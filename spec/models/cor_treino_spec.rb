@@ -1,15 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe ItemTreino do
+describe CorTreino do
   before(:each) do
     @valid_attributes = {
     }
   end
 
   it "should create a new instance given valid attributes" do
-    ItemTreino.create!(@valid_attributes)
+    CorTreino.create!(@valid_attributes)
   end
-  it {should belong_to (:treino)}
-  it {should belong_to (:cor_treino)}
 
+  it {should belong_to (:treinador)}
 end

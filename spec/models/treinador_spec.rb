@@ -9,4 +9,10 @@ describe Treinador do
   it "should create a new instance given valid attributes" do
     Treinador.create!(@valid_attributes)
   end
+
+  pending "should have one user on trainer" do
+    it { should have_one (:user)}
+  end
+  it { should have_many (:cor_treinos) }
+  it { should have_many (:cor_periodos) }
 end
