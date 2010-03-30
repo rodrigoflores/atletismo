@@ -9,7 +9,13 @@ describe ItemTreino do
   it "should create a new instance given valid attributes" do
     ItemTreino.create!(@valid_attributes)
   end
-  it {should belong_to (:treino)}
-  it {should belong_to (:cor_treino)}
+  
+  it "should belong to treino" do
+    should belong_to :treino
+  end
+  
+  it "should belong to cor_treino" do
+    should belong_to :cor_treino
+  end
 
 end

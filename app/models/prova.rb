@@ -30,13 +30,26 @@ class Prova < ActiveRecord::Base
   end
   
   def tempo_em_decimos
-    return 10*(60*self.minutos+self.segundos)+self.decimos
+    dec = 0
+    dec += 3600*self.horas if (self.horas != nil)
+    dec += 60*self.minutos if (self.minutos != nil)
+    dec += self.segundos if (self.segundos != nil)
+    dec = dec*10
+    dec += self.decimos if (self.decimos != nil)
+    
+    return dec
   end
   
   def tempo_em_minutos
-    min = self.minutos if self.minutos
-    min += self.segundos/60.0 if self.segundos
-    min += self.horas*60.0 if self.horas
+    min = 0
+    min += 60*self.horas if (self.horas != nil)    
+    min += self.minutos if (self.minutos != nil)
+    min += (1.0/60)*self.segundos if (self.segundos != nil)
+    min += (1.0/600)*self.decimos if (self.decimos != nil)
+    min *= 1000
+    min = min.floor()
+    min /= 1000.0
+
     return min
   end
 
