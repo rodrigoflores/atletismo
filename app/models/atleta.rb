@@ -21,16 +21,16 @@ class Atleta < ActiveRecord::Base
     usuario.name
   end
   
- has_one :user
+  has_one :user
  
- has_many :treinos
+  has_many :treinos
 
- has_many :provas
+  has_many :provas
  
- has_many :testes
- 
- has_one :treinador
-   
- has_many :participa_provas
+  has_many :testes
+
+  has_one :treinador
+
+  has_many :participa_provas
   
 end
