@@ -155,7 +155,7 @@ describe UsersController do
     describe "success" do
       before :each do
         @user = Factory(:user)
-        get :reset_password_request, :reset_password_token => @user.perishable_token
+        get :reset_password_request, :id => @user.perishable_token
       end
       it "should assign user" do 
           assigns[:user].should == @user
@@ -237,7 +237,7 @@ describe UsersController do
       
       it "should redirect to '/'" do
         put_it
-        should redirect_to :action => 'reset_password_request', :reset_password_token => @user.perishable_token
+        should redirect_to :action => 'reset_password_request', :id => @user.perishable_token
       end
       
     end

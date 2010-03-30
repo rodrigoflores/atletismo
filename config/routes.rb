@@ -1,13 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
  
  #Users
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
-  map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'
-  map.signup '/cadastro', :controller => 'users', :action => 'new'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'
   map.reset_password '/reset_password/:id', :controller => 'users', :action => 'reset_password_request'      
 
 
@@ -30,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
 
  #Routes padrão
   map.resources :users
-  map.resource :session
+  map.resource  :user_session
   map.resources :atletas, :has_many => :provas
   map.resources :atletas, :has_many => :testes
   map.resources :treinadores
