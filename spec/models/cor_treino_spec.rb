@@ -11,4 +11,16 @@ describe CorTreino do
   end
 
   it {should belong_to (:treinador)}
+
+  it "should return a corTreino by a user" do
+    @user = Factory(:user)
+    @user.save
+    @treinador = Treinador.new
+    @treinador.user_id = @user.id
+    @treinador.save
+    @cor = CorTreino.new
+    @cor.treinador_id = @treinador.id
+    @cor.save
+    @cor.findTreinoCor(@user).should == [@cor]
+  end
 end

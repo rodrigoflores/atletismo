@@ -12,7 +12,6 @@ class Prova < ActiveRecord::Base
   validates_numericality_of :segundos, :less_than => 60, :message => " deve ser menor do que 60."
   validates_numericality_of :decimos, :less_than => 10, :message => " deve ser menor do que 10."
 
-
   def default_values
     self.horas = 0 if self.horas.nil?
     self.minutos = 0 if self.minutos.nil?
@@ -52,7 +51,4 @@ class Prova < ActiveRecord::Base
 
     return min
   end
-
 end
-
-

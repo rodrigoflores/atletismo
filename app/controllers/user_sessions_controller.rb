@@ -6,12 +6,9 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    if @user_session = UserSession.find
-      @user_session.destroy 
-    end
-    unless @user_session = UserSession.find
-      @user_session = UserSession.new(params[:user_session])
-      flash[:notice] = "Login efetuado com sucesso." if @user_session.save
+    @user_session = UserSession.new(params[:user_session])
+    if @user_session.save 
+      flash[:notice] = "Login efetuado com sucesso."
     end
     redirect_to "/"
   end

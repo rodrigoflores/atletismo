@@ -1,8 +1,6 @@
 class TreinadoresController < ApplicationController
   
-  before_filter :login_required
-  before_filter :atleta_prohibited
-
+  before_filter :require_login, :atleta_prohibited
   
   def index
     @user = User.find(current_user)

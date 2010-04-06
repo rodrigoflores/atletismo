@@ -1,10 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PreferenciasController do
-
-  #Delete this example and add some real ones
-  it "should use PreferenciasController" do
-    controller.should be_an_instance_of(PreferenciasController)
+  before (:each) do
+    @pref = PreferenciasController.new
   end
+  
+  it "should create a PeriodoCor" do
+    @pref.novoPeriodoCor.should be_instance_of(CorPeriodo)
+  end
+  
+  it "should create a CorTreino" do
+    @pref.novoTipoTreinoCor.should be_instance_of(CorTreino)
+  end
+  
 
 end
