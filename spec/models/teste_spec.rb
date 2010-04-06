@@ -5,6 +5,10 @@ describe Teste do
 		@teste = Teste.new
 	end
 	
+	it "should belong to atleta" do
+    should belong_to :atleta
+  end
+	
 	describe "presence of name" do
 		it "should not be valid if there is no name" do
 			@teste.valid?.should be_false
