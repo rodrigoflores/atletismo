@@ -1,6 +1,6 @@
 class AtletasController < ApplicationController
   
-  before_filter :login_required
+
   before_filter :get_atleta, :except => [:index, :list, :create, :search_ranking, :ranking, :conditions_for_collection]
   before_filter :treinador_prohibited, :except => [:list, :show, :redirect_testes, :redirect_treinos, :redirect_provas, :row]
   before_filter :atleta_prohibited, :only => [:list]
@@ -36,7 +36,6 @@ class AtletasController < ApplicationController
     if user_is_treinador?
       render :active_scaffold => "show"
     end
-    
   end
   
   

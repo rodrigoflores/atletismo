@@ -24,8 +24,7 @@ end %>
   	<div id="banner-dir"></div>
   </div>  
   <div id="barra">
-  	
-	<%= render :partial => 'users/user_bar' %>
+	  <%= render :partial => 'users/user_bar' %>
   </div>
 	<div id="lateral">
 		<div id="content_top">
@@ -33,9 +32,10 @@ end %>
 			<div id="content_top_right"></div>
 		</div>
 		<div id="lateral-texto">
-			 <% if user_is_atleta? %>
+      <% if user_is_atleta? && user_has_validated? %>
 			 <%= render :partial => "atletas/side_menu"   %>
-			<% else %>
+			<% end %>
+      <% if user_is_treinador? && user_has_validated? %>
 			 <%= render :partial => "treinadores/side_menu" %>
 			<% end %>
 		</div>
