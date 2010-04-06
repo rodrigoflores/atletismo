@@ -1,16 +1,12 @@
 class PreferenciasController < ApplicationController
   
-  def mostraPeriodoCor
-    treinador = Treinador.find_by_user_id(self.current_user)
-    @corPeriodo = CorPeriodo.find(:all, :conditions => {:treinador_id => treinador.id})
-    
+  def mostraPeriodoCor    
+    @corPeriodo = CorPeriodo.findPeriodoCor(self.current_user)
   end
 
   def mostraTipoTreinoCor
-    treinador = Treinador.find_by_user_id(self.current_user)
-    @corTreino = CorTreino.find(:all, :conditions => {:treinador_id => treinador.id})
+    @corTreino = CorTreino.findTreinoCor(self.current_user)
   end 
-
 
   def novoPeriodoCor
       @corPeriodo = CorPeriodo.new
@@ -66,8 +62,7 @@ class PreferenciasController < ApplicationController
   def alterarPeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
   end
-
-
+  
   def atualizaPeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
     @corPeriodo.periodo = params[:cor_periodo][:periodo]

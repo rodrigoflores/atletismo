@@ -8,13 +8,7 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Por favor, ative sua conta'
     @body = ENDERECO_SITE + "activate/" + "#{user.perishable_token}"
   end
-  
-  def activation(user)
-    setup_email(user)
-    @subject    += 'Sua conta foi ativada!'
-    @body  = ENDERECO_SITE
-  end
-  
+    
   def forgot_password(user)
     setup_email(user)
     @subject += "Redefinir senha"
