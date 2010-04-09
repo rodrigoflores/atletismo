@@ -1,7 +1,7 @@
 
-<% form_for :user, :url => user_session_path do -%>
-  E-mail: <%= text_field_tag 'email', @email %>
-  Senha: <%= password_field_tag 'password', nil %>
+<% form_for :user_session, :url => user_session_path do |form| -%>
+  E-mail: <%= form.text_field 'email', :size => 15 %>
+  Senha: <%= form.password_field 'password', :size => 15 %>
 
   <%= submit_tag 'Entrar' %>  
 

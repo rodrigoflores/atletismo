@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
   def new
     @user = User.new
     @treinadores = Treinador.find(:all)
@@ -19,7 +18,7 @@ class UsersController < ApplicationController
   def activate
     @user = User.find_by_perishable_token(params[:activation_code])
     if @user
-      @user.reset_perishable_token!
+      @user.activate
       flash[:notice] = "Sua confirmação foi realizada com sucesso"    
     else
       flash[:notice] = "Código de ativação não encontrado"
