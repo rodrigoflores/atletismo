@@ -9,6 +9,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :perishable_token,          :null => false
       t.boolean :atleta
       t.boolean :treinador
+      t.integer :atleta_id
+      t.integer :treinador_id
+      t.boolean :activated
     end
   end
 

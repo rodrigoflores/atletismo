@@ -1,9 +1,7 @@
 class AtletasController < ApplicationController
   
+  before_filter :require_login
 
-  before_filter :get_atleta, :except => [:index, :list, :create, :search_ranking, :ranking, :conditions_for_collection]
-  before_filter :treinador_prohibited, :except => [:list, :show, :redirect_testes, :redirect_treinos, :redirect_provas, :row]
-  before_filter :atleta_prohibited, :only => [:list]
   
   active_scaffold :atleta do |config|
     config.label = "Atletas"
@@ -35,6 +33,8 @@ class AtletasController < ApplicationController
   def show
     if user_is_treinador?
       render :active_scaffold => "show"
+    else
+      @atleta = Atleta.find_by_user_id(current_user.id)
     end
   end
   

@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource  :user_session
   map.resources :atletas, :has_many => :provas
   map.resources :atletas, :has_many => :testes
-  map.resources :treinadores
+  map.resource :treinador
   
   
   # The priority is based upon order of creation: first created -> highest priority.

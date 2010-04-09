@@ -8,7 +8,7 @@ class CorPeriodo < ActiveRecord::Base
     end   
   end
   
-  def findPeriodoCor(user)
+  def self.findPeriodoCor(user)
     treinador = Treinador.find_by_user_id(user)
     @corPeriodo = CorPeriodo.find(:all, :conditions => {:treinador_id => treinador.id})  
   end

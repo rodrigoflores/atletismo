@@ -1,8 +1,6 @@
 class ProvasController < ApplicationController
   
-  before_filter :login_required
-  before_filter :get_atleta_com_seguranca
-  before_filter :treinador_prohibited, :only => [:new, :edit, :create, :update]
+  before_filter :require_login
   before_filter :provas_distancia_form
   
   

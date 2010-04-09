@@ -1,4 +1,6 @@
 class ItensTreinoController < ApplicationController
+   before_filter :require_login
+
   def index
     @itensTreino = ItemTreino.find(:all)
   end

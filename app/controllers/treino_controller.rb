@@ -1,8 +1,6 @@
 class TreinoController < ApplicationController
-  before_filter :login_required
-  before_filter :get_atleta_com_seguranca, :except => [:treinos, :calcula_ritmo, :calcula_ritmo_inicial, :calcula_ritmo_parcial, :porcentagem_to_decimal]
-  #before_filter :treinador_prohibited, :only => []
-  before_filter :atleta_prohibited, :only => [:cadastra_treino, :calcula_ritmo, :calcula_ritmo_parcial]
+  before_filter :require_login
+
   
   DECIMOS_EM_1_SEGUNDO = 10
   SEGUNDOS_EM_1_MINUTO = 60
@@ -94,9 +92,10 @@ class TreinoController < ApplicationController
     render 'show_interval_transpost'
   end
   
-  def treinos(atleta, data_inicial, data_final)
-    data_inicial = data_inicial.at_beginning_of_week
-    data_final = data_final.at_end_of_week
+  def treinos
+    atleta = Atleta.find(params[:atleta_id])
+    data_inicial = Time.parse(params[:from]).at_beginning_of_week
+    data_final = Time.parse(params[:to]).at_beginning_of_week
     filtro_treinos =  Treino.find(:all, :order => "date ASC", :conditions => [
       "atleta_id = :id AND date >= :begin AND date <= :end",
       { :id => atleta.id, :begin => data_inicial, :end => data_final}])
@@ -125,7 +124,7 @@ class TreinoController < ApplicationController
     else
       data = Date.strptime(params[:data],"%d/%m/%Y")
     end
-    @treinos = treinos(@atleta, data.beginning_of_week, data.end_of_week)
+    @treinos = treinos
   end
   
   def change_week

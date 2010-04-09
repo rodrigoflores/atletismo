@@ -10,6 +10,8 @@ class Atleta < ActiveRecord::Base
     return provasQueParticipa
  end
 =end
+
+  has_one :user
   
   attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas
  

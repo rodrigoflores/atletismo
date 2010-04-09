@@ -34,10 +34,10 @@ end %>
 			<div id="content_top_right"></div>
 		</div>
 		<div id="lateral-texto">
-      <% if user_is_atleta? && user_has_validated? %>
+      <% if user_is_atleta? %>
 			 <%= render :partial => "atletas/side_menu"   %>
 			<% end %>
-      <% if user_is_treinador? && user_has_validated? %>
+      <% if user_is_treinador? %>
 			 <%= render :partial => "treinadores/side_menu" %>
 			<% end %>
 		</div>

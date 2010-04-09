@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   
   ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default]='%d/%m/%Y'
     
-  helper_method :require_login, :current_session, :current_user, :user_has_validated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
+  helper_method :require_login, :current_session, :current_user, :user_has_activated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
   
   protected
 
@@ -29,8 +29,16 @@ class ApplicationController < ActionController::Base
     redirect_to "/" unless current_user
   end
 
-  def user_has_validated?
-    current_user.activated_at != nil
+  def require_atleta
+    redirect_to "/" unless user_is_atleta?
+  end
+
+  def require_treinador
+    redirect_to "/" unless user_is_treinador?
+  end
+
+  def user_has_activated?
+    current_user.activated
   end
 
   def current_session
@@ -66,33 +74,6 @@ class ApplicationController < ActionController::Base
   # /vendor/plugins/restful-authentication/generators/authenticated/templates/authenticated_system.rb
   # Inclui tambem o metodo "access_denied"
   
-  def treinador_prohibited
-    if (user_is_treinador?)
-      flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      redirect_to "/"
-    end
-  end
   
-  def atleta_prohibited
-    if (user_is_atleta?)
-      flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      redirect_to "/"
-    end
-  end
-  
-  
-  def get_atleta_com_seguranca
-    @atleta = Atleta.find(params[:atleta_id])
-
-    if (user_is_treinador?)
-      if @atleta.treinador_id != current_treinador.id
-        flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      end
-    else      
-      if @atleta != current_atleta
-        flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      end
-    end
-  end
   
 end
