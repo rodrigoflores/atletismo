@@ -9,6 +9,8 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save 
       flash[:notice] = "Login efetuado com sucesso."
+    else
+      flash[:error] = "Email ou senha inválidos."
     end
     redirect_to "/"
   end

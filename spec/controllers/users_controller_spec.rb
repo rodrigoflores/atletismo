@@ -96,6 +96,10 @@ describe UsersController do
         post_it
         should redirect_to "/"
       end 
+      it "should flash something" do
+        post_it
+        flash[:error].should == "Código de ativação não encontrado"
+      end
     end
   end
   

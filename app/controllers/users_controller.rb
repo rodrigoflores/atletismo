@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       @user.activate
       flash[:notice] = "Sua confirmação foi realizada com sucesso"    
     else
-      flash[:notice] = "Código de ativação não encontrado"
+      flash[:error] = "Código de ativação não encontrado"
     end
     redirect_to "/"
   end

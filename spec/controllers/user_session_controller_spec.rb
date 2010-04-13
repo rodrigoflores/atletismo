@@ -45,6 +45,10 @@ describe UserSessionsController do
           post_it
           should redirect_to "/"
         end
+        it "should flash something" do
+          post_it
+          flash[:error].should == "Email ou senha inválidos."
+        end
       end
 
     end
