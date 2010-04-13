@@ -5,4 +5,5 @@ Factory.define :user do |user|
   user.password_confirmation "123456"
   user.atleta true
   user.treinador false
+  user.activated true
 end

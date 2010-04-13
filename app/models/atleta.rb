@@ -1,16 +1,5 @@
 class Atleta < ActiveRecord::Base
  
-=begin
-  def provasQueParticipa
-    if provasParticipa.empty?
-      provasQueParticipa = "Nenhuma"
-    else
-      provasQueParticipa = provasParticipa 
-    end
-    return provasQueParticipa
- end
-=end
-
   has_one :user
   
   attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas
@@ -31,7 +20,7 @@ class Atleta < ActiveRecord::Base
  
   has_many :testes
 
-  has_one :treinador
+  belongs_to :treinador
 
   has_many :participa_provas
   

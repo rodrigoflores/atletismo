@@ -1,31 +1,30 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UserSessionsController do
+  before do 
+    activate_authlogic
+  end
+
   describe "not logged in" do 
     describe "post => create" do
       describe "success" do
         before :each do
-          if session = UserSession.find
-            session.destroy
-          end
           activate_authlogic
-          @user = Factory(:user)
-        end
-        def post_it 
+          @user = Factory(:user, :email => "a@b.com")
+					@user.activated = true
+					@user.save
           post :create, :user_session => {:password => "123456", :email => @user.email}
         end
 
-
         it "should create a session" do
-          post_it
           UserSession.find.user.should == @user
         end
+
         it "should redirect to /" do
-          post_it
           should redirect_to "/"
         end
+
         it "should flash something" do
-          post_it
           flash[:notice].should == "Login efetuado com sucesso."
         end
       end

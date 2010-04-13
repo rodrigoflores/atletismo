@@ -1,6 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
+  before do
+    activate_authlogic
+  end
   describe "get => new" do
     it "should render signup page" do
       get :new

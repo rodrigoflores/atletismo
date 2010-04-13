@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   
   ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default]='%d/%m/%Y'
     
-  helper_method :require_login, :current_session, :current_user, :user_has_activated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
+  helper_method :require_login, :require_atleta, :require_treinador, :current_session, :current_user, :user_has_activated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
   
   protected
 

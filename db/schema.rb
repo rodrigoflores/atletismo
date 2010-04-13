@@ -119,17 +119,20 @@ ActiveRecord::Schema.define(:version => 20091214162234) do
   end
 
   create_table "users", :force => true do |t|
-    t.string  "name",              :limit => 100, :default => ""
-    t.string  "email",             :limit => 100
-    t.string  "crypted_password",                                 :null => false
-    t.string  "password_salt",                                    :null => false
-    t.string  "persistence_token",                                :null => false
-    t.string  "perishable_token",                                 :null => false
-    t.boolean "atleta"
-    t.boolean "treinador"
-    t.integer "atleta_id"
-    t.integer "treinador_id"
-    t.boolean "activated"
+    t.string   "name",                :limit => 100, :default => ""
+    t.string   "email",               :limit => 100
+    t.string   "crypted_password",                                   :null => false
+    t.string   "password_salt",                                      :null => false
+    t.string   "persistence_token",                                  :null => false
+    t.string   "perishable_token",                                   :null => false
+    t.boolean  "atleta"
+    t.boolean  "treinador"
+    t.integer  "atleta_id"
+    t.integer  "treinador_id"
+    t.boolean  "activated"
+    t.string   "activation_code"
+    t.datetime "activated_at"
+    t.string   "password_reset_code"
   end
 
 end

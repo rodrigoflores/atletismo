@@ -19,17 +19,5 @@ describe CorPeriodo do
     @cor.valid?.should_not be_true
   end
   
-  it "should return a corPeriodo by a user" do
-    @user = Factory(:user)
-    @user.save
-    @treinador = Treinador.new
-    @treinador.user_id = @user.id
-    @treinador.save
-    @cor.treinador_id = @treinador.id
-    @cor.inicio = Date.new
-    @cor.fim = @cor.inicio.next()
-    @cor.save    
-    @cor.findPeriodoCor(@user).should == [@cor]    
-  end
 
 end
