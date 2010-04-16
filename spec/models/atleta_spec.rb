@@ -13,6 +13,8 @@ describe Atleta do
     :user_id => 1,
     :treinador_id => 1 
   }
+  
+  activate_authlogic
   end
 
   it { should have_one :user }
@@ -29,6 +31,15 @@ describe Atleta do
 
   it "should create a new instance given valid attributes" do
     Atleta.create!(@valid_attributes)
+  end
+  
+  describe "nome" do
+    it "should return the name of the athlete" do
+      @user = Factory(:user)
+      @atleta = Atleta.find(@user.atleta_id)
+      @atleta.nome.should == "omar"
+    end
+  
   end
  
 end
