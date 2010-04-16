@@ -20,8 +20,10 @@ class User < ActiveRecord::Base
     else
       atleta = Atleta.new
       atleta.user_id = self.id
+      atleta.treinador_id = self.treinador_id
       atleta.save
       self.atleta_id = atleta.id
+      self.treinador_id = nil
     end
     self.save
     UserSession.find.destroy
