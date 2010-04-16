@@ -1,7 +1,8 @@
 class Prova < ActiveRecord::Base
   belongs_to :atleta
   
-  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
+  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, 
+  				  :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
 
   validate :default_values
 
@@ -20,25 +21,34 @@ class Prova < ActiveRecord::Base
 
   def tempo
     tmp = ""
-    tmp << "#{self.horas} h " if self.horas && self.horas != 0
-    tmp << "#{self.minutos}' " if self.minutos && self.minutos != 0
-    tmp << "#{self.segundos}'' " if self.segundos && self.segundos != 0
-    tmp << "#{self.decimos}" if self.decimos && self.decimos != 0
+    tmp << "#{self.horas} h " if (self.horas != nil) && self.horas != 0
+    tmp << "#{self.minutos}' " if (self.minutos != nil) && self.minutos != 0
+    tmp << "#{self.segundos}'' " if (self.segundos != nil) && self.segundos != 0
+    tmp << "#{self.decimos}" if (self.decimos != nil) && self.decimos != 0
     return tmp
   end
   
   def tempo_em_decimos
-    return 10*(60*self.minutos+self.segundos)+self.decimos
+    dec = 0
+    dec += 3600*self.horas if (self.horas != nil)
+    dec += 60*self.minutos if (self.minutos != nil)
+    dec += self.segundos if (self.segundos != nil)
+    dec = dec*10
+    dec += self.decimos if (self.decimos != nil)
+    
+    return dec
   end
   
   def tempo_em_minutos
-    min = self.minutos if self.minutos
-    min += self.segundos/60.0 if self.segundos
-    min += self.horas*60.0 if self.horas
+    min = 0
+    min += 60*self.horas if (self.horas != nil)    
+    min += self.minutos if (self.minutos != nil)
+    min += (1.0/60)*self.segundos if (self.segundos != nil)
+    min += (1.0/600)*self.decimos if (self.decimos != nil)
+    min *= 1000
+    min = min.floor()
+    min /= 1000.0
+
     return min
   end
-  
-  
 end
-
-

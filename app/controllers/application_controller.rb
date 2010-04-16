@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   ActiveScaffold.set_defaults do |config| 
     config.ignore_columns.add [:created_at, :updated_at, :lock_version]
   end
-  
-  include AuthenticatedSystem
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -22,23 +20,41 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default]='%d/%m/%Y'
-  
-  
-  
-  helper_method :user_logged_in?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
+    
+  helper_method :require_login, :require_atleta, :require_treinador, :current_session, :current_user, :user_has_activated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
   
   protected
 
-  def user_logged_in?
-    session[:user_id]
+  def require_login
+    redirect_to "/" unless current_user
+  end
+
+  def require_atleta
+    redirect_to "/" unless user_is_atleta?
+  end
+
+  def require_treinador
+    redirect_to "/" unless user_is_treinador?
+  end
+
+  def user_has_activated?
+    current_user.activated
+  end
+
+  def current_session
+    @user_session ||= UserSession.find
+  end
+
+  def current_user
+    @current_user ||= current_session && current_session.record
   end
   
   def user_is_treinador?
-    user_logged_in? && current_user.treinador
+    @current_user.treinador if current_user
   end
   
   def user_is_atleta?
-    user_logged_in? && current_user.atleta
+    @current_user.atleta if current_user
   end
   
   def current_atleta
@@ -58,37 +74,6 @@ class ApplicationController < ActionController::Base
   # /vendor/plugins/restful-authentication/generators/authenticated/templates/authenticated_system.rb
   # Inclui tambem o metodo "access_denied"
   
-  def treinador_prohibited
-    if (user_is_treinador?)
-      flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      access_denied
-      #redirect_to root_path()
-    end
-  end
   
-  def atleta_prohibited
-    if (user_is_atleta?)
-      flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-      access_denied
-      #redirect_to root_path()
-    end
-  end
-  
-  
-  def get_atleta_com_seguranca
-    @atleta = Atleta.find(params[:atleta_id])
-
-    if (user_is_treinador?)
-      if @atleta.treinador_id != current_treinador.id
-        flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-        access_denied
-      end
-    else      
-      if @atleta != current_atleta
-        flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-        access_denied
-      end
-    end
-  end
   
 end

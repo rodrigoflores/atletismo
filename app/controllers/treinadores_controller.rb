@@ -1,9 +1,7 @@
 class TreinadoresController < ApplicationController
   
-  before_filter :login_required
-  before_filter :atleta_prohibited
+  before_filter :require_treinador
 
-  
   def index
     @user = User.find(current_user)
     @treinador = Treinador.find_by_user_id(@user)
@@ -15,7 +13,7 @@ class TreinadoresController < ApplicationController
   end
   
   def show
-    @treinador = Treinador.find(params[:id])
+    @treinador = Treinador.find_by_user_id(current_user.id)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @atleta }

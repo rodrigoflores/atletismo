@@ -16,3 +16,13 @@ Clone the repository
 4. On a terminal, type
     $ git clone git@github.com:rodrigoflores/atletismo.git
 5. Enjoy your cloned repository
+
+Execute the server
+------------------
+
+1. Install rcov 
+    $ gem install rcov
+2. Copy config/database.sqlite3.yml to config/database.yml
+3. Run the server
+    ./script/server
+

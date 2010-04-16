@@ -1,7 +1,7 @@
 
 <div id="menu">
   		<ul>
-  			<%if !logged_in?%>
+  			<%unless current_user%>
 				<% if request.path != "/" %>
 				<li><%= link_to "Home", :controller => 'welcome'%></li>
 				<%end%>
@@ -11,13 +11,14 @@
 			<%end%>
 			
   		</ul>
-  	</div>
+</div>
 	
-	<div id="login" >
-		<% if logged_in? %>
-		  <%= current_user.email %>(<%= link_to "Sair", logout_path, { :title => "Log out" }    %>)		
-		<% else %>
-			<%= render :partial => 'sessions/new' %>
-		<% end %>
-	</div>
+<div id="login" >
+  <% if current_session %>
+    <%= current_user.email %>(<%= link_to "Sair", user_session_path, :method => :delete %>)		
+  <% else %>
+    <%= render :partial => 'sessions/new' %>
+  <% end %>
+</div>
+
 	

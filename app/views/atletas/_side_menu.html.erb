@@ -5,6 +5,5 @@
 	<li><%= link_to 'Meus dados', @atleta %></li>
 	<li><%= link_to 'Minhas provas', atleta_provas_path(@atleta)  %></li>
 	<li><%= link_to 'Meus testes', atleta_testes_path(@atleta)  %></li>
-	<li><%= link_to 'Meus treinos', :controller => "treino", :action => "treino_atleta", :atleta_id => @atleta %></li>
 </ul>
 <%	end %>

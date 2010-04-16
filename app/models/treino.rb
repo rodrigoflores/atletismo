@@ -10,14 +10,10 @@ class Treino < ActiveRecord::Base
 
   def initialize(params = nil)
     super
-    self.text = "" unless self.text
-    self.comentario = "" unless self.comentario
+    self.text = "" unless self.text != nil
+    self.comentario = "" unless self.comentario != nil
   end
-  
-  def <=> treino
-    date <=> treino.date
-  end
- 
+   
   def transposeScheduler
   end
   

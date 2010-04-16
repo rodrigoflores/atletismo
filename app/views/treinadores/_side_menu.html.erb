@@ -4,9 +4,9 @@
 
 <%	end %>
 <ul>
-	<li><%= link_to 'Página inicial', treinadores_path %></li>
-	<li><%= link_to "Meus dados", :controller => "treinadores", :action => "show", :id => @treinador %></li>
-    <li><%= link_to "Cálculo de Ritmo", :controller => "treino", :action => "calcula_ritmo_inicial"%></li>
+
+	<li><%= link_to "Meus dados", treinador_path  %></li>
+    <li><%= link_to "Cálculo de Ritmo", :controller => "treinos", :action => "calcula_ritmo_inicial"%></li>
     <li><%= link_to "Preferências de cor e período", :controller => "preferencias", :action => "mostraPeriodoCor"%></li>
     <li><%= link_to "Preferências de cor e tipo de treino", :controller => "preferencias", :action => "mostraTipoTreinoCor"%></li>
 
@@ -18,7 +18,6 @@
 	<ul>
 	<li><%= link_to "Provas de #{@atleta.nome.split.first}", atleta_provas_path(@atleta)  %></li>
 	<li><%= link_to "Testes de #{@atleta.nome.split.first}", atleta_testes_path(@atleta)  %></li>
-	<li><%= link_to "Treinos de #{@atleta.nome.split.first}", :controller => "treino", :action => "treino_atleta", :atleta_id => @atleta %></li>
 
 	<li><%= link_to "Voltar para a lista dos atletas", :controller => "atletas", :action => "list" %></li>
 	<%	else %>

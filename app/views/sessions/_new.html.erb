@@ -1,15 +1,9 @@
 
-<% form_tag session_path do -%>
-E-mail: <%= text_field_tag 'email', @email %>
-Senha: <%= password_field_tag 'password', nil %>
+<% form_for :user_session, :url => user_session_path do |form| -%>
+  E-mail: <%= form.text_field 'email', :size => 15 %>
+  Senha: <%= form.password_field 'password', :size => 15 %>
 
-
-<!-- Uncomment this if you want this functionality
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
-
-<%= submit_tag 'Entrar' %>
+  <%= submit_tag 'Entrar' %>  
 
 <%= link_to 'Esqueceu sua senha?', forgot_password_request_url %>
 <% end -%>

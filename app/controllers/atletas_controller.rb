@@ -1,31 +1,16 @@
 class AtletasController < ApplicationController
   
-  before_filter :login_required
-  before_filter :get_atleta, :except => [:index, :list, :create, :search_ranking, :ranking, :conditions_for_collection]
-  before_filter :treinador_prohibited, :except => [:list, :show, :redirect_testes, :redirect_treinos, :redirect_provas, :row]
-  before_filter :atleta_prohibited, :only => [:list]
+  before_filter :require_login
+
   
   active_scaffold :atleta do |config|
     config.label = "Atletas"
-    config.actions.exclude :create, :update, :delete
+    config.actions.exclude :create, :update, :delete, :show
     config.columns = [:nome, :nasc, :peso, :altura]
     columns[:nome].sort_by  :method => 'nome'
     list.sorting = {:nome => 'ASC' }
     config.columns[:nome].search_sql = 'nome'
     config.search.columns << :nome
-    config.action_links.add "redirect_provas",
-    :type => :record,
-    :label => "Provas",
-    :inline => false
-    config.action_links.add "redirect_testes",
-    :type => :record,
-    :label => "Testes",
-    :inline => false
-    config.action_links.add "redirect_treinos",
-    :type => :record,
-    :label => "Treinos",
-    :inline => false
-    
   end
   
   def index
@@ -35,8 +20,9 @@ class AtletasController < ApplicationController
   def show
     if user_is_treinador?
       render :active_scaffold => "show"
+    else
+      @atleta = Atleta.find_by_user_id(current_user.id)
     end
-    
   end
   
   
@@ -47,6 +33,7 @@ class AtletasController < ApplicationController
   
   def edit
     @treinadores = Treinador.find(:all)
+    @atleta = Atleta.find(current_atleta)
   end
   
   
@@ -66,6 +53,7 @@ class AtletasController < ApplicationController
     if params[:atleta][:participa_provas].nil?
         params[:atleta][:participa_provas] = []
     end
+    @atleta = Atleta.find(current_atleta)
     for participa_prova_string in params[:atleta][:participa_provas] do
       if integer? participa_prova_string 
         pp = ParticipaProva.find(participa_prova_string)
