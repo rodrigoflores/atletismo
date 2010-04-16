@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
  #Users
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'
-  map.reset_password '/reset_password/:id', :controller => 'users', :action => 'reset_password_request'      
+  map.reset_password '/reset_password/:perishable_token', :controller => 'users', :action => 'reset_password_request'      
 
 
   map.connect "preferencia/mostraPeriodo", :controller => "preferencias", :action => "mostraPeriodoCor" 

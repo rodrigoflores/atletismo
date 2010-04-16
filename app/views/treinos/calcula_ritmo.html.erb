@@ -1,0 +1,37 @@
+<h1>Cálculo de ritmo</h1>
+
+<% form_tag :action => :calcula_ritmo do %>
+	<table>
+		<tr>
+			<th>Minutos</th>
+			<th>Segundos</th>
+			<th>Décimos</th>
+			<th>Distância</th>
+			<th>Intensidade</th>
+		</tr>
+		<tr>
+			<td><%=@minutos%></td>
+			<td><%=@segundos%></td>
+			<td><%=@decimos%></td>
+			<td><%=@distancia%></td>
+			<td><%=@intensidade%></td>
+		</tr>
+		
+	</table>
+	<br/>
+	<h2>Ritmo (min)</h2>
+	<table>
+		<tr>
+			<th>Minutos</th>
+			<th>Segundos</th>
+			<th>Decimos</th>
+		</tr>
+		<tr>
+			<td><%= @ritmo_minutos %></td>
+			<td><%= @ritmo_segundos %></td>
+			<td><%= @ritmo_decimos %></td>
+		</tr>
+	</table>
+	<br/>
+	<%= link_to "Novo cálculo", :controller => "treino", :action => "calcula_ritmo_inicial" %>
+<% end %>

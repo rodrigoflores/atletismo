@@ -26,7 +26,7 @@ describe UsersController do
           post_it
         }.should change(User,:count).by(1)
       end
-      it "should redirect to" do
+      it "should redirect to /" do
         post_it
         should redirect_to "/"
       end
@@ -162,7 +162,7 @@ describe UsersController do
     describe "success" do
       before :each do
         @user = Factory(:user)
-        get :reset_password_request, :id => @user.perishable_token
+        get :reset_password_request, :perishable_token => @user.perishable_token
       end
       it "should assign user" do 
           assigns[:user].should == @user
@@ -244,7 +244,7 @@ describe UsersController do
       
       it "should redirect to '/'" do
         put_it
-        should redirect_to :action => 'reset_password_request', :id => @user.perishable_token
+        should redirect_to :action => 'reset_password_request', :perishable_token => @user.perishable_token
       end
       
     end

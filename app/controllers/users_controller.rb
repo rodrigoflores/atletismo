@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
   
   def reset_password_request
-    unless @user = User.find_by_perishable_token(params[:id])
+    unless @user = User.find_by_perishable_token(params[:perishable_token])
       flash[:notice] = "Código de alteração de senha não encontrado."
       redirect_to "/"     
     end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Senha alterada com sucesso"
       redirect_to "/"
     else
-      redirect_to :action => 'reset_password_request', :id => @user.perishable_token
+      redirect_to :action => 'reset_password_request', :perishable_token => @user.perishable_token
     end
   end
   

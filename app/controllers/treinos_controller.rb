@@ -1,0 +1,3 @@
+class TreinosController < ApplicationController
+  
+end
