@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20091214162234) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "treinador_id"
-    t.integer  "treino_id"
   end
 
   create_table "cor_periodos", :force => true do |t|

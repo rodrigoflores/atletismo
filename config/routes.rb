@@ -1,5 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
- 
+
+
+  map.namespace :treinador do |treinador|
+  	treinador.resources :atletas, :has_many => :treinos
+  end 
+
  #Users
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'

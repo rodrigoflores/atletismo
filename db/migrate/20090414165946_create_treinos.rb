@@ -8,11 +8,9 @@ class CreateTreinos < ActiveRecord::Migration
       
       t.timestamps
     end
-    add_column :atletas, :treino_id, :integer
   end
 
   def self.down
     drop_table :treinos
-    remove_column :atletas, :treino_id;
   end
 end
