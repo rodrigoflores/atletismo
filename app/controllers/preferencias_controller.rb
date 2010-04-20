@@ -29,40 +29,22 @@ class PreferenciasController < ApplicationController
   def criaTreinoCor
     @corTreino = CorTreino.new(params[:cor_treino])
     @corTreino.save
-    
+ 
     redirect_to :action => "mostraTipoTreinoCor"
   end
 
   def removePeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
-    @corPeriodo.cor = "FFFFFF"
-    @corPeriodo.save 
+    @corPeriodo.delete
     redirect_to :action => "mostraPeriodoCor"
   end
 
   def removeTipoTreinoCor
     @corTreino = CorTreino.find(params[:id])
-    @corTreino.cor = "FFFFFF"
-    @corTreino.save
+    @corTreino.delete
     redirect_to :action => "mostraTipoTreinoCor"
   end
 
-  def alterarTipoTreinoCor 
-    @corTreino = CorTreino.find(params[:id])
-  end
-
-  def atualizaTipoTreinoCor
-    @corTreino = CorTreino.find(params[:id])
-    @corTreino.tipo = params[:cor_treino][:tipo]
-    @corTreino.cor = params[:cor_treino][:cor] 
-    @corTreino.save
-    redirect_to :action => "mostraTipoTreinoCor"
-  end
-
-  def alterarPeriodoCor
-    @corPeriodo = CorPeriodo.find(params[:id])
-  end
-  
   def atualizaPeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
     @corPeriodo.periodo = params[:cor_periodo][:periodo]
@@ -72,4 +54,11 @@ class PreferenciasController < ApplicationController
   end
 
 
+  def atualizaTipoTreinoCor
+    @corTreino = CorTreino.find(params[:id])
+    @corTreino.tipo = params[:cor_treino][:tipo]
+    @corTreino.cor = params[:cor_treino][:cor] 
+    @corTreino.save
+    redirect_to :action => "mostraTipoTreinoCor"
+  end
 end

@@ -9,7 +9,6 @@ describe UserSessionsController do
     describe "post => create" do
       describe "success" do
         before :each do
-          activate_authlogic
           @user = Factory(:user, :email => "a@b.com")
 					@user.activated = true
 					@user.save
@@ -31,7 +30,6 @@ describe UserSessionsController do
 
       describe "failure" do
         before :each do
-          activate_authlogic
         end
         def post_it 
           post :create, :user_session => {:password => "1234", :email => ""}
@@ -55,7 +53,6 @@ describe UserSessionsController do
   end
   describe "logged in" do
     before :each do
-      activate_authlogic
       @user = Factory(:user)
       UserSession.create(@user).should be_true
     end
