@@ -27,24 +27,13 @@ class AtletasController < ApplicationController
   
   
   def showProvas
-    @provas = @atleta.provas    
+    @provas = @atleta.provas
   end
   
   
   def edit
     @treinadores = Treinador.find(:all)
     @atleta = Atleta.find(current_atleta)
-  end
-  
-  
-  def create
-    @atleta = Atleta.new(params[:atleta])
-    if @atleta.save
-      flash[:notice] = 'Atleta foi criado com sucesso.'
-      redirect_to(@atleta)
-    else
-      render :action => "edit" 
-    end
   end
   
   
@@ -58,7 +47,7 @@ class AtletasController < ApplicationController
       if integer? participa_prova_string 
         pp = ParticipaProva.find(participa_prova_string)
       else 
-        pp = ParticipaProva.new(:atleta_id => params[:atleta][:id], :nome => participa_prova_string)
+        pp = ParticipaProva.new(:atleta_id => current_atleta.id, :nome => participa_prova_string)
       end
       participa_provas <<  pp
     end
@@ -72,14 +61,6 @@ class AtletasController < ApplicationController
   end
   
   
-  def destroy
-    @atleta.destroy
-    
-    redirect_to(atletas_url)
-  end
-  
-  
-  #Redireções
   def redirect_testes
     redirect_to atleta_testes_path(@atleta)
   end

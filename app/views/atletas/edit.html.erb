@@ -53,10 +53,12 @@
 
   <p id="provas">
   	Provas que corre: 
-	<input type="text" id="nova_prova"/>
+	<input id="nova_prova" type="text"/>
 	<input type="button" onclick="addProva()" value="+" alt="Adicionar Item" style="width: 30px"/>
-	<input type="button" onclick="removeProva()" value="-" alt="Excluir Item" style="width: 30px"/>
-	<!--<%= "collection_select :atleta, :participa_provas, @atleta.participa_provas, :id, :nome, {}, :multiple => true, :size => 5 "%>-->
+	<br />
+
+	<%= collection_select :atleta, :participa_provas, @atleta.participa_provas, :id, :nome, {}, :multiple => true, :size => 5 %>
+  <input type="button" onclick="removeProva()" value="-" alt="Excluir Item" style="width: 30px"/>
   </p>
   
   

@@ -9,7 +9,7 @@ Factory.define :user do |user|
 end
 
 Factory.define :treinador, :class => User do |user|
-  user.email "krynble@gmail.com"
+  user.email "krynble@yahoo.com"
   user.name "omar"
   user.password "123456"
   user.password_confirmation "123456"
@@ -35,3 +35,36 @@ Factory.define :treino do |treino|
   treino.comentario "bbbb"
   treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) }  
 end
+
+Factory.define :prova, :class => Prova do |provas|
+  provas.data Date.new
+  provas.competicao "Meia Maratona"
+  provas.atleta_id 1
+  provas.created_at Date.new
+  provas.updated_at Date.new
+  provas.segundos 47
+  provas.minutos 9
+  provas.decimos 3
+  provas.clima "Nublado"
+  provas.distancia 10.4
+  provas.tipoTempo "seco"
+  provas.comentarios "suave"
+  provas.colocacao 715627
+  provas.horas 8
+  provas.cor_periodo_id 1
+end
+
+Factory.define :cor_periodo do |cor|
+  cor.treinador_id 1
+  cor.cor "FFFFFF"
+  cor.periodo "treinamento"
+  cor.inicio Date.new
+  cor.fim Date.new
+end
+
+Factory.define :cor_treino do |cor|
+  cor.treinador_id 1
+  cor.cor "preto e branco"
+  cor.tipo "corrida"
+end
+
