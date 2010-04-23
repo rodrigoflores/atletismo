@@ -31,67 +31,6 @@ class ProvasController < ApplicationController
     
   end
 
-
-
-
-  def graphic
-    if params[:distancia]
-      @provas = Prova.find(:all, :conditions => {:atleta_id => @atleta.id, :distancia => params[:distancia]}, :order => "data ASC")
-    else
-      @provas = Prova.find(:all, :conditions => {:atleta_id => @atleta.id}, :order => "data ASC")
-    end
-    
-    times = Array.new
-    dates = Array.new
-    num_dates = Array.new
-    datesLabels = String.new
-    i = 0
-    max = 0
-    @provas.each do |prova|
-      times[i] = prova.tempo_em_minutos
-      max = prova.tempo_em_minutos if max < prova.tempo_em_minutos
-      num_dates[i] = "#{i+1}"
-      dates[i] = "#{prova.data}"
-      datesLabels += "\"#{dates[i]}\" #{num_dates[i]}"
-      datesLabels += ", " if i != (@provas.size - 1)
-      puts "Data: #{dates[i]} - Minutos: #{times[i]}"
-      i += 1
-      
-    end
-    
-
-    Gnuplot.open do |gp|
-      Gnuplot::Plot.new( gp ) do |plot|
-        plot.output "'public/images/teste.png'"
-        plot.terminal "png"
-        plot.xrange "[0:#{i+1}]"
-        plot.xtics "(#{datesLabels})"
-        plot.xlabel "Data"
-        plot.ylabel "Tempo (minutos)"
-        #plot.yrange "[0:#{max}]"
-
-        num_dates.each do |d|
-          puts d
-          x = ["#{d}"]
-          y = ["#{max}"]
-          plot.data << Gnuplot::DataSet.new( [x,y] ) do |ds|
-            ds.with = "boxes lt #{d} lw 2"
-            ds.notitle
-          end
-        end
-        
-        plot.data << Gnuplot::DataSet.new( [num_dates, times] ) do |ds|
-          ds.with = "linespoints"
-          ds.linewidth = 2
-          ds.notitle
-        end
-
-      end
-    end
-    @teste = 'teste.png'
-  end
-  
-
   def show
     @prova = Prova.find(params[:id])
     render :active_scaffold => 'provas'
@@ -160,11 +99,6 @@ class ProvasController < ApplicationController
       @distancia = params[:distancia]
     end
   end
-  
-  
-  
-  
-  
   
   # opções de active scaffold:
   # para tirar os links de edicao na tela do treinador
