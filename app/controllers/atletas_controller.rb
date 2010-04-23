@@ -38,21 +38,8 @@ class AtletasController < ApplicationController
   
   
   def update
-    participa_provas = [];
-    if params[:atleta][:participa_provas].nil?
-        params[:atleta][:participa_provas] = []
-    end
     @atleta = Atleta.find(current_atleta)
-    for participa_prova_string in params[:atleta][:participa_provas] do
-      if integer? participa_prova_string 
-        pp = ParticipaProva.find(participa_prova_string)
-      else 
-        pp = ParticipaProva.new(:atleta_id => current_atleta.id, :nome => participa_prova_string)
-      end
-      participa_provas <<  pp
-    end
-    params[:atleta][:participa_provas] = participa_provas
-    if @atleta.update_attributes(params[:atleta])
+    if @atleta.update_atleta(params[:atleta])
       flash[:notice] = 'Atleta foi atualizado com sucesso.'
       redirect_to(@atleta) 
     else
