@@ -1,8 +1,7 @@
 class TestesController < ApplicationController
   
-  before_filter :require_login
-  
-  
+  before_filter :require_login  
+
   active_scaffold :testes do |config|
     config.label = "Testes"
     list.sorting = {:data => 'DESC' } 
@@ -26,8 +25,7 @@ class TestesController < ApplicationController
     :label => "Gráfico",
     :inline => false
   end
-  
-  
+    
   def show
     @teste = Teste.find(params[:id])
     render :active_scaffold => 'Testes'
@@ -36,15 +34,12 @@ class TestesController < ApplicationController
   def new
     @teste = Teste.new
     render :active_scaffold => 'Testes'
-    
   end
   
   def edit
     @teste = Teste.find(params[:id])
-    render :active_scaffold => 'Testes'
-    
+    render :active_scaffold => 'Testes'    
   end
-  
   
   def create
     @teste = Teste.new(params[:teste])
@@ -54,13 +49,13 @@ class TestesController < ApplicationController
     if @teste.save
       flash[:notice] = 'Teste foi criado com sucesso.'
       @testes = Teste.find(:all, :conditions => {:atleta_id => @teste.atleta_id})
-      redirect_to atleta_testes_path(@atleta);     
+      redirect_to atleta_testes_path(@testes);
     else
       render :action => "new"
     end
   end
-  
-  
+
+
   def update
     @teste = Teste.find(params[:id])
     
@@ -71,64 +66,6 @@ class TestesController < ApplicationController
       render :action => "edit" 
     end
   end
-  
-  def graphic
-    if params[:distancia]
-      @testes = Teste.find(:all, :conditions => {:atleta_id => @atleta.id, :distancia => params[:distancia]}, :order => "data ASC")
-    else
-      @testes = Teste.find(:all, :conditions => {:atleta_id => @atleta.id}, :order => "data ASC")
-    end
-    
-    times = Array.new
-    dates = Array.new
-    num_dates = Array.new
-    datesLabels = String.new
-    i = 0
-    max = 0
-    @testes.each do |teste|
-      times[i] = teste.tempo_em_minutos
-      max = teste.tempo_em_minutos if max < teste.tempo_em_minutos
-      num_dates[i] = "#{i+1}"
-      dates[i] = "#{teste.data}"
-      datesLabels += "\"#{dates[i]}\" #{num_dates[i]}"
-      datesLabels += ", " if i != (@testes.size - 1)
-      puts "Data: #{dates[i]} - Minutos: #{times[i]}"
-      i += 1
-      
-    end
-    
-
-    Gnuplot.open do |gp|
-      Gnuplot::Plot.new( gp ) do |plot|
-        plot.output "'public/images/teste.png'"
-        plot.terminal "png"
-        plot.xrange "[0:#{i+1}]"
-        plot.xtics "(#{datesLabels})"
-        plot.xlabel "Data"
-        plot.ylabel "Tempo (minutos)"
-        #plot.yrange "[0:#{max}]"
-
-        num_dates.each do |d|
-          puts d
-          x = ["#{d}"]
-          y = ["#{max}"]
-          plot.data << Gnuplot::DataSet.new( [x,y] ) do |ds|
-            ds.with = "boxes lt #{d} lw 2"
-            ds.notitle
-          end
-        end
-        
-        plot.data << Gnuplot::DataSet.new( [num_dates, times] ) do |ds|
-          ds.with = "linespoints"
-          ds.linewidth = 2
-          ds.notitle
-        end
-
-      end
-    end
-    @graphic_pic = 'teste.png'
-  end
-  
   
   protected
   
@@ -145,9 +82,7 @@ class TestesController < ApplicationController
       end
     end
   end
-  
-
-  
+    
   # para tirar os links de edicao na tela do treinador
   def create_authorized?
     user_is_atleta?
@@ -158,6 +93,5 @@ class TestesController < ApplicationController
   def delete_authorized?
     user_is_atleta?
   end
-  
-  
+    
 end

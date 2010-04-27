@@ -2,8 +2,7 @@ class Teste < ActiveRecord::Base
   belongs_to :atleta
   
   attr_accessible :nome, :data, :minutos, :segundos, :decimos, :atleta, :comentarios, :clima, :periodo, :metros, :centimetros, :kg
-  
-  
+
   validate :default_values
   validates_numericality_of :segundos, :less_than => 60, :message => " deve ser menor do que 60."
   validates_numericality_of :decimos, :less_than => 10, :message => " deve ser menor do que 10."

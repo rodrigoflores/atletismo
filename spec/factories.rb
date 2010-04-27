@@ -68,3 +68,19 @@ Factory.define :cor_treino do |cor|
   cor.tipo "corrida"
 end
 
+Factory.define :teste, :class => Teste do |t|
+  t.atleta_id 1
+  t.nome "O mar"
+  t.data Date.new
+  t.minutos 10
+  t.segundos 10
+  t.decimos 9
+  t.metros 10
+  t.centimetros 10
+  t.kg 0.2
+  t.clima "frio"
+  t.periodo "periodo"
+  t.comentarios "comentario"
+  t.created_at Date.new
+  t.updated_at Date.new
+end

@@ -37,7 +37,11 @@ describe AtletasController do
 				assigns[:atleta].should == Atleta.find_by_user_id(@atleta.id)
 			end
 		end
-		
+
+		describe "put => update"	do
+			
+			
+		end
 	end
 
 end
