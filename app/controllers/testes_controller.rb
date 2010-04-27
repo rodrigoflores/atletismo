@@ -61,7 +61,7 @@ class TestesController < ApplicationController
     
     if @teste.update_attributes(params[:teste])
       flash[:notice] = 'Teste foi atualizado com sucesso.'
-      redirect_to atleta_testes_path(@atleta);     
+      redirect_to atleta_testes_path(@teste);     
     else
       render :action => "edit" 
     end
@@ -70,18 +70,18 @@ class TestesController < ApplicationController
   protected
   
   # Segurança
-  def get_atleta
-    if (user_is_treinador?)
-      @atleta = Atleta.find(params[:atleta_id])
-    else      
-      if @atleta = Atleta.find(params[:atleta_id]) == current_atleta
-        @atleta = current_atleta
-      else
-        flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
-        redirect_to root_path()
-      end
-    end
-  end
+#  def get_atleta
+ #   if (user_is_treinador?)
+  #    @atleta = Atleta.find(params[:atleta_id])
+   # else      
+    #  if @atleta = Atleta.find(params[:atleta_id]) == current_atleta
+     #   @atleta = current_atleta
+      #else
+       # flash[:alert] = "Erro: Você não tem acesso à página "+request.request_uri
+#        #redirect_to root_path()
+ #     end
+  #  end
+  #end
     
   # para tirar os links de edicao na tela do treinador
   def create_authorized?
@@ -90,8 +90,5 @@ class TestesController < ApplicationController
   def update_authorized?
     user_is_atleta?
   end
-  def delete_authorized?
-    user_is_atleta?
-  end
-    
+      
 end

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   def after_create   
     self.activated = false
+    self.activated_at = nil
     if self.treinador?
       treinador = Treinador.new
       treinador.user_id = self.id
