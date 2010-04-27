@@ -1,0 +1,17 @@
+<p>Data: <%= @treino.date %></p>
+
+<p>
+  Observação:
+  <br/>
+  <%= @treino.observacao %>
+</p>
+
+<p>
+  Comentário:
+  <br/>
+  <%= @treino.comentario %>
+</p>
+
+<%= link_to "Treinos", treinador_atleta_treinos_path(@atleta) %>
+|
+<%= link_to "Editar este treino", edit_treinador_atleta_treino_path(@atleta,@treino) %>

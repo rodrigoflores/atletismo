@@ -1,10 +1,12 @@
 class Treinador::TreinosController < ApplicationController
   def index
-    @treinos = Atleta.find(params[:atleta_id]).treinos
+    @atleta = Atleta.find(params[:atleta_id])
+    @treinos = @atleta.treinos
   end
   
   def new
-    @treino = Atleta.find(params[:atleta_id]).treinos.new
+    @atleta = Atleta.find(params[:atleta_id])
+    @treino = @atleta.treinos.new
   end
   
   def update
@@ -40,6 +42,7 @@ class Treinador::TreinosController < ApplicationController
   end
   
   def show
+    @atleta = Atleta.find(params[:atleta_id])  
     @treino = Treino.find(params[:id])
   end
 end

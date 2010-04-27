@@ -1,0 +1,14 @@
+
+
+<% form_for @treino, :url => treinador_atleta_treinos_path(@atleta) do |f| %>
+<p><%= label_tag 'Data:' %><br/>
+<%= f.date_select :date %></p>
+
+<p><%= label_tag 'Observação:' %><br/>
+<%= f.text_area :observacao, :rows => 10  %></p>
+
+
+<p><%= submit_tag 'Criar treino' %></p>
+
+
+<% end %>
