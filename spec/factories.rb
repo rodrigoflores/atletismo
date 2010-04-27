@@ -33,7 +33,7 @@ Factory.define :treino do |treino|
   treino.date Time.now
   treino.text "aaaa"
   treino.comentario "bbbb"
-  treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) }  
+  treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) } 
 end
 
 Factory.define :prova, :class => Prova do |provas|
