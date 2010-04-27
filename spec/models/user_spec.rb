@@ -29,7 +29,7 @@ describe User do
  describe "after_create" do
   it "should create an athlete" do
    lambda{
-    @user = Factory(:user)   
+    @user = Factory(:atleta)   
    }.should change(Atleta,:count).by(1)
    @user.atleta_id.should_not be_nil
    @user.treinador_id.should be_nil
