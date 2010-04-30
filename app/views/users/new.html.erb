@@ -7,8 +7,15 @@ function disableUserType(type_true,type_false) {
 	else
 		document.getElementById('user_treinador_id').disabled=false;	
 }
-</script>
 
+function disableAllUserType() {
+	document.getElementById('user_atleta').checked=false;
+	document.getElementById('user_treinador').checked=false;
+}
+
+window.onload = disableAllUserType;
+
+</script>
 <h1>Cadastro de usuário</h1>
 <% @user.password = @user.password_confirmation = nil %>
 
@@ -29,7 +36,7 @@ function disableUserType(type_true,type_false) {
 
 <p><%=	f.check_box :atleta, {:onclick => "disableUserType('user_atleta','user_treinador')"} %><%= label_tag 'Atleta' %>
 	<% if !@treinadores.nil? %>
-	- Treinadores: 
+	- Treinadores:
 		<%= f.select :treinador_id, @treinadores.collect { |p| [p.usuario.name, p.id]},  { :include_blank => true }, {:disabled => true } %>
 	<% end %>
 </p>
