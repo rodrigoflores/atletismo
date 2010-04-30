@@ -1,0 +1,11 @@
+class Treinador::ItensTreinoController < ApplicationController
+  def create
+    @treino = Treino.find(params[:treino_id])
+    @item_treino = @treino.itens_treino.new(params[:item_treino])
+    if @item_treino.save
+      redirect_to treinador_atleta_treino_path(@treino.atleta, @treino)
+    else
+      render 'treinador/treinos/show'
+    end 
+  end
+end
