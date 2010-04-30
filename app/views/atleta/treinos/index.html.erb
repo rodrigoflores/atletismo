@@ -1,0 +1,11 @@
+<table>
+  <tr>
+    <th>Data</th>
+  </tr>
+  <% @treinos.each do |treino| %>
+    <tr>
+      <td><%= treino.date %></td>
+      <td><%= link_to "Detalhes", atleta_treino_path(treino) %></td>
+    </tr>
+   <% end %>
+</table>

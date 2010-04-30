@@ -3,6 +3,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :treinador do |treinador|
   	treinador.resources :atletas, :has_many => :treinos
+  end
+
+  map.namespace :atleta do |atleta|
+  	atleta.resources :treinos
   end 
 
  #Users

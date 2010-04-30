@@ -1,0 +1,10 @@
+<% form_for @treino, :url => atleta_treino_path(@treino) do |f| %>
+
+<p><%= label_tag 'Comentário:' %><br/>
+<%= f.text_area :comentario, :rows => 10  %></p>
+
+
+<p><%= submit_tag 'Atualizar' %></p>
+
+
+<% end %>

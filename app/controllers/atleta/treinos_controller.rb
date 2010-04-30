@@ -1,0 +1,31 @@
+class Atleta::TreinosController < ApplicationController
+
+	before_filter :require_login
+
+  def index
+    @atleta = Atleta.find(current_user.atleta_id)
+    @treinos = @atleta.treinos
+  end
+
+  def update
+    @atleta = Atleta.find(current_user.atleta_id)
+    @treino = @atleta.treinos.find(params[:id])
+    if @treino.update_attributes(params[:treino])
+      redirect_to atleta_treino_path(@treino)
+    else
+      render 'edit'
+    end
+  end
+  
+  def edit
+    @atleta = Atleta.find(current_user.atleta_id)
+    @treino = Treino.find(params[:id])
+  end
+
+  def show
+    @atleta = Atleta.find(current_user.atleta_id)
+    @treino = Treino.find(params[:id])
+  end
+  
+  
+end
