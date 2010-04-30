@@ -61,7 +61,7 @@ describe Treinador::TreinosController do
         
         it "should redirect to" do
           put_it
-          should redirect_to treinador_atleta_treinos_path(@atleta.atleta_id)
+          should redirect_to treinador_atleta_treino_path(@atleta.atleta_id, @treino)
         end
       end
       

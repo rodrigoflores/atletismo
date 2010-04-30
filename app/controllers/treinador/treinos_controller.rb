@@ -13,7 +13,7 @@ class Treinador::TreinosController < ApplicationController
     @atleta = Atleta.find(params[:atleta_id])
     @treino = @atleta.treinos.find(params[:id])
     if @treino.update_attributes(params[:treino])
-      redirect_to treinador_atleta_treinos_path(@atleta)
+      redirect_to treinador_atleta_treino_path(@atleta, @treino)
     else
       render 'edit'
     end

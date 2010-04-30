@@ -7,7 +7,7 @@
   <% @atletas.each do |atleta| %>
     <tr>
       <td><%= atleta.user.name %></td>
-      <td><%= link_to treinador_atleta_treinos_path(atleta)
+      <td><%= link_to "Treinos", treinador_atleta_treinos_path(atleta) %></td>
     </tr>
   <% end %>
 </table>
