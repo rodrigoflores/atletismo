@@ -28,7 +28,7 @@ end %>
 	  <%= render :partial => 'users/user_bar' %>
   </div>
   
-  <% if user_is_atleta? && !is_first_time?%>
+  <% if user_is_treinador? || !is_first_time?%>
 	  <div id="lateral">
 		  <div id="content_top">
 			  <div id="content_top_left"></div>

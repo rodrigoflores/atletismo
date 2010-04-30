@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Usuário cadastrado com sucesso! Aguarde um e-mail de ativação contendo link para ativação"
       redirect_to "/"
     else
+      @treinadores = Treinador.find(:all)
       render "new"
     end
   end
