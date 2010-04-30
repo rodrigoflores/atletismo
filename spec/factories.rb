@@ -36,6 +36,20 @@ Factory.define :treino do |treino|
   treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) } 
 end
 
+Factory.define :item_treino do |item_treino|
+  item_treino.treino { |x| x.association(:treino)} 
+  item_treino.metodo "Em pé"
+  item_treino.series 12
+  item_treino.repeticao 5
+  item_treino.volume   10
+  item_treino.grandeza "m"
+  item_treino.exercicio "Polichinelo"
+  item_treino.intervalo 100
+  item_treino.pausa     10  
+
+end
+
+
 Factory.define :prova, :class => Prova do |provas|
   provas.data Date.new
   provas.competicao "Meia Maratona"
