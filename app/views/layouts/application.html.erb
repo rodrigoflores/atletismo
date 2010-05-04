@@ -49,7 +49,11 @@ end %>
     </div>
   <% end %>
   
+  <% if !is_first_time? %>
   <div id="conteudo">
+  <% else %>
+  <div id="conteudo" style="width: 100%;">
+  <% end %>
   		<div id="content_top">
 			<div id="content_top_left"></div>
 			<div id="content_top_right"></div>

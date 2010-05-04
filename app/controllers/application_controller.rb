@@ -58,6 +58,8 @@ class ApplicationController < ActionController::Base
   end
   
   def is_first_time?
+    # Verifica se o atleta está com altura em branco
+    # Isto indica que é o primeiro login. Solicitaremos o preenchimento do restante dos dados.
     user_is_atleta? && (Atleta.find(current_atleta).altura == nil)
   end
   
