@@ -52,17 +52,17 @@
 
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :exercicio, :input_html => { :size => 20 } %>
-    <%= form.input :metodo, :input_html => { :size => 20 } %>
-    <%= form.input :volume, :input_html => { :size => 5 } %>
-    <%= form.input :grandeza, :as => :select, :collection => ["m", "kg", "unidades"] %>
-    <%= form.input :pausa,  :input_html => { :size => 5 } %>
-    <%= form.input :intervalo,  :input_html => { :size => 5 } %>
-    <%= form.input :series,  :input_html => { :size => 5 } %>
-    <%= form.input :repeticao,  :input_html => { :size => 5 } %>
-    <%= form.input :minutos,  :input_html => { :size => 3 } %>
-    <%= form.input :segundos,  :input_html => { :size => 3 } %>
-    <%= form.input :decimos,  :input_html => { :size => 3 } %>
+    <%= form.input :exercicio,                :input_html => { :size => 20 } %>
+    <%= form.input :metodo,                      :input_html => { :size => 20 } %>
+    <%= form.input :volume,     :as => :numeric, :input_html => { :size => 5 } %>
+    <%= form.input :grandeza,   :as => :select,  :collection => ["m", "kg", "unidades"] %>
+    <%= form.input :pausa,      :as => :numeric, :input_html => { :size => 5 } %>
+    <%= form.input :intervalo,  :as => :numeric, :input_html => { :size => 5 } %>
+    <%= form.input :series,     :as => :numeric, :input_html => { :size => 5 } %>
+    <%= form.input :repeticao,  :as => :numeric, :input_html => { :size => 5 } %>
+    <%= form.input :minutos,    :as => :numeric, :input_html => { :size => 3 } %>
+    <%= form.input :segundos,   :as => :numeric, :input_html => { :size => 3 } %>
+    <%= form.input :decimos,    :as => :numeric, :input_html => { :size => 3 } %>
   <% end %>
   
   <% form.buttons do %>

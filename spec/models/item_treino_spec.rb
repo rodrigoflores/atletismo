@@ -2,6 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ItemTreino do
 
+  should_validate_numericality_of :volume, :series, :repeticao, :segundos, :minutos, :segundos, :decimos
+
   it "should belong to treino" do
     should belong_to :treino
   end
