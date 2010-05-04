@@ -5,6 +5,7 @@ class Treinador::ItensTreinoController < ApplicationController
     if @item_treino.save
       redirect_to treinador_atleta_treino_path(@treino.atleta, @treino)
     else
+      @atleta = @treino.atleta
       render 'treinador/treinos/show'
     end 
   end
