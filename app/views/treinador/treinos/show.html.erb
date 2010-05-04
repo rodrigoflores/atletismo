@@ -11,6 +11,36 @@
   <br/>
   <%= @treino.comentario %>
 </p>
+<ul>
+<% @treino.itens_treino.each do |item_treino| %>
+  <li>
+    <%= item_treino.exercicio %> 
+    <%= link_to "X", treinador_treino_item_treino_path(@treino, item_treino), :method => :delete %>    
+  </li>
+<% end %>
+</ul>
+<% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
+  <% form.inputs do %>
+    <%= form.input :exercicio %>
+    <%= form.input :metodo %>
+    <%= form.input :volume %>
+    <%= form.input :grandeza, :as => :select, :collection => ["m", "kg", "unidades"] %>
+    <%= form.input :pausa %>
+    <%= form.input :intervalo %>
+    <%= form.input :series %>
+    <%= form.input :repeticao %>
+    <%= form.input :minutos %>
+    <%= form.input :segundos %>
+    <%= form.input :decimos %>
+  <% end %>
+  
+  <% form.buttons do %>
+    <%= form.commit_button %>
+  <% end %>
+  
+<% end %>
+
+
 
 <%= link_to "Treinos", treinador_atleta_treinos_path(@atleta) %>
 |

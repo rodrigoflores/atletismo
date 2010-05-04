@@ -170,6 +170,11 @@ describe Treinador::TreinosController do
       it "should assign a treino" do
         assigns[:treino].should == @treino
       end
+      
+      it "should assign a item_treino whose treino is @treino" do
+        assigns[:item_treino].should be_kind_of(ItemTreino)
+        assigns[:item_treino].treino.should == @treino
+      end
     end
   end
 end

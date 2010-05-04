@@ -44,5 +44,6 @@ class Treinador::TreinosController < ApplicationController
   def show
     @atleta = Atleta.find(params[:atleta_id])  
     @treino = Treino.find(params[:id])
+    @item_treino = @treino.itens_treino.new
   end
 end
