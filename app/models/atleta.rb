@@ -1,17 +1,13 @@
 class Atleta < ActiveRecord::Base
 
-  has_one :user
- 
-  has_many :treinos
-
-  has_many :provas
- 
-  has_many :testes
-
   belongs_to :treinador
 
+  has_one :user
+  has_many :treinos
+  has_many :provas
+  has_many :testes
   has_many :participa_provas
-  
+ 
   attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas
   
   validates_presence_of :treinador_id
