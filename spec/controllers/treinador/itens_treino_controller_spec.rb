@@ -8,8 +8,28 @@ describe Treinador::ItensTreinoController do
       @atleta_user = Factory(:atleta, :treinador_id => @treinador.id)
       @atleta = Atleta.find(@atleta_user.atleta_id)
       @treino = Factory(:treino, :atleta => @atleta)
+      @item_treino = Factory(:item_treino, :treino => @treino)
       UserSession.create(@treinador)
     end
+    
+    
+    describe "delete => :destroy" do
+      def delete_it
+        delete :destroy, :treino_id => @treino.id, :id => @item_treino.id
+      end
+      
+      it "should delete a item_treino" do 
+        lambda{
+          delete_it
+        }.should change(@treino.itens_treino, :count).by(-1)
+      end
+      
+      it "shoudl redirect to treino" do
+        delete_it
+        should redirect_to treinador_atleta_treino_path(@atleta, @treino)
+      end
+    end
+    
     
   
     describe "post => create" do
@@ -49,5 +69,7 @@ describe Treinador::ItensTreinoController do
         
       end
     end
+    
+    
   end
 end
