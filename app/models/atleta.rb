@@ -12,9 +12,9 @@ class Atleta < ActiveRecord::Base
 
   has_many :participa_provas
   
-  attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas
+  attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas, :treinos
   
-  validates_presence_of :treinador_id, :altura
+  validates_presence_of :treinador_id
 
   def usuario
     @usuario = User.find(self.user_id) if(self.user_id)
