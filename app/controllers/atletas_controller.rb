@@ -38,6 +38,8 @@ class AtletasController < ApplicationController
       flash[:notice] = "Atleta foi atualizado com sucesso."
       redirect_to(@atleta)
     else
+      @treinadores = Treinador.find(:all)
+      @atleta = Atleta.find(current_atleta)
       render "edit"
     end
   end

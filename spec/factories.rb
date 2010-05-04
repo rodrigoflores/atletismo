@@ -30,7 +30,7 @@ Factory.define :atleta, :class => User do |user|
 end
 
 Factory.define :treino do |treino|
-  treino.date Time.now
+  treino.date Date.new
   treino.text "aaaa"
   treino.comentario "bbbb"
   treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) } 
