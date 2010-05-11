@@ -37,4 +37,12 @@ describe Treino do
     
   end
   
+  describe "validation" do
+  	before do
+      @treino2 = Factory(:treino, :atleta => Atleta.find(@atleta.atleta_id), :date => "2010-05-11")
+  	end
+		should_validate_uniqueness_of :date, :scope => :atleta_id
+	end
+  
+  
 end
