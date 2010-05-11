@@ -4,5 +4,9 @@ class Treinador::AtletasController < ApplicationController
   end
   
   def somatorio_de_cargas
+    data_inicial = params[:somatorio_de_carga][:data_inicial]
+    data_final = params[:somatorio_de_carga][:data_final]
+    @atleta = Atleta.find(params[:id])
+    @resultado = Treino.somatorio_de_cargas(@atleta, data_inicial, data_final)
   end
 end

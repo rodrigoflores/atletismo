@@ -6,7 +6,6 @@ class Treino < ActiveRecord::Base
   
   def self.somatorio_de_cargas(atleta, data_inicio, data_termino)
     @treinos = atleta.treinos.all(:conditions => [ "date >= ? AND date <= ?", data_inicio, data_termino])
-    #treinos_ids = @treinos.map { |item| item.id }
     treinos_ids = Array.new
     for item in @treinos do
       treinos_ids << item.id

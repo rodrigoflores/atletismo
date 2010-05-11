@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.namespace :treinador do |treinador|
-  	treinador.resources :atletas, :has_many => :treinos, :member => { :somatorio_de_cargas => :get }
+  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => :treinos
   	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
   end
 
