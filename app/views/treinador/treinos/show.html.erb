@@ -1,3 +1,25 @@
+<script type='text/javascript'>
+  function calculaRitmo() { 
+    var minutos = document.getElementById("item_treino_minutos").value;
+    var segundos = document.getElementById("item_treino_segundos").value;
+    var decimos = document.getElementById("item_treino_decimos").value; 
+    var volume = document.getElementById("item_treino_series").value * document.getElementById("item_treino_repeticao").value * document.getElementById("item_treino_volume").value;
+    if(volume == 0) {
+      alert("Distância deve ser maior que zero");
+      document.getElementById('item_treino_volume').focus();
+      return;
+    }
+    var intensidade = document.getElementById('tempo_intensidade').value;
+    decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
+    volume = volume/1000;
+    var ritmo = (decimos/volume)/(intensidade/100);
+    var resultado = document.getElementById('resultado_ritmo');
+    minutos = (ritmo/600).floor();
+    segundos = ((ritmo%600)/10).toFixed(0);
+    resultado.innerHTML = "Ritmo: " + (minutos > 0 ? (minutos) + " min": "") + (segundos > 0 ? " " + (segundos) + " seg": "") + "/km" ;
+  }
+</script>
+
 <p>Data: <%= @treino.date %></p>
 
 <p>
@@ -18,7 +40,6 @@
     <th>Séries</th>
     <th>Repetição</th>
     <th>Volume</th>
-    <th>Grandeza</th>
     <th>Tempo</th>
     <th>Pausa</th>
     <th>Intervalo</th>
@@ -34,8 +55,7 @@
       </td>
       <td><%= item_treino.series %></td>
       <td><%= item_treino.repeticao %></td>
-      <td><%= item_treino.volume %></td>
-      <td><%= item_treino.grandeza %></td>
+      <td><%= item_treino.volume %> <%= item_treino.grandeza %></td>
       <% if item_treino.minutos || item_treino.segundos || item_treino.decimos %>
         <td><%= item_treino.minutos %>'<%= item_treino.segundos %>''<%= item_treino.decimos %>"</td>
       <% else %>
@@ -47,26 +67,31 @@
     </tr>
   <% end %>
 </table>
-
+<br />
 <h2> Novo item de treino </h2>
 
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
     <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
     <%= form.input :metodo,     :required => false, :input_html => { :size => 20 } %>
+    <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
+    <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>
     <%= form.input :grandeza,   :required => true, :as => :select,  :collection => ["m", "kg", "unidades"] %>
     <%= form.input :pausa,      :required => false, :input_html => { :size => 5 } %>
     <%= form.input :intervalo,  :required => false, :input_html => { :size => 5 } %>
-    <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
-    <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :minutos,    :required => false, :input_html => { :size => 3 } %>
     <%= form.input :segundos,   :required => false, :input_html => { :size => 3 } %>
     <%= form.input :decimos,    :required => false, :input_html => { :size => 3 } %>
   <% end %>
+  Intensidade:
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %>
+  <input type='button' value="Calcular Ritmo" onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;
+  <span id="resultado_ritmo"></span><br /><br />
   
   <% form.buttons do %>
-    <%= form.commit_button %>
+    <%= form.commit_button value="Criar Item Treino" %>
   <% end %>
   
 <% end %>

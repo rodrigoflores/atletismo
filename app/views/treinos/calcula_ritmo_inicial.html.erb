@@ -14,10 +14,14 @@
       return;
     }
     var intensidade = document.getElementById('tempo_intensidade').value;
-    decimos = 0 + minutos*600 + 10*segundos + decimos;
-    ritmo = (decimos/distancia)*(intensidade/100);
+    
+    decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
+    distancia = distancia/1000;
+    var ritmo = (decimos/distancia)/(intensidade/100);
     var resultado = document.getElementById('resultado_ritmo');
-    resultado.innerHTML = "Ritmo desejado: " + (ritmo/6).toFixed(1) + " min/km" ;
+    minutos = (ritmo/600).floor();
+    segundos = ((ritmo%600)/10).toFixed(0);
+    resultado.innerHTML = "Ritmo: " + (minutos > 0 ? (minutos) + " min": "") + (segundos > 0 ? " " + (segundos) + " seg": "") + "/km" ;
   }
 </script>
 
@@ -38,7 +42,7 @@
 			<td><%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %></td>
 		</tr>
     </table>
-  <input type='button' value='Calcular' onclick="calculaRitmo()"><span id="resultado_ritmo"></span>
+  <input type='button' value='Calcular' onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;<span id="resultado_ritmo"></span>
 </form>
 
 
