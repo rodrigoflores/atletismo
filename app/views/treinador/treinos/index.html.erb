@@ -1,4 +1,12 @@
-
+<% semantic_form_for :somatorio, :url => somatorio_de_cargas_treinador_atleta_path(@atleta.id) do |form| %>
+  <% form.inputs do %>
+    <%= form.input :data_inicial, :as => :date %>
+    <%= form.input :data_final, :as => :date %>
+  <% end %>
+  <% form.buttons do %>
+    <%= form.commit_button %>
+  <% end %>
+<% end %>
 
 <table>
   <tr>

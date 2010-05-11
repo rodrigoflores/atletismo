@@ -90,8 +90,7 @@
   <input type='button' value="Calcular Ritmo" onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;
   <span id="resultado_ritmo"></span><br /><br />
   
-  <% form.buttons do %>
-    <%= form.commit_button value="Criar Item Treino" %>
+    <%= form.commit_button "Criar item treino"%>
   <% end %>
   
 <% end %>
@@ -100,4 +99,4 @@
 
 <%= link_to "Treinos", treinador_atleta_treinos_path(@atleta) %>
 |
-<%= link_to "Editar este treino", edit_treinador_atleta_treino_path(@atleta,@treino) %>
+<%= link_to "Editar treino", edit_treinador_atleta_treino_path(@atleta,@treino) %>
