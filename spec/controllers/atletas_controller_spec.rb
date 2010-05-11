@@ -16,16 +16,13 @@ describe AtletasController do
 				get :show
 				assigns[:atleta].should == Atleta.find_by_user_id(@atleta.id)
 			end
+			it "should render show" do
+			  UserSession.find.destroy
+			  UserSession.create(@treinador)
+				get :show
+				should render_template "show"
+			end
 		end
-		
-#		describe "get => showProvas" do
-#			# Problemas com add provas
-#			it "should assign provas" do
-#				pending
-#				get :showProvas
-#				assigns[:provas].should be_kind_of Prova
-#			end
-#		end
 		
 		describe "get => edit" do
 			it "should assign treinadores" do
