@@ -6,10 +6,7 @@ describe User do
   end
 
   should_be_authentic
-  it "should send a confirmation e-mail on creation"
-  it "should send an e-mail containing a new user passowrd request"
   it "should generate an activation code after creation" do
-	
     user = Factory(:user)
     user.perishable_token.should_not be_nil
   end
