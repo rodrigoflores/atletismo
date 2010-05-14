@@ -4,8 +4,8 @@ class Treinador::AtletasController < ApplicationController
   end
   
   def somatorio_de_cargas
-    data_inicial = params[:somatorio_de_carga][:data_inicial]
-    data_final = params[:somatorio_de_carga][:data_final]
+    data_inicial = Date.parse("#{params[:somatorio_de_carga]["data_inicial(3i)"]}-#{params[:somatorio_de_carga]["data_inicial(2i)"]}-#{params[:somatorio_de_carga]["data_inicial(1i)"]}")
+    data_final = Date.parse("#{params[:somatorio_de_carga]["data_final(3i)"]}-#{params[:somatorio_de_carga]["data_final(2i)"]}-#{params[:somatorio_de_carga]["data_final(1i)"]}")
     @atleta = Atleta.find(params[:id])
     @resultado = Treino.somatorio_de_cargas(@atleta, data_inicial, data_final)
   end
