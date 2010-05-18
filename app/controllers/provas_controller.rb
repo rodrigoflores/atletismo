@@ -31,67 +31,6 @@ class ProvasController < ApplicationController
     
   end
 
-
-
-
-  def graphic
-    if params[:distancia]
-      @provas = Prova.find(:all, :conditions => {:atleta_id => @atleta.id, :distancia => params[:distancia]}, :order => "data ASC")
-    else
-      @provas = Prova.find(:all, :conditions => {:atleta_id => @atleta.id}, :order => "data ASC")
-    end
-    
-    times = Array.new
-    dates = Array.new
-    num_dates = Array.new
-    datesLabels = String.new
-    i = 0
-    max = 0
-    @provas.each do |prova|
-      times[i] = prova.tempo_em_minutos
-      max = prova.tempo_em_minutos if max < prova.tempo_em_minutos
-      num_dates[i] = "#{i+1}"
-      dates[i] = "#{prova.data}"
-      datesLabels += "\"#{dates[i]}\" #{num_dates[i]}"
-      datesLabels += ", " if i != (@provas.size - 1)
-      puts "Data: #{dates[i]} - Minutos: #{times[i]}"
-      i += 1
-      
-    end
-    
-
-    Gnuplot.open do |gp|
-      Gnuplot::Plot.new( gp ) do |plot|
-        plot.output "'public/images/teste.png'"
-        plot.terminal "png"
-        plot.xrange "[0:#{i+1}]"
-        plot.xtics "(#{datesLabels})"
-        plot.xlabel "Data"
-        plot.ylabel "Tempo (minutos)"
-        #plot.yrange "[0:#{max}]"
-
-        num_dates.each do |d|
-          puts d
-          x = ["#{d}"]
-          y = ["#{max}"]
-          plot.data << Gnuplot::DataSet.new( [x,y] ) do |ds|
-            ds.with = "boxes lt #{d} lw 2"
-            ds.notitle
-          end
-        end
-        
-        plot.data << Gnuplot::DataSet.new( [num_dates, times] ) do |ds|
-          ds.with = "linespoints"
-          ds.linewidth = 2
-          ds.notitle
-        end
-
-      end
-    end
-    @teste = 'teste.png'
-  end
-  
-
   def show
     @prova = Prova.find(params[:id])
     render :active_scaffold => 'provas'
@@ -105,17 +44,15 @@ class ProvasController < ApplicationController
   
   def edit
     @prova = Prova.find(params[:id])
-    render :active_scaffold => 'provas'
-    
+    render :active_scaffold => 'provas'    
   end
-  
   
   def create
     @prova = Prova.new(params[:prova])
     @atleta = Atleta.find(params[:atleta_id])
     @treinador = Treinador.find(@atleta.treinador_id)
 
-    if params[:atleta_id] 
+    if params[:atleta_id]
       @prova.atleta_id = params[:atleta_id]
     end
     if @prova.save
@@ -126,45 +63,26 @@ class ProvasController < ApplicationController
       render :action => "new"
     end
   end
-  
-  
+
   def update
     @prova = Prova.find(params[:id])
-    p @prova
     if @prova.update_attributes(params[:prova])
       flash[:notice] = 'Prova foi atualizada com sucesso.'
-      redirect_to atleta_provas_path(@atleta);     
+      redirect_to atleta_provas_path(@prova);     
     else
       render :action => "edit" 
     end
   end
-  
-  
-  
-  def distancia
-    @condition = "distancia = #{params[:distancia]}" 
-    index
-  end
-  
-  def conditions_for_collection
-    @condition
-  end
-  
-  
+
   protected
   
   def provas_distancia_form
-    @provas_distancia=true
+    @provas_distancia = true
     if params[:distancia]
-      @voltar_link=true
+      @voltar_link = true
       @distancia = params[:distancia]
     end
   end
-  
-  
-  
-  
-  
   
   # opções de active scaffold:
   # para tirar os links de edicao na tela do treinador
@@ -172,9 +90,6 @@ class ProvasController < ApplicationController
     user_is_atleta?
   end
   def update_authorized?
-    user_is_atleta?
-  end
-  def delete_authorized?
     user_is_atleta?
   end
   

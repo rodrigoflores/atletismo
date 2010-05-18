@@ -8,6 +8,7 @@
   <%= javascript_include_tag "prototype" , "effects" %>
   <%= active_scaffold_includes %>
   <%= stylesheet_link_tag 'vt' %>
+  <%= formtastic_stylesheet_link_tag %>
 </head>
 
 <% if (request.path == "/")
@@ -27,26 +28,33 @@ end %>
    <div id="barra">
 	  <%= render :partial => 'users/user_bar' %>
   </div>
-
-	<div id="lateral">
-		<div id="content_top">
-			<div id="content_top_left"></div>
-			<div id="content_top_right"></div>
-		</div>
-		<div id="lateral-texto">
-      <% if user_is_atleta? %>
-			 <%= render :partial => "atletas/side_menu"   %>
-			<% end %>
-      <% if user_is_treinador? %>
-			 <%= render :partial => "treinadores/side_menu" %>
-			<% end %>
-		</div>
-	  	<div id="content_bottom">
-	  		<div id="content_bottom_left"></div>
-			<div id="content_bottom_right"></div>
-	  	</div>
+  
+  <% if user_is_treinador? || !is_first_time?%>
+	  <div id="lateral">
+		  <div id="content_top">
+			  <div id="content_top_left"></div>
+			  <div id="content_top_right"></div>
+		  </div>
+		  <div id="lateral-texto">
+        <% if user_is_atleta? && !is_first_time?%>
+			   <%= render :partial => "atletas/side_menu"   %>
+			  <% end %>
+        <% if user_is_treinador? %>
+			   <%= render :partial => "treinadores/side_menu" %>
+			  <% end %>
+		  </div>
+	    <div id="content_bottom">
+	   		<div id="content_bottom_left"></div>
+			  <div id="content_bottom_right"></div>
+	    </div>
     </div>
+  <% end %>
+  
+  <% if !is_first_time? %>
   <div id="conteudo">
+  <% else %>
+  <div id="conteudo" style="width: 100%;">
+  <% end %>
   		<div id="content_top">
 			<div id="content_top_left"></div>
 			<div id="content_top_right"></div>

@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   
   ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default]='%d/%m/%Y'
     
-  helper_method :require_login, :require_atleta, :require_treinador, :current_session, :current_user, :user_has_activated?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
+  helper_method :require_login, :require_atleta, :require_treinador, :current_session, :current_user, :user_has_activated?, :is_first_time?, :user_is_treinador?, :user_is_atleta?, :current_atleta, :current_treinador, :get_atleta_com_seguranca
   
   protected
 
@@ -55,6 +55,12 @@ class ApplicationController < ActionController::Base
   
   def user_is_atleta?
     @current_user.atleta if current_user
+  end
+  
+  def is_first_time?
+    # Verifica se o atleta está com altura em branco
+    # Isto indica que é o primeiro login. Solicitaremos o preenchimento do restante dos dados.
+    user_is_atleta? && (Atleta.find(current_atleta).altura == nil)
   end
   
   def current_atleta

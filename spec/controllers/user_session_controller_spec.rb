@@ -8,30 +8,56 @@ describe UserSessionsController do
   describe "not logged in" do 
     describe "post => create" do
       describe "success" do
-        before :each do
-          activate_authlogic
-          @user = Factory(:user, :email => "a@b.com")
-					@user.activated = true
-					@user.save
-          post :create, :user_session => {:password => "123456", :email => @user.email}
+        describe "first time" do
+          before :each do
+            @user = Factory(:atleta, :email => "a@b.com")
+					  @user.activated = true
+					  @user.save
+            post :create, :user_session => {:password => "123456", :email => @user.email}
+          end
+
+          it "should create a session" do
+            UserSession.find.user.should == @user
+          end
+
+          it "should redirect to edit_atleta on first time" do
+            should redirect_to edit_atleta_path(Atleta.find(@user.atleta_id))
+          end
+
+          it "should flash something" do
+            flash[:notice].should == "Login efetuado com sucesso."
+          end
         end
 
-        it "should create a session" do
-          UserSession.find.user.should == @user
-        end
+        describe "not first time" do
+          before :each do
+            @user = Factory(:atleta, :email => "a@b.com")
+					  @user.activated = true
+					  @user.save
+					  @atleta = Atleta.find(@user.atleta_id)
+					  @atleta.altura = 10
+					  @atleta.save
+            post :create, :user_session => {:password => "123456", :email => @user.email}
+          end
 
-        it "should redirect to /" do
-          should redirect_to "/"
-        end
+          it "should create a session" do
+            UserSession.find.user.should == @user
+          end
 
-        it "should flash something" do
-          flash[:notice].should == "Login efetuado com sucesso."
+          it "should redirect to /" do
+            should redirect_to "/"
+          end
+
+          it "should flash something" do
+            flash[:notice].should == "Login efetuado com sucesso."
+          end
         end
+          
+          
       end
 
       describe "failure" do
         before :each do
-          activate_authlogic
         end
         def post_it 
           post :create, :user_session => {:password => "1234", :email => ""}
@@ -55,8 +81,7 @@ describe UserSessionsController do
   end
   describe "logged in" do
     before :each do
-      activate_authlogic
-      @user = Factory(:user)
+      @user = Factory(:atleta)
       UserSession.create(@user).should be_true
     end
 

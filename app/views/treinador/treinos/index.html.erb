@@ -1,0 +1,24 @@
+<% semantic_form_for :somatorio_de_carga, :url => somatorio_de_cargas_treinador_atleta_path(@atleta.id) do |form| %>
+  <% form.inputs do %>
+    <%= form.input :data_inicial, :as => :date %>
+    <%= form.input :data_final, :as => :date %>
+  <% end %>
+  <% form.buttons do %>
+    <%= form.commit_button %>
+  <% end %>
+<% end %>
+
+<table>
+  <tr>
+    <th>Data</th>
+  </tr>
+  <% @treinos.each do |treino| %>
+    <tr>
+      <td><%= treino.date %></td>
+      <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
+      <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
+    </tr>
+   <% end %>
+</table>
+
+<%= link_to "Novo treino", new_treinador_atleta_treino_path(@atleta) %>

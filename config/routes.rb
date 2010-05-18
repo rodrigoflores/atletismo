@@ -1,5 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
- 
+
+	map.connect "/treinador/atletas/:id/somatorio_de_cargas", :controller => "treinador/atletas", :action => "somatorio_de_cargas"
+
+  map.namespace :treinador do |treinador|
+  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => :treinos
+  	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
+  end
+
+  map.namespace :atleta do |atleta|
+  	atleta.resources :treinos
+  end 
+
  #Users
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'

@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Treinador do
 
   it "should have one user on trainer" do
-    should have_one (:user)
+    should have_one(:user)
   end
 
   it "should have many cor_treinos" do
