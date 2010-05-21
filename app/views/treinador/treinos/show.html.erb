@@ -60,11 +60,17 @@
       <td><%= item_treino.series %></td>
       <td><%= item_treino.repeticao %></td>
       <td><%= item_treino.volume %> <%= item_treino.grandeza %></td>
-      <% if item_treino.minutos || item_treino.segundos || item_treino.decimos %>
-        <td><%= item_treino.minutos %>'<%= item_treino.segundos %>''<%= item_treino.decimos %>"</td>
-      <% else %>
-        <td></td>
+      <td>
+      <% if item_treino.minutos %>
+      <%= item_treino.minutos %>'
       <% end %>
+      <% if item_treino.segundos %>
+      <%= item_treino.segundos %>''
+      <% end %>
+      <% if item_treino.decimos %>
+      <%= item_treino.decimos %>"
+      <% end %>
+      </td>
       <td><%= item_treino.pausa %></td>
       <td><%= item_treino.intervalo %></td>
       <td><%= link_to "Remover", treinador_treino_item_treino_path(@treino,item_treino), :method => :delete %>
