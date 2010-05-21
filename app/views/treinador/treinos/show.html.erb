@@ -61,42 +61,39 @@
   <br/>
   <%= @treino.comentario %>
 </p>
-<table>
+<table border=1 width="100%">
+  <tr><td colspan=9 align=center><i>Itens de Treino</td></tr>
   <tr>
-    <th>Objetivo</th>
-    <th>Exercício</th>
-    <th>Séries</th>
-    <th>Repetição</th>
-    <th>Volume</th>
-    <th>Tempo</th>
-    <th>Pausa</th>
-    <th>Intervalo</th>
-    <th></th>
+    <td align=center><b>Objetivo</td>
+    <td align=center><b>Exercício</td>
+    <td align=center><b>Séries</td>
+    <td align=center><b>Repetição</td>
+    <td align=center><b>Volume</td>
+    <td align=center><b>Tempo</td>
+    <td align=center><b>Pausa</td>
+    <td align=center><b>Intervalo</td>
+    <td align=center><b></td>
   </tr>
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
-      <td>
-        <%= item_treino.objetivo %>
+    	<td align=center><%=item_treino.objetivo%></td>
+      <td align=center><%=item_treino.exercicio%></td>
+      <td align=center><%=item_treino.series%></td>
+      <td align=center><%=item_treino.repeticao%></td>
+      <td align=center><%=item_treino.volume%> <%=item_treino.grandeza%></td>
+      <td align=center>
+	      <% if item_treino.minutos %>
+	  	    <%= item_treino.minutos %>'
+  	    <% end %>
+  	    <% if item_treino.segundos %>
+  		    <%= item_treino.segundos %>''
+  	    <% end %>
+  	    <% if item_treino.decimos %>
+  		    <%= item_treino.decimos %>"
+  	    <% end %>
       </td>
-      <td>
-        <%= item_treino.exercicio %>
-      </td>
-      <td><%= item_treino.series %></td>
-      <td><%= item_treino.repeticao %></td>
-      <td><%= item_treino.volume %> <%= item_treino.grandeza %></td>
-      <td>
-      <% if item_treino.minutos %>
-      <%= item_treino.minutos %>'
-      <% end %>
-      <% if item_treino.segundos %>
-      <%= item_treino.segundos %>''
-      <% end %>
-      <% if item_treino.decimos %>
-      <%= item_treino.decimos %>"
-      <% end %>
-      </td>
-      <td><%= item_treino.pausa %></td>
-      <td><%= item_treino.intervalo %></td>
+      <td align=center><%=item_treino.pausa%></td>
+      <td align=center><%= item_treino.intervalo %></td>
       <td><%= link_to "Remover", treinador_treino_item_treino_path(@treino,item_treino), :method => :delete %>
     </tr>
   <% end %>

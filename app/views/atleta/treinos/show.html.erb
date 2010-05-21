@@ -6,23 +6,33 @@
     <tr>
       <td align=center><b>Objetivo</td>
       <td align=center><b>Exercício</td>
-      <td align=center><b>Volume</td>
-      <td align=center><b>Pausa</td>
-      <td align=center><b>Intervalo</td>
       <td align=center><b>Séries</td>
       <td align=center><b>Repetição</td>
+      <td align=center><b>Volume</td>
       <td align=center><b>Tempo</td>
+      <td align=center><b>Pausa</td>
+      <td align=center><b>Intervalo</td>
     </tr>
     <%@treino.itens_treino.each do |item|%>
       <tr>
         <td align=center><%=item.objetivo%></td>
-        <td align=center><%= item.exercicio%></td>
-        <td align=center><%=item.volume%> <%=item.grandeza%></td>
-        <td align=center><%=item.pausa%></td>
-        <td align=center><%=item.intervalo%></td>
+        <td align=center><%=item.exercicio%></td>
         <td align=center><%=item.series%></td>
         <td align=center><%=item.repeticao%></td>
-        <td align=center><%=item.minutos%>'<%=item.segundos%>''<%=item.decimos%></td>
+        <td align=center><%=item.volume%> <%=item.grandeza%></td>
+		    <td align=center>
+			    <% if item.minutos %>
+				    <%= item.minutos %>'
+			    <% end %>
+			    <% if item.segundos %>
+				    <%= item.segundos %>''
+			    <% end %>
+			    <% if item.decimos %>
+				    <%= item.decimos %>"
+			    <% end %>
+		    </td>
+        <td align=center><%=item.pausa%></td>
+        <td align=center><%=item.intervalo%></td>
       </tr>
     <% end %>
   </table>
