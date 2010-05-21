@@ -22,6 +22,30 @@
     var resultado = document.getElementById('resultado_ritmo');
     resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
   }
+
+  function calculaTempoPeloRitmo() {
+ 
+  	var ritmo = document.getElementById("ritmo_ritmo").value;
+  	var distancia = document.getElementById("item_treino_volume").value / 1000;
+    var intensidade = document.getElementById('tempo_intensidade').value;
+    var tempo = ritmo * distancia * (2 - intensidade/100);
+
+    var tempo = tempo * 600;
+
+    var minutos = (tempo / 600).floor();
+    var segundos = ((tempo % 600) / 10).floor();
+    var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
+
+    var campo_minutos = document.getElementById("item_treino_minutos");
+    var campo_segundos = document.getElementById("item_treino_segundos");
+    var campo_decimos = document.getElementById("item_treino_decimos"); 
+    
+    campo_minutos.value = minutos;
+    campo_segundos.value = segundos;
+    campo_decimos.value = decimos;
+    
+  }
+
 </script>
 
 <p>Data: <%= @treino.date %></p>
@@ -94,6 +118,13 @@
     <%= form.input :segundos,   :required => false, :input_html => { :size => 3 } %>
     <%= form.input :decimos,    :required => false, :input_html => { :size => 3 } %>
   <% end %>
+  Ritmo:
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= text_field(name = :ritmo, value = :ritmo, :size => 5) %>
+  <input type='button' value="Calcular Tempo" onclick="calculaTempoPeloRitmo()">&nbsp;&nbsp;&nbsp;
+  <span id="resultado_ritmo"></span><br /><br />
+  
   Intensidade:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %>
