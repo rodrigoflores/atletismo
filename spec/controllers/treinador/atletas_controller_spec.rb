@@ -6,8 +6,11 @@ describe Treinador::AtletasController do
     before do
       activate_authlogic
       @treinador = Factory(:treinador)
-      UserSession.create @treinador
       @atleta = Factory(:atleta, :treinador_id => @treinador.id)
+      @treinador_2 = Factory(:treinador, :email => "aaa@bbb.com")
+      @atleta_2 = Factory(:atleta, :treinador_id => @treinador_2.id, :email => "ac@ad.com")
+        
+      UserSession.create @treinador
     end
 
     describe "get index" do
@@ -17,8 +20,6 @@ describe Treinador::AtletasController do
       end
 
       it "should assign atletas" do
-        @treinador_2 = Factory(:treinador, :email => "aaa@bbb.com")
-        @atleta_2 = Factory(:atleta, :treinador_id => @treinador_2.id, :email => "ac@ad.com")
         get :index
         assigns[:atletas].should == [Atleta.find(@atleta.atleta_id)]
       end

@@ -76,7 +76,7 @@
 
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :objetivo,   :required => false, :input_html => { :size => 20 } %>
+    <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
     <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
