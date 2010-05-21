@@ -38,7 +38,7 @@ end
 
 Factory.define :item_treino do |item_treino|
   item_treino.treino { |x| x.association(:treino)} 
-  item_treino.metodo "Em pé"
+  item_treino.objetivo "Força"
   item_treino.series 12
   item_treino.repeticao 5
   item_treino.volume   10

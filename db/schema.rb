@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100430180826) do
+ActiveRecord::Schema.define(:version => 20100521183047) do
 
   create_table "atletas", :force => true do |t|
     t.date     "nasc"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20100430180826) do
     t.datetime "updated_at"
     t.integer  "repeticao"
     t.integer  "treino_id"
-    t.string   "metodo"
+    t.string   "objetivo"
     t.integer  "series"
     t.integer  "cor_treino_id"
     t.integer  "minutos"

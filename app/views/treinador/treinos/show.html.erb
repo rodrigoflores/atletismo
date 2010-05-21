@@ -35,8 +35,8 @@
 </p>
 <table>
   <tr>
+    <th>Objetivo</th>
     <th>Exercício</th>
-    <th>Método</th>
     <th>Séries</th>
     <th>Repetição</th>
     <th>Volume</th>
@@ -48,10 +48,10 @@
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
       <td>
-        <%= item_treino.exercicio %>
+        <%= item_treino.objetivo %>
       </td>
       <td>
-        <%= item_treino.metodo %>
+        <%= item_treino.exercicio %>
       </td>
       <td><%= item_treino.series %></td>
       <td><%= item_treino.repeticao %></td>
@@ -72,8 +72,8 @@
 
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
+    <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
     <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
-    <%= form.input :metodo,     :required => false, :input_html => { :size => 20 } %>
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>

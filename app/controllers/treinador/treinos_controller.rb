@@ -1,4 +1,5 @@
 class Treinador::TreinosController < ApplicationController
+
   def index
     @atleta = Atleta.find(params[:atleta_id])
     @treinos = @atleta.treinos
