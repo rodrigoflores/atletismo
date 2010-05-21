@@ -264,11 +264,11 @@ table.time {
 	text-align: center;
 }
 
-.page_users div#lateral, .page_signup div#lateral, .page_home div#lateral, .page_forgot_password div#lateral  {
+.page_users div#lateral, .page_signup div#lateral, .page_home div#lateral, .page_forgot_password div#lateral, .page_reset_password div#lateral  {
 	display: none;
 }
 
-.page_users  div#conteudo, .page_signup  div#conteudo, .page_home div#conteudo, .page_forgot_password div#conteudo  {
+.page_users  div#conteudo, .page_signup  div#conteudo, .page_home div#conteudo, .page_forgot_password div#conteudo, .page_reset_password div#conteudo  {
 	position:relative;
 	background: #FFFFFF;
 	width: 100%;
