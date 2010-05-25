@@ -29,5 +29,5 @@ class Teste < ActiveRecord::Base
     tmp.delete("")
     return tmp.join " | "
   end
-  
+
 end

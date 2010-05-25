@@ -26,7 +26,7 @@ Factory.define :atleta, :class => User do |user|
   user.atleta true
   user.treinador false
   user.activated true
-  user.treinador_id { x = Factory(:treinador); x.id } 
+  user.treinador_id { x = Factory(:treinador); x.id }
 end
 
 Factory.define :treino do |treino|
@@ -83,7 +83,7 @@ Factory.define :cor_treino do |cor|
 end
 
 Factory.define :teste, :class => Teste do |t|
-  t.atleta_id 1
+  t.atleta {|x| x.association(:atleta)}
   t.nome "O mar"
   t.data Date.new
   t.minutos 10

@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.connect "/treinador/atletas/:id/somatorio_de_cargas", :controller => "treinador/atletas", :action => "somatorio_de_cargas"
 
   map.namespace :treinador do |treinador|
-  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => :treinos
+  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => [:treinos, :testes]
   	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
   end
 
