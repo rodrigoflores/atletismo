@@ -90,12 +90,5 @@ describe ProvasController do
       end
     end
   end
-  
-  describe "get => provas_distancia_form" do
-    dist = 1
-    it "should form a distance" do
-      get :show, :id => @prova.id, :distancia => dist
-      assigns[:distancia].should == dist.to_s
-    end
-  end 
+
 end
