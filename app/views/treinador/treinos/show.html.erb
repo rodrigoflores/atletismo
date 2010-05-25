@@ -1,28 +1,87 @@
 <script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
 
 <script type='text/javascript'>
-  function calculaRitmo() { 
-    var minutos = document.getElementById("item_treino_minutos").value;
-    var segundos = document.getElementById("item_treino_segundos").value;
-    var decimos = document.getElementById("item_treino_decimos").value; 
-    var volume = document.getElementById("item_treino_volume").value;
-    if(volume <= 0) {
-      alert("Volume deve ser maior que zero");
-      document.getElementById('item_treino_volume').focus();
-      return;
-    }
-    var intensidade = document.getElementById('tempo_intensidade').value;
-    if(intensidade > 100 || intensidade <= 0)
-    {
-      alert("Intensidade deve estar no intervalo 1~100%");
-      document.getElementById('tempo_intensidade').focus();
-      return;
-    
-    }
-    var resultado = document.getElementById('resultado_ritmo');
-    resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
+function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade, campo_resultado) { 
+
+  var minutos = document.getElementById(campo_minutos).value;
+  var segundos = document.getElementById(campo_segundos).value;
+  var decimos = document.getElementById(campo_decimos).value; 
+  var volume = document.getElementById(campo_volume).value;
+  if(volume <= 0) {
+    alert("Volume deve ser maior que zero");
+    document.getElementById(campo_volume).focus();
+    return;
   }
+  var intensidade = document.getElementById(campo_intensidade).value;
+  if(intensidade > 100 || intensidade <= 0)
+  {
+    alert("Intensidade deve estar no intervalo 1~100%");
+    document.getElementById(campo_intensidade).focus();
+    return;
+  
+  }
+  var resultado = document.getElementById(campo_resultado);
+  resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
+}
+
+function copiar(){
+  document.getElementById('item_treino_minutos').value = document.getElementById('calculadora_minutos').value;
+  document.getElementById('item_treino_segundos').value = document.getElementById('calculadora_segundos').value;
+  document.getElementById('item_treino_decimos').value = document.getElementById('calculadora_decimos').value;
+  document.getElementById('item_treino_volume').value = document.getElementById('calculadora_volume').value;
+  document.getElementById('tempo_intensidade').value = document.getElementById('calculadora_intensidade').value;
+}
+
+$(document).ready(function() {
+	$('.popup_calculadora').draggable();
+});
+	
 </script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+<div class="popup_calculadora">
+  <div style="float: right;">
+  <a href="javascript:void(0)" onclick="$('.popup_calculadora').fadeOut('fast')">[X]</a>
+  </div>
+  <div class="popup_content">
+
+    <div style="padding-top: 50x;">
+      <table>
+        <tr>
+          <td><label for="calculadora_volume">Volume</label></td>
+          <td><input type="text" size="5" id="calculadora_volume"/></td>
+        </tr>
+        <tr>
+          <td><label for="calculadora_minutos">Minutos</label></td>
+          <td><input type="text" size="2" id="calculadora_minutos"/></td>
+        </tr>
+        <tr>
+          <td><label for="calculadora_segundos">Segundos</label></td>
+          <td><input type="text" size="2" id="calculadora_segundos"/></td>
+        </tr>
+        <tr>
+          <td><label for="calculadora_decimos">Decimos</label></td>
+          <td><input type="text" size="2" id="calculadora_decimos"/></td>
+        </tr>
+        <tr>
+          <td><label for="calculadora_intensidade">Intensidade</label></td>
+          <td><input type="text" size="3" id="calculadora_intensidade"/></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" value="Calcular" onclick="javascript:calculaRitmo ('calculadora_minutos', 'calculadora_segundos', 'calculadora_decimos', 'calculadora_volume', 'calculadora_intensidade', 'popup_resultado')"/>
+            <input type="button" value="Copiar para o treino" onclick="javascript: copiar();"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" id="popup_resultado"></td>
+        </tr>
+      </table> 
+    </div>
+  </div>
+</div>
+
 
 <p>Data: <%= @treino.date %></p>
 
@@ -80,6 +139,8 @@
 <br />
 <h2> Novo item de treino </h2>
 
+<p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
+
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
     <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
@@ -97,7 +158,8 @@
   Intensidade:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %>
-  <input type='button' value="Calcular Ritmo" onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;
+  <input type='button' value="Calcular Ritmo" onclick="calculaRitmo('item_treino_minutos', 'item_treino_segundos', 'item_treino_decimos', 'item_treino_volume', 'tempo_intensidade', 'resultado_ritmo')">
+  &nbsp;&nbsp;&nbsp;
   <span id="resultado_ritmo"></span><br /><br />
   
   <% form.buttons do %>
