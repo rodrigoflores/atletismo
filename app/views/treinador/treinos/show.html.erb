@@ -158,6 +158,10 @@ $(document).ready(function() {
   <% end %>
 </table>
 <br />
+
+<div id="botao_criar_treino"><a href="javascript: void(0);" onclick="$('#novo_item_treino').fadeIn('slow'); $('#botao_criar_treino').fadeOut('slow'); ">Criar novo treino</a></div>
+
+<div id="novo_item_treino" style="display: none;">
 <h2> Novo item de treino </h2>
 
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
@@ -195,7 +199,7 @@ $(document).ready(function() {
   
 <% end %>
 
-
+</div>
 
 <%= link_to "Treinos", treinador_atleta_treinos_path(@atleta) %>
 |
