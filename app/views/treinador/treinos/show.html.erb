@@ -110,7 +110,9 @@ $(document).ready(function() {
   </div>
 </div>
 
-
+<p>
+	<h1>Treino de <%= User.find_by_atleta_id(@atleta.id).name %></h1>
+</p>
 <p>Data: <%= @treino.date %></p>
 
 <p>

@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe ProvasController do
+describe Atleta::ProvasController do
   before (:each) do
     activate_authlogic
     @atleta = Factory(:atleta)
@@ -17,6 +17,13 @@ describe ProvasController do
     it "should assign a test" do
       get :new
       assigns[:prova].should be_kind_of Prova
+    end
+  end
+  
+  describe "get => index" do
+    it "should assign a athlete" do
+      get :index
+      assigns[:atleta].should be_kind_of Atleta
     end
   end
   
@@ -51,7 +58,7 @@ describe ProvasController do
           post :create, :prova => Factory.attributes_for(:prova), :atleta_id => @atleta.atleta_id
         }.should change(Prova,:count).by(1)
         flash[:notice].should == 'Prova foi criada com sucesso.'
-        should redirect_to atleta_provas_path(assigns[:atleta])
+        should redirect_to atleta_provas_path
       end
       
       it "assigns prova" do
@@ -80,7 +87,7 @@ describe ProvasController do
       it "should update a prova" do
         put :update, :prova => Factory.attributes_for(:prova), :id => @prova.id
         flash[:notice].should == 'Prova foi atualizada com sucesso.'
-        should redirect_to atleta_provas_path(@prova)
+        should redirect_to atleta_provas_path
       end
     end
     describe "failure" do

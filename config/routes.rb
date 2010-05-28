@@ -3,12 +3,13 @@ ActionController::Routing::Routes.draw do |map|
 	map.connect "/treinador/atletas/:id/somatorio_de_cargas", :controller => "treinador/atletas", :action => "somatorio_de_cargas"
 
   map.namespace :treinador do |treinador|
-  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => [:treinos, :testes]
+  	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => [:treinos, :testes, :provas]
   	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
   end
 
   map.namespace :atleta do |atleta|
   	atleta.resources :treinos
+  	atleta.resources :provas
   end 
 
  #Users
@@ -36,7 +37,7 @@ ActionController::Routing::Routes.draw do |map|
  #Routes padrão
   map.resources :users
   map.resource  :user_session
-  map.resources :atletas, :has_many => :provas
+  #map.resources :atletas, :has_many => :provas
   map.resources :atletas, :has_many => :testes
   map.resource :treinador
   map.resources :treinos, :collection => { :calcula_ritmo_inicial => :get }  
