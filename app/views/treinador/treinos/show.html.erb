@@ -1,5 +1,11 @@
 <script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
 
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
+
+
+
 <script type='text/javascript'>
 function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade, campo_resultado) { 
 
@@ -32,9 +38,6 @@ function copiar(){
   document.getElementById('tempo_intensidade').value = document.getElementById('calculadora_intensidade').value;
 }
 
-$(document).ready(function() {
-	$('.popup_calculadora').draggable();
-});
 	
 
   function calculaTempoPeloRitmo() {
@@ -60,9 +63,10 @@ $(document).ready(function() {
     
   }
 
+$(document).ready(function() {
+	$('.popup_calculadora').draggable();
+});
 </script>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
 <div class="popup_calculadora">
   <div style="float: right;">
