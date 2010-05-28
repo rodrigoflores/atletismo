@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :atleta do |atleta|
   	atleta.resources :treinos
+  	atleta.resources :testes
   end 
 
  #Users

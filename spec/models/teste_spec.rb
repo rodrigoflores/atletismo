@@ -58,18 +58,6 @@ describe Teste do
 		end
 	end
 	
-	describe "default values" do
-		it "should assign 0 if nil" do
-			@teste.valid?
-			@teste.minutos.should == 0
-			@teste.segundos.should == 0
-			@teste.decimos.should == 0
-			@teste.kg.should == 0
-			@teste.metros.should == 0
-			@teste.centimetros.should == 0
-		end
-	end
-	
 	describe "resultado" do
 		it "should return '' if all is nil" do
 			@teste.resultado.should  == ""

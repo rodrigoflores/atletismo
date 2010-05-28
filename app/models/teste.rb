@@ -1,12 +1,11 @@
 class Teste < ActiveRecord::Base
   belongs_to :atleta
-  
-  attr_accessible :nome, :data, :minutos, :segundos, :decimos, :atleta, :comentarios, :clima, :periodo, :metros, :centimetros, :kg
 
-  validate :default_values
-  validates_numericality_of :segundos, :less_than => 60, :message => " deve ser menor do que 60."
-  validates_numericality_of :decimos, :less_than => 10, :message => " deve ser menor do que 10."
-  validates_numericality_of :centimetros, :less_than => 100, :message => " deve ser menor do que 100."
+ attr_accessible :nome, :data, :minutos, :segundos, :decimos, :atleta, :comentarios, :clima, :periodo, :metros, :centimetros, :kg
+
+  validates_numericality_of :segundos, :less_than => 60, :message => " deve ser menor do que 60.", :allow_nil => true
+  validates_numericality_of :decimos, :less_than => 10, :message => " deve ser menor do que 10.", :allow_nil => true
+  validates_numericality_of :centimetros, :less_than => 100, :message => " deve ser menor do que 100.", :allow_nil => true
   validates_presence_of :nome
   
   def default_values
