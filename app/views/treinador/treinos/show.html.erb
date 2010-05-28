@@ -63,9 +63,7 @@ function copiar(){
     
   }
 
-$(document).ready(function() {
-	$('.popup_calculadora').draggable();
-});
+
 </script>
 
 <div class="popup_calculadora">
@@ -165,9 +163,25 @@ $(document).ready(function() {
 </table>
 <br />
 
-<div id="botao_criar_treino"><a href="javascript: void(0);" onclick="$('#novo_item_treino').fadeIn('slow'); $('#botao_criar_treino').fadeOut('slow'); ">Criar novo treino</a></div>
+<%= "<script type=\"text/javascript\">$(document).ready(function() {
+	$('.popup_calculadora').draggable();
+	$('#novo_item_treino').fadeIn('slow');
+	$('#botao_criar_treino').hide();
+});</script>" if (params["mostra_form"] == "sim") %>
+
+
+<%= "<script type=\"text/javascript\">$(document).ready(function() {
+	$('.popup_calculadora').draggable();
+});</script>" if (params["mostra_form"] != "sim") %>
+
+
+<div id="botao_criar_treino"><a href="javascript: void(0);" onclick="$('#novo_item_treino').fadeIn('slow'); $('#botao_criar_treino').fadeOut('slow'); ">Criar novo item de treino</a></div>
 
 <div id="novo_item_treino" style="display: none;">
+
+  <div style="float: right;">
+  <a href="javascript:void(0)" onclick="$('#novo_item_treino').fadeOut('slow'); $('#botao_criar_treino').fadeIn('slow');">[X]</a>
+  </div>
 <h2> Novo item de treino </h2>
 
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
@@ -186,21 +200,21 @@ $(document).ready(function() {
     <%= form.input :segundos,   :required => false, :input_html => { :size => 3 } %>
     <%= form.input :decimos,    :required => false, :input_html => { :size => 3 } %>
   <% end %>
+  Intensidade:
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %>
+  <input type='button' value="Calcular Ritmo" onclick="calculaRitmo('item_treino_minutos', 'item_treino_segundos', 'item_treino_decimos', 'item_treino_volume', 'tempo_intensidade', 'resultado_ritmo')"><input type="hidden" name="mostra_form" value="sim" />
+  &nbsp;&nbsp;&nbsp;
+  <span id="resultado_ritmo"></span><br /><br />
+
   Ritmo:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <%= text_field(name = :ritmo, value = :ritmo, :size => 5) %>
   <input type='button' value="Calcular Tempo" onclick="calculaTempoPeloRitmo()"><br /><br />
-  
-  Intensidade:
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <%= text_field(name = :tempo, value = :intensidade, :size => 5, :maxlength => 3) %>
-  <input type='button' value="Calcular Ritmo" onclick="calculaRitmo('item_treino_minutos', 'item_treino_segundos', 'item_treino_decimos', 'item_treino_volume', 'tempo_intensidade', 'resultado_ritmo')">
-  &nbsp;&nbsp;&nbsp;
-  <span id="resultado_ritmo"></span><br /><br />
-  
+
   <% form.buttons do %>
-    <%= form.commit_button "Criar item treino"%>
+    <%= form.commit_button "Criar item treino" %>
   <% end %>
   
 <% end %>

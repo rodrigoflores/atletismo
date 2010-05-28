@@ -11,6 +11,7 @@ class Treinador::TestesController < ApplicationController
   end
   
   def edit
+    @atleta = Atleta.find(params[:atleta_id])
     @teste = Teste.find(params[:id])
   end
   

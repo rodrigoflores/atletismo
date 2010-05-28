@@ -3,7 +3,7 @@ class Atleta::TreinosController < ApplicationController
 	before_filter :require_login
 
   def index
-    @atleta = Atleta.find(current_user.atleta_id)
+    @atleta = Atleta.find(current_atleta)
     @treinos = @atleta.treinos
   end
 
