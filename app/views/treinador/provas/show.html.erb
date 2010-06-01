@@ -1,4 +1,4 @@
-<p><h1>Prova de <%= current_user.name%></h1></p><br />
+<p><h1>Provas de <%= User.find_by_atleta_id(@atleta.id).name%></h1></p><br />
 <p>
   <b>Competicao:</b>
   <%=h @prova.competicao %>
@@ -48,5 +48,5 @@
 	</p>
 <% end %>
 
-<%= link_to "Voltar", atleta_provas_path(@atleta) %>
+<%= link_to "Voltar", treinador_atleta_provas_path(@atleta) %>
 

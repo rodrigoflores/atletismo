@@ -1,3 +1,7 @@
+<p>
+	<h1>Editar treino de <%= User.find_by_atleta_id(@atleta.id).name %></h1>
+</p>
+
 <% form_for @treino, :url => treinador_atleta_treino_path(@atleta, @treino) do |f| %>
 <p><%= label_tag 'Data:' %><br/>
 <%= f.date_select :date %></p>

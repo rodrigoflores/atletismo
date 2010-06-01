@@ -1,0 +1,6 @@
+<h1>Editar teste </h1>
+
+<% semantic_form_for @teste, :url => atleta_teste_path(@teste) do |form| %>
+  <%= form.error_messages %>
+  <%= render :partial => 'form', :locals => { :form => form } %>
+<% end %>

@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Data</th>
+  </tr>
+  <% @testes.each do |teste| %>
+    <tr>
+      <td><%= link_to teste.nome, treinador_atleta_teste_path(@atleta, teste) %></td>
+      <td><%= teste.data %></td>
+      <td><%= link_to "Editar", edit_treinador_atleta_teste_path(@atleta, teste) %></td>
+      <td><%= link_to "Excluir", treinador_atleta_teste_path(@atleta, teste), :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Novo teste", new_treinador_atleta_teste_path(@atleta)%>

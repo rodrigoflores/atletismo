@@ -1,0 +1,55 @@
+<h1>Incluir nova prova</h1>
+
+
+<% form_for ([  @atleta, @prova ]) do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+   <%= f.label :competicao, "Competição"	%> <br />
+    <%= f.text_field :competicao %>
+  </p>
+
+  <p>
+    <%= f.label :data %><br />
+    <%= f.date_select :data %>
+  </p>
+  
+  <p>
+    <%= f.label :distancia, "Distância"	%><br />
+    <%= f.text_field :distancia , :size => "7" %> <label> metros</label>
+  </p>
+
+  <p>
+  	<label>Tempo: </label>
+         <%= f.text_field :horas, :size => 5 %> <label>h </label>
+		 <%= f.text_field :minutos, :size => 5 %> <label>' </label>
+         <%= f.text_field :segundos, :size => 5 %> <label>'' </label> 
+         <%= f.text_field :decimos, :size => 5 %>
+  </p>
+  <p>
+	  <%= f.radio_button :tipoTempo, "Manualmente" %> <label> Manualmente </label><br />
+	  <%= f.radio_button :tipoTempo, "Eletronicamente" %> <label> Eletronicamente </label><br />
+  </p>	  
+
+  <p>
+    <%= f.label :clima %><br />
+    <%= f.text_field :clima %>
+  </p>
+    
+   <p>
+    <%= f.label :colocacao, "Colocação" %><br />
+    <%= f.text_field :colocacao, :size => 3 %>
+  </p>
+  
+   <p>
+    <%= f.label :comentarios, "Comentários" %><br />
+    <%= f.text_area :comentarios, :cols => 35, :rows => 10%>
+  </p>	
+	
+	
+  <p>
+    <%= f.submit 'Criar prova' %>
+  </p>
+<% end %>
+
+
