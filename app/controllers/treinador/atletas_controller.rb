@@ -1,4 +1,5 @@
 class Treinador::AtletasController < ApplicationController
+
   def index
     @atletas = Atleta.find_all_by_treinador_id(current_user.treinador_id)
   end

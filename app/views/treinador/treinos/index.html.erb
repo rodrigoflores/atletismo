@@ -1,13 +1,26 @@
+<p>
+	<h1><%= User.find_by_atleta_id(@atleta.id).name %></h1>
+</p>
+
+<p>
+	<h3>Somatório de cargas</h3>
+	<br/>
+</p>
+
 <% semantic_form_for :somatorio_de_carga, :url => somatorio_de_cargas_treinador_atleta_path(@atleta.id) do |form| %>
   <% form.inputs do %>
-    <%= form.input :data_inicial, :as => :date %>
-    <%= form.input :data_final, :as => :date %>
+    <%= form.input :data_inicial,:required => false,:as => :date %>
+    <%= form.input :data_final, :required => false, :as => :date %>
   <% end %>
   <% form.buttons do %>
-    <%= form.commit_button %>
+    <%= form.commit_button "Somatório de cargas"%>
   <% end %>
 <% end %>
 
+<p>
+	<h3>Treinos</h3>
+	<br/>
+</p>
 <table>
   <tr>
     <th>Data</th>

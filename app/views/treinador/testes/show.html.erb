@@ -1,0 +1,25 @@
+<h1><%= @atleta.nome %></h1>
+<table>
+  <tr>
+    <td>Teste:</td>
+    <td><%= @teste.nome %></td>
+  </tr>
+  <tr>
+    <td>Data:</td>
+    <td><%= @teste.data %></td>
+  </tr>
+  <% if (@teste.minutos || @teste.segundos || @teste.decimos) %>
+    <tr>
+      <td>Tempo:</td>
+      <td><%= @teste.minutos %> " <%= @teste.segundos %>''<%= @teste.decimos %>'</td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Distância:</td>
+    <td><%= @teste.metros %></td>
+  </tr>
+  <tr>
+    <td>Comentários:</td>
+    <td><%= @teste.comentarios %></td>
+  </tr>
+</table>
