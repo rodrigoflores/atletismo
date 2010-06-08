@@ -9,13 +9,13 @@ describe WelcomeController do
     it "should redirect to treinador_path" do
       UserSession.create(Factory(:treinador))
       get :index
-      should redirect_to treinador_path
+      should redirect_to treinador_profile_path
     end
     
     it "should redirect to treinador_path" do
-      UserSession.create(Factory(:user))
+      UserSession.create(Factory(:atleta))
       get :index
-      should redirect_to :controller => :atletas
+      should redirect_to atleta_profile_path
     end
   end
   

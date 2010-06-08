@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20100601165947) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "treinador_id"
-    t.integer  "treino_id"
   end
 
   create_table "cor_periodos", :force => true do |t|
@@ -57,9 +56,9 @@ ActiveRecord::Schema.define(:version => 20100601165947) do
     t.integer  "decimos"
     t.string   "grandeza"
     t.string   "exercicio"
-    t.integer  "pausa"
-    t.integer  "intervalo"
     t.integer  "volume"
+    t.string   "pausa"
+    t.string   "intervalo"
   end
 
   create_table "participa_provas", :force => true do |t|

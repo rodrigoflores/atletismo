@@ -1,0 +1,16 @@
+<%	@treinador = Treinador.find_by_user_id(current_user); %>
+<%	if @treinador	%>
+<%	if @atleta	%>
+
+<%	end %>
+<ul>
+
+	<li><%= link_to "Meus dados", treinador_profile_path  %></li>
+    <li><%= link_to "Cálculo de Ritmo", :controller => "treinador/treinos", :action => "calcula_ritmo_inicial"%></li>
+		<li><%= link_to "Atletas", treinador_atletas_path%></li>
+
+</ul>
+
+
+
+<%	end %>
