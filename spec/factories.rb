@@ -98,3 +98,8 @@ Factory.define :teste, :class => Teste do |t|
   t.created_at Date.new
   t.updated_at Date.new
 end
+
+Factory.define :objetivo do |objetivo|
+  objetivo.treinador_id { x = Factory(:treinador); x.id }
+  objetivo.nome "forca"
+end

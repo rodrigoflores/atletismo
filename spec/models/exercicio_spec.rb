@@ -5,8 +5,4 @@ describe Exercicio do
     @valid_attributes = {
     }
   end
-
-  it "should create a new instance given valid attributes" do
-    Exercicio.create!(@valid_attributes)
-  end
 end
