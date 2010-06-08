@@ -5,12 +5,15 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :treinador do |treinador|
   	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => [:treinos, :testes, :provas]
   	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
+  	treinador.root :controller => 'welcome', :action => 'index'
   end
 
   map.namespace :atleta do |atleta|
   	atleta.resources :treinos
   	atleta.resources :provas
   	atleta.resources :testes
+  	atleta.resource :profile
+  	atleta.root :controller => 'profiles', :action => 'show'
   end 
 
  #Users

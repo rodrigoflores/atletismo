@@ -34,13 +34,13 @@
 
 <h1>Editar atleta</h1>
 
-<% form_for(@atleta,:html=>{:onsubmit=>"selectAllProvas();"}) do |f| %>
+<% form_for @atleta ,:url => atleta_profile_path , :html=>{:onsubmit=>"selectAllProvas();"}, :method => :put do |f| %>
 
   <%= f.error_messages %>
 
   <p>
-    <b><%= f.label :nasc %> </b>
-	<%= f.date_select :nasc %>
+    <b><%= f.label "Data de nascimento:" %> </b><br />
+    <%= f.date_select :nasc,:start_year => Time.now.year - 100, :end_year => Time.now.year %>
   </p>
   <p>
     <b><%= f.label :peso %>: </b>
@@ -53,17 +53,19 @@
 
   <p id="provas">
   	Provas que corre: 
-	<input type="text" id="nova_prova"/>
+	<input id="nova_prova" type="text"/>
 	<input type="button" onclick="addProva()" value="+" alt="Adicionar Item" style="width: 30px"/>
-	<input type="button" onclick="removeProva()" value="-" alt="Excluir Item" style="width: 30px"/>
+	<br />
+
 	<%= collection_select :atleta, :participa_provas, @atleta.participa_provas, :id, :nome, {}, :multiple => true, :size => 5 %>
+  <input type="button" onclick="removeProva()" value="-" alt="Excluir Item" style="width: 30px"/>
   </p>
   
   
   
   <p>
     <b><%= f.label :treinador %></b>
-    <%= select :atleta, :treinador_id, @treinadores.collect { |p| [p.usuario.name, p.id]},  { :include_blank => true } %>
+    <%= select :atleta, :treinador_id, @treinadores.collect { |p| [p.usuario.name, p.id]},  { :include_blank => false } %>
   </p>
   <br />
   <p>
