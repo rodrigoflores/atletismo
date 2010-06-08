@@ -45,17 +45,7 @@ describe Teste do
 			@teste.valid?.should be_false
 		end
 		
-		it "should not be valid if the centimeters are more/equal than 100" do
-			@teste.nome = "Cicrano2"
-			@teste.centimetros = 100
-			@teste.valid?.should be_false
-		end
-		
-		it "should be valid if the centimeters are less than 100" do
-			@teste.nome = "Fulano"
-			@teste.centimetros = 99
-			@teste.valid?.should be_true
-		end
+
 	end
 	
 	describe "resultado" do
@@ -67,20 +57,6 @@ describe Teste do
 			@teste.minutos = 0
 			@teste.segundos = 0
 			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 0
-			@teste.resultado.should == ""
-		end
-		
-		it "should return '1' 1'' 1 | 1.0 kg | 1 m 1 cm' if all is set as 1" do
-			@teste.minutos = 1
-			@teste.segundos = 1
-			@teste.decimos = 1
-			@teste.kg = 1
-			@teste.metros = 1
-			@teste.centimetros = 1
-			@teste.resultado.should == "1' 1'' 1 | 1.0 kg | 1 m 1 cm"
 		end
 		
 		it "should return '1' 1'' 1' if there is only time" do
@@ -94,41 +70,7 @@ describe Teste do
 			@teste.minutos = 1
 			@teste.segundos = 1
 			@teste.decimos = 1
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 0
 			@teste.resultado.should == "1' 1'' 1"
-		end
-
-		it "should return '1.0 kg' if there is only weight" do
-			@teste.kg = 1
-			@teste.resultado.should == "1.0 kg"
-		end
-		
-		it "should return '1.0 kg' if only the weight is different of 0" do
-			@teste.minutos = 0
-			@teste.segundos = 0
-			@teste.decimos = 0
-			@teste.kg = 1
-			@teste.metros = 0
-			@teste.centimetros = 0
-			@teste.resultado.should == "1.0 kg"
-		end
-		
-		it "should return '1 m 1 cm' if there is only distance" do
-			@teste.metros = 1
-			@teste.centimetros = 1
-			@teste.resultado.should == "1 m 1 cm"
-		end
-
-		it "should return '1 m 1 cm' if only the distance is different of 0" do
-			@teste.minutos = 0
-			@teste.segundos = 0
-			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 1
-			@teste.centimetros = 1
-			@teste.resultado.should == "1 m 1 cm"
 		end
 		
 		it "should return '1' ' if there is only minutes" do
@@ -140,9 +82,6 @@ describe Teste do
 			@teste.minutos = 1
 			@teste.segundos = 0
 			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 0
 			@teste.resultado.should == "1' "
 		end
 
@@ -155,9 +94,6 @@ describe Teste do
 			@teste.minutos = 0
 			@teste.segundos = 1
 			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 0
 			@teste.resultado.should == "1'' "
 		end
 
@@ -170,40 +106,7 @@ describe Teste do
 			@teste.minutos = 0
 			@teste.segundos = 0
 			@teste.decimos = 1
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 0
 			@teste.resultado.should == "1"
-		end
-
-		it "should return '1 m ' if there is only meters" do
-			@teste.metros = 1
-			@teste.resultado.should == "1 m "
-		end
-
-		it "should return '1 m ' if only the meters is different of 0" do
-			@teste.minutos = 0
-			@teste.segundos = 0
-			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 1
-			@teste.centimetros = 0
-			@teste.resultado.should == "1 m "
-		end
-
-		it "should return '1 cm' if there is only cemtimeters" do
-			@teste.centimetros = 1
-			@teste.resultado.should == "1 cm"
-		end
-
-		it "should return '1 cm' if only the centimeters is different of 0" do
-			@teste.minutos = 0
-			@teste.segundos = 0
-			@teste.decimos = 0
-			@teste.kg = 0
-			@teste.metros = 0
-			@teste.centimetros = 1
-			@teste.resultado.should == "1 cm"
 		end
 	end
 end

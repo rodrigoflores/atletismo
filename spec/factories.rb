@@ -89,12 +89,8 @@ Factory.define :teste, :class => Teste do |t|
   t.minutos 10
   t.segundos 10
   t.decimos 9
-  t.metros 10
-  t.centimetros 10
-  t.kg 0.2
-  t.clima "frio"
-  t.periodo "periodo"
-  t.comentarios "comentario"
+  t.comentarios "comentarios"
+  t.descricao "blabla"
   t.created_at Date.new
   t.updated_at Date.new
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100608193141) do
+ActiveRecord::Schema.define(:version => 20100608195414) do
 
   create_table "atletas", :force => true do |t|
     t.date     "nasc"
@@ -93,14 +93,12 @@ ActiveRecord::Schema.define(:version => 20100608193141) do
     t.integer  "minutos"
     t.integer  "segundos"
     t.integer  "decimos"
-    t.integer  "metros"
-    t.integer  "centimetros"
-    t.decimal  "kg"
-    t.string   "clima"
-    t.string   "periodo"
     t.text     "comentarios"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "descricao"
+    t.float    "volume"
+    t.string   "grandeza"
   end
 
   create_table "tipos", :force => true do |t|
