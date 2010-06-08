@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(:version => 20100608195414) do
     t.datetime "updated_at"
   end
 
+  create_table "exercicios", :force => true do |t|
+    t.integer  "treinador_id"
+    t.string   "exercicio"
+    t.string   "unidade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "itens_treino", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

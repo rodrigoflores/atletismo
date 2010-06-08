@@ -46,9 +46,7 @@ Factory.define :item_treino do |item_treino|
   item_treino.exercicio "Polichinelo"
   item_treino.intervalo 100
   item_treino.pausa     10  
-
 end
-
 
 Factory.define :prova, :class => Prova do |provas|
   provas.data Date.new
@@ -93,4 +91,11 @@ Factory.define :teste, :class => Teste do |t|
   t.descricao "blabla"
   t.created_at Date.new
   t.updated_at Date.new
+end
+
+Factory.define :exercicio do |t|
+  t.treinador_id 1
+  t.exercicio "Correr"
+  t.unidade "m"
+
 end
