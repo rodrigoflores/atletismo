@@ -46,9 +46,7 @@ Factory.define :item_treino do |item_treino|
   item_treino.exercicio "Polichinelo"
   item_treino.intervalo 100
   item_treino.pausa     10  
-
 end
-
 
 Factory.define :prova, :class => Prova do |provas|
   provas.data Date.new
@@ -89,12 +87,8 @@ Factory.define :teste, :class => Teste do |t|
   t.minutos 10
   t.segundos 10
   t.decimos 9
-  t.metros 10
-  t.centimetros 10
-  t.kg 0.2
-  t.clima "frio"
-  t.periodo "periodo"
-  t.comentarios "comentario"
+  t.comentarios "comentarios"
+  t.descricao "blabla"
   t.created_at Date.new
   t.updated_at Date.new
 end
@@ -102,4 +96,10 @@ end
 Factory.define :objetivo do |objetivo|
   objetivo.treinador_id { x = Factory(:treinador); x.id }
   objetivo.nome "forca"
+end
+
+Factory.define :exercicio do |t|
+  t.treinador_id 1
+  t.exercicio "Correr"
+  t.unidade "m"
 end

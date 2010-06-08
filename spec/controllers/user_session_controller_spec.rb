@@ -21,7 +21,7 @@ describe UserSessionsController do
           end
 
           it "should redirect to edit_atleta on first time" do
-            should redirect_to edit_atleta_path(Atleta.find(@user.atleta_id))
+            should redirect_to edit_atleta_profile_path
           end
 
           it "should flash something" do

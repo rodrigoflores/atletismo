@@ -1,8 +1,7 @@
   <% form.inputs do %>
     <%= form.input :nome, :size => 12 %>
     <%= form.input :data, :as => :date %>
-    <%= form.input :metros, :label => "Distância" %>
-    <%= form.input :comentarios, :label => "Comentários", :required => false%>
+    <%= form.input :descricao, :label => "Descrição", :required => false%>
 	<% end %>
 	<% form.buttons do %>
 		<%= form.commit_button 'Criar teste' %>

@@ -17,6 +17,10 @@ describe Treinador do
   it "should have many atletas" do
     should have_many :atletas
   end
+  
+  it "should have many exercicio" do
+    should have_many :exercicios
+  end
  
   it "should bring back user" do
 		activate_authlogic

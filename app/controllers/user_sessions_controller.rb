@@ -6,7 +6,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save 
       flash[:notice] = "Login efetuado com sucesso."
       if is_first_time?
-         redirect_to edit_atleta_path(Atleta.find(current_user.atleta_id))
+         redirect_to edit_atleta_profile_path
       else
         redirect_to "/"
       end

@@ -1,0 +1,17 @@
+<h1>Exercícios Cadastrados</h1>
+
+<table width="70%">
+  <tr>
+    <th>Nome</th>
+    <th>Unidade</th>        
+  </tr>
+  <% @exercicios.each do |e| %>
+    <tr>
+      <td align=center><%= e.exercicio%></td>
+      <td align=center><%= e.unidade%></td>
+      <td><%= link_to "Editar", edit_treinador_exercicio_path(e) %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= link_to "Novo Exercício", new_treinador_exercicio_path %>
