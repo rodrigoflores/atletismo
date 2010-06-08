@@ -1,6 +1,6 @@
-class CreateExercicio < ActiveRecord::Migration
+class CreateExercicios < ActiveRecord::Migration
   def self.up
-    create_table :exercicio do |t|
+    create_table :exercicios do |t|
       t.integer :treinador_id
       t.string :exercicio
       t.string :unidade
@@ -9,6 +9,6 @@ class CreateExercicio < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :exercicio
+    drop_table :exercicios
   end
 end
