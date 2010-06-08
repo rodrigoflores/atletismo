@@ -113,7 +113,6 @@ describe Treinador::TestesController do
         end
 
         it "should create a new teste" do
-        	pending
           lambda {
             put_it
             @teste.reload

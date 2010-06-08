@@ -28,9 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => { :forgot_password => :get, :reset_password_request => :get,  :reset_password => :get }
   map.resource  :user_session
   #map.resources :atletas, :has_many => :provas
-  
-  
 
-   map.root :controller => "welcome"
+  map.root :controller => "welcome"
 
 end
