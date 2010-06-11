@@ -6,9 +6,11 @@ describe Treinador::ObjetivosController do
   
   before do
     activate_authlogic
-    @treinador = Factory(:treinador)
-    @objetivo = Factory(:objetivo, :treinador_id => @treinador.id)
-    UserSession.create(@treinador)
+    @treinador_user = Factory(:treinador)
+    @objetivo = Factory(:objetivo, :treinador_id => @treinador_user.treinador_id)
+    UserSession.create(@treinador_user)
+    @treinador = Treinador.find(@treinador_user.treinador_id)
+    
   end
 
 
@@ -82,16 +84,15 @@ describe Treinador::ObjetivosController do
   
   describe "post => create" do
     
-    def post_it
-      post :create, :objetivo => Factory.attributes_for(:objetivo, :nome => "novo", :treinador_id => @treinador.id)
-    end
-  
     describe "sucess" do
+      def post_it
+        post :create, :objetivo => Factory.attributes_for(:objetivo, :nome => "novo", :treinador_id => @treinador.id)
+      end
+
       it "should increase the size of objetivos" do
-        pending
         lambda {
           post_it
-        }.should change(Objetivo.find_all_by_treinador_id(@treinador), :count)
+        }.should change(@treinador.objetivos, :count).by(1)
       end   
 
       it "should redirect to index" do
@@ -101,7 +102,19 @@ describe Treinador::ObjetivosController do
     end
     
     describe "failure" do
-    
+      def post_it
+        post :create, :objetivo => Factory.attributes_for(:objetivo, :nome => "", :treinador_id => @treinador.id)
+      end
+      it "should not change the size of objetivos" do
+        lambda{
+          post_it
+        }.should_not change(@treinador.objetivos, :count)
+      end
+      
+      it "should render new" do
+        post_it
+        should render_template "new"
+      end
     end
   end
 end
