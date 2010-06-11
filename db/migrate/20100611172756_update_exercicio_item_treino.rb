@@ -1,7 +1,7 @@
-class UpdateItemTreino < ActiveRecord::Migration
+class UpdateExercicioItemTreino < ActiveRecord::Migration
   def self.up
-    remove_column :itens_treino, :exercicio
     remove_column :itens_treino, :grandeza
+    remove_column :itens_treino, :exercicio
     add_column :itens_treino, :exercicio_id, :integer
   end
 

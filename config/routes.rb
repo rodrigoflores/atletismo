@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :treinador do |treinador|
   	treinador.resources :atletas, :member => { :somatorio_de_cargas => :get },:has_many => [:treinos, :testes, :provas]
   	treinador.resources :treinos, :has_many => :itens_treino, :collection => { :calcula_ritmo_inicial => :get }
+  	treinador.resources :objetivos
   	treinador.resources :exercicios, :has_many => :exercicio
   	treinador.resource :profile
   	treinador.root :controller => 'profiles', :action => 'show'
@@ -28,9 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => { :forgot_password => :get, :reset_password_request => :get,  :reset_password => :get }
   map.resource  :user_session
   #map.resources :atletas, :has_many => :provas
-  
-  
 
-   map.root :controller => "welcome"
+  map.root :controller => "welcome"
 
 end

@@ -139,11 +139,11 @@ function copiar(){
   </tr>
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
-    	<td align=center><%=item_treino.objetivo%></td>
-      <td align=center><%=Exercicio.find(item_treino.exercicio).exercicio%></td>
+    	<td align=center><%=Objetivo.find(item_treino.objetivo_id).nome%></td>
+      <td align=center><%=Exercicio.find(item_treino.exercicio_id).exercicio%></td>
       <td align=center><%=item_treino.series%></td>
       <td align=center><%=item_treino.repeticao%></td>
-      <td align=center><%=item_treino.volume%> <%=Exercicio.find(item_treino.exercicio).unidade%></td>
+      <td align=center><%=item_treino.volume%> <%=Exercicio.find(item_treino.exercicio_id).unidade%></td>
       <td align=center>
 	      <% if item_treino.minutos %>
 	  	    <%= item_treino.minutos %>'
@@ -187,8 +187,8 @@ function copiar(){
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :objetivo,    :required => false, :as => :select, :collection => @exercicios.map { |exercicio| [objetivo.exercicio, objetivo.id]}%>
-    <%= form.input :exercicio,  :required => true,  :as => :select,  :collection => @exercicios.map { |exercicio| [exercicio.exercicio, exercicio.id]}  %>
+    <%= form.input :objetivo_id,    :required => true, :as => :select, :collection => @objetivos.map { |objetivo| [objetivo.nome, objetivo.id]}%>
+    <%= form.input :exercicio_id,  :required => true,  :as => :select,  :collection => @exercicios.map { |exercicio| [exercicio.exercicio, exercicio.id]}  %>
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>

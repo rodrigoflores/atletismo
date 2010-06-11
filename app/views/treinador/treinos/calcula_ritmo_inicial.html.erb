@@ -1,6 +1,5 @@
 <h1>Cálculo de ritmo</h1>
 
-
 <script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
 
 <script type="text/javascript">
@@ -50,12 +49,9 @@ function calculaRitmo() {
   <input type='button' value='Calcular' onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;<span id="resultado_ritmo"></span>
 </form>
 
-
-
-
 <hr/>
 
-<% form_tag :action => :calcula_ritmo_parcial do %>
+<% form_tag :action => :calcula_ritmo_inicial do %>
 	<table>
 		<tr>
 			<th style="text-align: center;">Ritmo Minutos</th>
@@ -99,7 +95,4 @@ function calculaRitmo() {
     resultado.innerHTML = "Ritmo desejado: " + (ritmo_em_decimos/6000).toFixed(1) + " min/km" ;
   }
 </script>
-
-
-
 

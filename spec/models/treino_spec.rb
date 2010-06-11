@@ -9,12 +9,14 @@ describe Treino do
     @date1 = Date.parse("2010-05-05")
     @date2 = Date.parse("2010-05-10")
     UserSession.create(@treinador)
+    @exercicio2 = Factory(:exercicio, :unidade => "kg")
+    @exercicio4 = Factory(:exercicio, :unidade => "unidades")
     @treino1 = Factory(:treino, :atleta => Atleta.find(@atleta.atleta_id), :date => @date1)
     @treino2 = Factory(:treino, :atleta => Atleta.find(@atleta.atleta_id), :date => @date2)
     @item1 = Factory(:item_treino, :treino => @treino1)
-    @item2 = Factory(:item_treino, :treino => @treino2, :grandeza => "kg")
+    @item2 = Factory(:item_treino, :treino => @treino2, :exercicio_id => @exercicio2.id)
     @item3 = Factory(:item_treino, :treino => @treino1)
-    @item4 = Factory(:item_treino, :treino => @treino2, :grandeza => "unidades")
+    @item4 = Factory(:item_treino, :treino => @treino2, :exercicio_id => @exercicio4.id)
   end
 
   describe "Treino" do

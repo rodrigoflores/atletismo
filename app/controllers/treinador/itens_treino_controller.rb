@@ -7,6 +7,8 @@ class Treinador::ItensTreinoController < ApplicationController
       redirect_to treinador_atleta_treino_path(@treino.atleta, @treino)
     else
       @atleta = @treino.atleta
+      @exercicios = Exercicio.find(:all,  :conditions => {:treinador_id => current_treinador})
+      @objetivos = Objetivo.find(:all,  :conditions => {:treinador_id => current_treinador})
       render 'treinador/treinos/show'
     end 
   end
