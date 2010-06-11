@@ -16,7 +16,7 @@ class Treino < ActiveRecord::Base
     somatorio = { "m" => 0.0, "kg" => 0.0, "unidades" => 0.0 }
   
     for item_treino in @itens_treino do
-      somatorio [item_treino.grandeza] += item_treino.series.to_f * item_treino.repeticao.to_f * item_treino.volume.to_f
+      somatorio [Exercicio.find(item_treino.exercicio_id).unidade] += item_treino.series.to_f * item_treino.repeticao.to_f * item_treino.volume.to_f
     end
     
     return somatorio

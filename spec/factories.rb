@@ -38,12 +38,11 @@ end
 
 Factory.define :item_treino do |item_treino|
   item_treino.treino { |x| x.association(:treino)} 
-  item_treino.objetivo "Força"
+  item_treino.objetivo_id { x = Factory(:objetivo); x.id }
   item_treino.series 12
   item_treino.repeticao 5
   item_treino.volume   10
-  item_treino.grandeza "m"
-  item_treino.exercicio "Polichinelo"
+  item_treino.exercicio_id { x = Factory(:exercicio); x.id }
   item_treino.intervalo 100
   item_treino.pausa     10  
 end
@@ -94,7 +93,7 @@ Factory.define :teste, :class => Teste do |t|
 end
 
 Factory.define :objetivo do |objetivo|
-  objetivo.treinador_id { x = Factory(:treinador); x.id }
+  objetivo.treinador_id 1
   objetivo.nome "forca"
 end
 

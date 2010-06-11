@@ -174,15 +174,15 @@ function copiar(){
   </tr>
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
-    	<td align=center><%=item_treino.objetivo%></td>
+    	<td align=center><%=Objetivo.find(item_treino.objetivo_id).nome%></td>
 			<% if item_treino.video_link%>
-				<td align=center><%= link_to item_treino.exercicio, item_treino.video_link%></td>
+				<td align=center><%= link_to Exercicio.find(item_treino.exercicio_id).exercicio, item_treino.video_link%></td>
 			<% else %>
-				<td align=center><%=item_treino.exercicio%></td>
+				<td align=center><%=Exercicio.find(item_treino.exercicio_id).exercicio%></td>
 			<% end %>
       <td align=center><%=item_treino.series%></td>
       <td align=center><%=item_treino.repeticao%></td>
-      <td align=center><%=item_treino.volume%> <%=item_treino.grandeza%></td>
+      <td align=center><%=item_treino.volume%> <%=Exercicio.find(item_treino.exercicio_id).unidade%></td>
       <td align=center>
 	      <% if item_treino.minutos %>
 	  	    <%= item_treino.minutos %>'
@@ -224,16 +224,17 @@ function copiar(){
 <h2> Novo item de treino </h2>
 
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
-
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
-    <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
+
+
+    <%= form.input :objetivo_id,    :required => true, :as => :select, :collection => @objetivos.map { |objetivo| [objetivo.nome, objetivo.id]}%>
+    <%= form.input :exercicio_id,  :required => true,  :as => :select,  :collection => 	@exercicios.map { |exercicio| [exercicio.exercicio, exercicio.id]}  %>
     <%= form.input :video_link, :label => "Video", :required => false, :input_html => { :size => 20 } %>
+
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>
-    <%= form.input :grandeza,   :required => true, :as => :select,  :collection => ["m", "kg", "unidades"] %>
     <%= form.input :pausa,      :required => false, :input_html => { :size => 5 } %>
     <%= form.input :intervalo,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :minutos,    :required => false, :input_html => { :size => 3 } %>

@@ -29,6 +29,7 @@ class Treinador::ObjetivosController < ApplicationController
   
   def create
     @objetivo = Objetivo.new(params[:objetivo])
+    @objetivo.treinador_id = Treinador.find(current_user.treinador_id).id
     if @objetivo.save
       redirect_to treinador_objetivos_path
     else

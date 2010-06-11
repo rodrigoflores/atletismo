@@ -56,18 +56,17 @@ ActiveRecord::Schema.define(:version => 20100611195551) do
     t.datetime "updated_at"
     t.integer  "repeticao"
     t.integer  "treino_id"
-    t.string   "objetivo"
     t.integer  "series"
     t.integer  "cor_treino_id"
     t.integer  "minutos"
     t.integer  "segundos"
     t.integer  "decimos"
-    t.string   "grandeza"
-    t.string   "exercicio"
     t.integer  "volume"
     t.string   "pausa"
     t.string   "intervalo"
     t.string   "video_link"
+    t.integer  "exercicio_id"
+    t.integer  "objetivo_id"
   end
 
   create_table "objetivos", :force => true do |t|
