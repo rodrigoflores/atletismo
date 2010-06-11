@@ -16,7 +16,11 @@
     <%@treino.itens_treino.each do |item|%>
       <tr>
         <td align=center><%=item.objetivo%></td>
-        <td align=center><%=item.exercicio%></td>
+        <% if item.video_link%>
+        	<td align=center><%= link_to item.exercicio, item.video_link%></td>
+        <% else %>
+        	<td align=center><%=item.exercicio%></td>
+        <% end %>
         <td align=center><%=item.series%></td>
         <td align=center><%=item.repeticao%></td>
         <td align=center><%=item.volume%> <%=item.grandeza%></td>

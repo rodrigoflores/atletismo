@@ -175,7 +175,11 @@ function copiar(){
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
     	<td align=center><%=item_treino.objetivo%></td>
-      <td align=center><%=item_treino.exercicio%></td>
+			<% if item_treino.video_link%>
+				<td align=center><%= link_to item_treino.exercicio, item_treino.video_link%></td>
+			<% else %>
+				<td align=center><%=item_treino.exercicio%></td>
+			<% end %>
       <td align=center><%=item_treino.series%></td>
       <td align=center><%=item_treino.repeticao%></td>
       <td align=center><%=item_treino.volume%> <%=item_treino.grandeza%></td>
@@ -225,6 +229,7 @@ function copiar(){
   <% form.inputs do %>
     <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
     <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
+    <%= form.input :video_link, :label => "Video", :required => false, :input_html => { :size => 20 } %>
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>
