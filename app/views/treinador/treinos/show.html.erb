@@ -185,15 +185,14 @@ function copiar(){
 <h2> Novo item de treino </h2>
 
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
-
+<% @exercicios = Exercicio.find(:all, :select => "*", :conditions => {:treinador_id => current_treinador}) %>
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
-    <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
+    <%= form.input :objetivo,    :required => false, :input_html => { :size => 20 } %>
+    <%= form.input :exercicio,  :required => true,  :as => :select,  :collection => @exercicios %>
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>
-    <%= form.input :grandeza,   :required => true, :as => :select,  :collection => ["m", "kg", "unidades"] %>
     <%= form.input :pausa,      :required => false, :input_html => { :size => 5 } %>
     <%= form.input :intervalo,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :minutos,    :required => false, :input_html => { :size => 3 } %>

@@ -42,8 +42,7 @@ Factory.define :item_treino do |item_treino|
   item_treino.series 12
   item_treino.repeticao 5
   item_treino.volume   10
-  item_treino.grandeza "m"
-  item_treino.exercicio "Polichinelo"
+  item_treino.exercicio { x = Factory(:exercicio); Exercicio.find(x.id) }
   item_treino.intervalo 100
   item_treino.pausa     10  
 end
