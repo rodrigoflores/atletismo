@@ -174,11 +174,11 @@ function copiar(){
   </tr>
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
-    	<td align=center><%=Objetivo.find(item_treino.objetivo_id).nome%></td>
+    	<td align=center><%= item_treino.objetivo.nome%></td>
 			<% if item_treino.video_link%>
-				<td align=center><%= link_to Exercicio.find(item_treino.exercicio_id).exercicio, item_treino.video_link%></td>
+				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link %></td>
 			<% else %>
-				<td align=center><%=Exercicio.find(item_treino.exercicio_id).exercicio%></td>
+				<td align=center><%=item_treino.exercicio.exercicio%></td>
 			<% end %>
       <td align=center><%=item_treino.series%></td>
       <td align=center><%=item_treino.repeticao%></td>
