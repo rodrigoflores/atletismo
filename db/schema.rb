@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100601165947) do
+ActiveRecord::Schema.define(:version => 20100611162607) do
 
   create_table "atletas", :force => true do |t|
     t.date     "nasc"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20100601165947) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "treinador_id"
+    t.integer  "treino_id"
   end
 
   create_table "cor_periodos", :force => true do |t|
@@ -54,11 +55,10 @@ ActiveRecord::Schema.define(:version => 20100601165947) do
     t.integer  "minutos"
     t.integer  "segundos"
     t.integer  "decimos"
-    t.string   "grandeza"
-    t.string   "exercicio"
     t.integer  "volume"
     t.string   "pausa"
     t.string   "intervalo"
+    t.integer  "exercicio"
   end
 
   create_table "participa_provas", :force => true do |t|
