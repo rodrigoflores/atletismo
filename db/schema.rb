@@ -69,6 +69,11 @@ ActiveRecord::Schema.define(:version => 20100608195414) do
     t.string   "intervalo"
   end
 
+  create_table "objetivos", :force => true do |t|
+    t.integer "treinador_id"
+    t.string  "nome"
+  end
+
   create_table "participa_provas", :force => true do |t|
     t.integer  "atleta_id"
     t.string   "nome"

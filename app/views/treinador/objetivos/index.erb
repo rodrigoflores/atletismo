@@ -1,0 +1,15 @@
+<h1>Objetivos Cadastrados</h1>
+
+<table>
+  <tr>
+    <td style="height: 10px;"></td>
+  </tr>
+  <% @objetivos.each do |objetivo| %>
+    <tr>
+      <td><%= link_to objetivo.nome, edit_treinador_objetivo_path(objetivo) %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= link_to "Criar novo Objetivo", new_treinador_objetivo_path %>
+
