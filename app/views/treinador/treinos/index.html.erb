@@ -27,18 +27,22 @@
 	<% unless treino.nil? %>
 		<%= link_to "Treino", treinador_atleta_treino_path(@atleta,treino) %>
 		<%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %>
+		<br/>
+		<% if treino.visualizado == false %><%= "* Novo Comentario" %><%end%>
 	<% end %>
 <% end %>
 
 <table>
   <tr>
-    <th colspan=2>Treinos dos proximos meses</th>
+    <th colspan=3>Treinos dos proximos meses</th>
   </tr>
   <% @treinos.each do |treino| %>
     <tr>
     	<% if treino.date.year > Date.today.year or (treino.date.year == Date.today.year and treino.date.month > Date.today.month) %>
 	      <td><%= treino.date %></td>
   	    <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
+        <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
+	      <td><% if treino.visualizado == false %>&nbsp;&nbsp;<%= "* Novo Comentario" %><%end%></td>
       <% end %>
     </tr>
    <% end %>
@@ -46,18 +50,16 @@
 
 <table>
   <tr>
-    <th colspan=2>Treinos dos meses anteriores</th>
+    <th colspan=3>Treinos dos meses anteriores</th>
   </tr>
   <% @treinos.each do |treino| %>
     <tr>
     	<% if treino.date.year < Date.today.year or (treino.date.year == Date.today.year and treino.date.month < Date.today.month) %>
 	      <td><%= treino.date %></td>
   	    <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
+        <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
+	      <td><% if treino.visualizado == false %>&nbsp;&nbsp;<%= "* Novo Comentario" %><%end%></td>
       <% end %>
-      <td><%= treino.date %></td>
-      <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
-      <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
-      <td><% if treino.visualizado == false %>&nbsp;&nbsp;<%= "* Novo Comentario" %><%end%></td>
     </tr>
    <% end %>
 </table>

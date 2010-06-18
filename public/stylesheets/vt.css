@@ -300,6 +300,7 @@ table.time {
 
 #calendar td,
 #calendar th {
+	width: 14%;
   color: #ccc;
   font-family: "Lucida Grande",arial,helvetica,sans-serif;
   font-size: 10px;
