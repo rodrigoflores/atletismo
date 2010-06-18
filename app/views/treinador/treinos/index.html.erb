@@ -30,6 +30,7 @@
       <td><%= treino.date %></td>
       <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
       <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
+      <td><% if treino.visualizado == false %>&nbsp;&nbsp;<%= "* Novo Comentario" %><%end%></td>
     </tr>
    <% end %>
 </table>
