@@ -21,15 +21,39 @@
 	<h3>Treinos</h3>
 	<br/>
 </p>
+<% calendar  :header_format => '%a', :caption_format => '%B  %Y' do |date|  %>
+	<br/>
+	<% treino = @atleta.treinos.find_by_date(date) %>
+	<% unless treino.nil? %>
+		<%= link_to "Treino", treinador_atleta_treino_path(@atleta,treino) %>
+		<%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %>
+	<% end %>
+<% end %>
+
 <table>
   <tr>
-    <th>Data</th>
+    <th colspan=2>Treinos dos proximos meses</th>
   </tr>
   <% @treinos.each do |treino| %>
     <tr>
-      <td><%= treino.date %></td>
-      <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
-      <td><%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %></td>
+    	<% if treino.date.year > Date.today.year or (treino.date.year == Date.today.year and treino.date.month > Date.today.month) %>
+	      <td><%= treino.date %></td>
+  	    <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
+      <% end %>
+    </tr>
+   <% end %>
+</table>
+
+<table>
+  <tr>
+    <th colspan=2>Treinos dos meses anteriores</th>
+  </tr>
+  <% @treinos.each do |treino| %>
+    <tr>
+    	<% if treino.date.year < Date.today.year or (treino.date.year == Date.today.year and treino.date.month < Date.today.month) %>
+	      <td><%= treino.date %></td>
+  	    <td><%= link_to "Detalhes", treinador_atleta_treino_path(@atleta.id, treino) %></td>
+      <% end %>
     </tr>
    <% end %>
 </table>

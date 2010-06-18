@@ -292,3 +292,49 @@ table.time {
 .preferencies td{
 	padding: 5px 7px 5px 7px;	
 }
+
+#calendar {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#calendar td,
+#calendar th {
+  color: #ccc;
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 10px;
+  padding: 6px;
+}
+
+#calendar th {
+  border: 1px solid #ccc;
+  background: #ccc;
+  color: #666;
+  text-align: left;
+}
+
+#calendar td {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+}
+
+#calendar span {
+  display: block;
+}
+
+#calendar td.events {
+  background: #fff;
+}
+
+#calendar td.today {
+  background: #ffc;
+  color: #666;
+}
+
+#calendar caption {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #666;
+  text-align: center;
+}
+
