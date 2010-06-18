@@ -1,0 +1,12 @@
+<h1>Editar Exercício</h1>
+
+<% semantic_form_for @exercicio, :url => treinador_exercicio_path(@exercicio) do |f| %>
+	<%= f.error_messages %>
+	<% f.inputs do %>
+		<%= f.input :exercicio, :label => "Nome: " %>
+		<%= f.input :unidade, :as => :select, :collection => ["kg", "m", "unidades"]%>
+	<% end %>
+	<% f.buttons do %>
+		<%= f.commit_button 'Editar' %>
+	<% end %>
+<% end %>

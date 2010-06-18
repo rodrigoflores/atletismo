@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100521183047) do
+ActiveRecord::Schema.define(:version => 20100611195551) do
 
   create_table "atletas", :force => true do |t|
     t.date     "nasc"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20100521183047) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "treinador_id"
-    t.integer  "treino_id"
   end
 
   create_table "cor_periodos", :force => true do |t|
@@ -36,22 +35,43 @@ ActiveRecord::Schema.define(:version => 20100521183047) do
     t.string  "tipo"
   end
 
+  create_table "exercicio", :force => true do |t|
+    t.integer  "treinador_id"
+    t.string   "exercicio"
+    t.string   "unidade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "exercicios", :force => true do |t|
+    t.integer  "treinador_id"
+    t.string   "exercicio"
+    t.string   "unidade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "itens_treino", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "repeticao"
     t.integer  "treino_id"
-    t.string   "objetivo"
     t.integer  "series"
     t.integer  "cor_treino_id"
     t.integer  "minutos"
     t.integer  "segundos"
     t.integer  "decimos"
-    t.string   "grandeza"
-    t.string   "exercicio"
-    t.integer  "pausa"
-    t.integer  "intervalo"
     t.integer  "volume"
+    t.string   "pausa"
+    t.string   "intervalo"
+    t.string   "video_link"
+    t.integer  "exercicio_id"
+    t.integer  "objetivo_id"
+  end
+
+  create_table "objetivos", :force => true do |t|
+    t.integer "treinador_id"
+    t.string  "nome"
   end
 
   create_table "participa_provas", :force => true do |t|
@@ -86,14 +106,12 @@ ActiveRecord::Schema.define(:version => 20100521183047) do
     t.integer  "minutos"
     t.integer  "segundos"
     t.integer  "decimos"
-    t.integer  "metros"
-    t.integer  "centimetros"
-    t.decimal  "kg"
-    t.string   "clima"
-    t.string   "periodo"
     t.text     "comentarios"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "descricao"
+    t.float    "volume"
+    t.string   "grandeza"
   end
 
   create_table "tipos", :force => true do |t|

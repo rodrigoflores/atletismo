@@ -1,0 +1,10 @@
+<%	@atleta = Atleta.find_by_user_id(current_user); %>
+<%	if @atleta	%>
+<ul>
+	<li><%= link_to 'Página inicial', atleta_profile_path %></li>
+	<li><%= link_to 'Meus dados', atleta_profile_path %></li>
+	<li><%= link_to 'Treinos', atleta_treinos_path %></li>
+	<li><%= link_to 'Minhas provas', atleta_provas_path  %></li>
+	<li><%= link_to 'Meus testes', atleta_testes_path  %></li>
+</ul>
+<%	end %>

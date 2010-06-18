@@ -28,6 +28,14 @@ function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume
   }
   var resultado = document.getElementById(campo_resultado);
   resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
+  
+  
+  decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
+  decimos = (decimos)*((200-intensidade)/100);
+  
+  document.getElementById('calculadora_minutos').value = (decimos/600).floor();
+  document.getElementById('calculadora_segundos').value = ((decimos%600)/10).toFixed(0);
+  document.getElementById('calculadora_decimos').value = ((decimos%600)%10).floor();
 }
 
 function copiar(){
@@ -63,6 +71,28 @@ function copiar(){
     
   }
 
+  function calculaTempoPeloRitmo_calc() {
+ 
+  	var ritmo = document.getElementById("calculadora_ritmo").value;
+  	var distancia = document.getElementById("calculadora_volume").value / 1000;
+    var intensidade = document.getElementById('calculadora_intensidade').value;
+    var tempo = ritmo * distancia * (2 - intensidade/100);
+
+    var tempo = tempo * 600;
+
+    var minutos = (tempo / 600).floor();
+    var segundos = ((tempo % 600) / 10).floor();
+    var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
+
+    var campo_minutos = document.getElementById("calculadora_minutos");
+    var campo_segundos = document.getElementById("calculadora_segundos");
+    var campo_decimos = document.getElementById("calculadora_decimos"); 
+    
+    campo_minutos.value = minutos;
+    campo_segundos.value = segundos;
+    campo_decimos.value = decimos;
+    
+  }
 
 </script>
 
@@ -95,9 +125,14 @@ function copiar(){
           <td><input type="text" size="3" id="calculadora_intensidade"/></td>
         </tr>
         <tr>
+          <td><label for="calculadora_ritmo">Ritmo</label></td>
+          <td><input type="text" size="3" id="calculadora_ritmo"/></td>
+        </tr>
+        <tr>
           <td colspan="2">
-            <input type="button" value="Calcular" onclick="javascript:calculaRitmo ('calculadora_minutos', 'calculadora_segundos', 'calculadora_decimos', 'calculadora_volume', 'calculadora_intensidade', 'popup_resultado')"/>
-            <input type="button" value="Copiar para o treino" onclick="javascript: copiar();"/>
+            <input type="button" value="Calcular Ritmo" onclick="javascript:calculaRitmo ('calculadora_minutos', 'calculadora_segundos', 'calculadora_decimos', 'calculadora_volume', 'calculadora_intensidade', 'popup_resultado')"/>
+            <input type="button" value="Calcular Tempo" onclick="javascript:calculaTempoPeloRitmo_calc()" />
+            <input type="button" value="Copiar" onclick="javascript: copiar();"/>
           </td>
         </tr>
         <tr>
@@ -139,11 +174,15 @@ function copiar(){
   </tr>
   <% @treino.itens_treino.each do |item_treino| %>
     <tr>
-    	<td align=center><%=item_treino.objetivo%></td>
-      <td align=center><%=item_treino.exercicio%></td>
+    	<td align=center><%= item_treino.objetivo.nome%></td>
+			<% if item_treino.video_link%>
+				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link %></td>
+			<% else %>
+				<td align=center><%=item_treino.exercicio.exercicio%></td>
+			<% end %>
       <td align=center><%=item_treino.series%></td>
       <td align=center><%=item_treino.repeticao%></td>
-      <td align=center><%=item_treino.volume%> <%=item_treino.grandeza%></td>
+      <td align=center><%=item_treino.volume%> <%=Exercicio.find(item_treino.exercicio_id).unidade%></td>
       <td align=center>
 	      <% if item_treino.minutos %>
 	  	    <%= item_treino.minutos %>'
@@ -185,15 +224,17 @@ function copiar(){
 <h2> Novo item de treino </h2>
 
 <p><input type="button" value="Calculadora" onclick="$('.popup_calculadora').fadeIn('slow');" /></p>
-
 <% semantic_form_for @item_treino, :url => treinador_treino_itens_treino_path(@treino) do |form| %>
   <% form.inputs do %>
-    <%= form.input :objetivo,     :required => false, :input_html => { :size => 20 } %>
-    <%= form.input :exercicio,  :required => true, :input_html => { :size => 20 } %>
+
+
+    <%= form.input :objetivo_id,    :required => true, :as => :select, :collection => @objetivos.map { |objetivo| [objetivo.nome, objetivo.id]}%>
+    <%= form.input :exercicio_id,  :required => true,  :as => :select,  :collection => 	@exercicios.map { |exercicio| [exercicio.exercicio, exercicio.id]}  %>
+    <%= form.input :video_link, :label => "Video", :required => false, :input_html => { :size => 20 } %>
+
     <%= form.input :series,     :required => false, :input_html => { :size => 5 } %>
     <%= form.input :repeticao,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :volume,     :required => true,  :input_html => { :size => 5 } %>
-    <%= form.input :grandeza,   :required => true, :as => :select,  :collection => ["m", "kg", "unidades"] %>
     <%= form.input :pausa,      :required => false, :input_html => { :size => 5 } %>
     <%= form.input :intervalo,  :required => false, :input_html => { :size => 5 } %>
     <%= form.input :minutos,    :required => false, :input_html => { :size => 3 } %>

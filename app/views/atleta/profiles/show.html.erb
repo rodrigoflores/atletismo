@@ -1,0 +1,38 @@
+<p> 
+  <b>Nome:</b>
+  <%= @atleta.user.name %>
+</p>
+
+<p> 
+  <b>E-mail:</b>
+  <%= @atleta.user.email %>
+</p>
+
+<p>
+  <b>Data de nascimento:</b>
+  <%=h @atleta.nasc %>
+</p>
+
+<p>
+  <b>Peso:</b>
+  <%=h @atleta.peso %> 
+  <%= "kg" if @atleta.peso  %>
+</p>
+
+<p>
+  <b>Altura:</b>
+  <%=h @atleta.altura %>
+  <%= "cm" if @atleta.altura %>
+</p>
+
+<p>
+	<b>Provas que participa:</b>
+	<%for participa_prova in @atleta.participa_provas do%>
+		<%= participa_prova.nome + ', '%>
+	<%end%>
+</p>
+
+<%if user_is_atleta? %>
+	<%= link_to 'Editar', edit_atleta_profile_path %>
+<%end%>		
+

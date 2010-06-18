@@ -1,8 +1,13 @@
+  
+
   <% form.inputs do %>
+  	<%= form.input :volume, :input_html => { :size => 10 } %>
+  	<%= form.input :grandeza, :as => :select, :collection => ["m", "kg", "unidades"] %>
     <%= form.input :minutos %>
     <%= form.input :segundos %>
     <%= form.input :decimos %>
+    <%= form.input :comentarios %>
 	<% end %>
 	<% form.buttons do %>
-		<%= form.commit_button 'Criar teste' %>
+		<%= form.commit_button 'Atualizar teste' %>
 	<% end %>

@@ -1,0 +1,13 @@
+<h2>Criar novo objetivo</h2>
+<br /><br />
+
+<% semantic_form_for :objetivo, :url =>  treinador_objetivos_path(@objetivo) do |form| %>
+  <% form.inputs do %>
+    <%= form.input :nome,     :required => true, :input_html => { :size => 40 } %>
+  <% end %>
+
+  <% form.buttons do %>
+    <%= form.commit_button "Gravar" %>
+  <% end %>
+  
+<% end %>

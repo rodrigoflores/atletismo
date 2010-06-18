@@ -1,6 +1,26 @@
 <h1>Editar teste </h1>
 
+<p>
+	<strong>Nome: </strong>
+	<%= @teste.nome %>
+</p>
+
+<p>
+	<strong>Data: </strong>
+	<%= @teste.data %>
+</p>
+
+
+<p>
+	<strong>Descrição: </strong>
+	<br/>
+	<%= @teste.descricao %>
+</p>
+
+Insira o resultado em volume ou em tempo. 
+
 <% semantic_form_for @teste, :url => atleta_teste_path(@teste) do |form| %>
   <%= form.error_messages %>
   <%= render :partial => 'form', :locals => { :form => form } %>
 <% end %>
+

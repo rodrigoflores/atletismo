@@ -1,6 +1,5 @@
 <h1>Cálculo de ritmo</h1>
 
-
 <script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
 
 <script type="text/javascript">
@@ -50,35 +49,29 @@ function calculaRitmo() {
   <input type='button' value='Calcular' onclick="calculaRitmo()">&nbsp;&nbsp;&nbsp;<span id="resultado_ritmo"></span>
 </form>
 
-
-
-
 <hr/>
 
-<% form_tag :action => :calcula_ritmo_parcial do %>
-	<table>
-		<tr>
-			<th style="text-align: center;">Ritmo Minutos</th>
-			<th style="text-align: center;">Ritmo Segundos</th>
-			<th style="text-align: center;">Ritmo Décimos</th>
-			<th style="text-align: center;">Distância do Tiro / Prova (m)</th>
-			<th style="text-align: center;">Parcial</th>
-		</tr>
-	  <tr>
-		  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :minutos, :size => 5, :maxlength => 4) %></td>
-		  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :segundos, :size => 5, :maxlength => 2) %></td>
-		  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :decimos, :size => 5, :maxlength => 1) %></td>
-		  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :distancia, :size => 5, :maxlength => 6) %></td>
-		  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :parcial, :size => 5, :maxlength => 6) %></td>
-	  </tr>
-	</table>
+<table>
+	<tr>
+		<th style="text-align: center;">Ritmo Minutos</th>
+		<th style="text-align: center;">Ritmo Segundos</th>
+		<th style="text-align: center;">Ritmo Décimos</th>
+		<th style="text-align: center;">Distância do Tiro / Prova (m)</th>
+		<th style="text-align: center;">Parcial</th>
+	</tr>
+  <tr>
+	  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :minutos, :size => 5, :maxlength => 4) %></td>
+	  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :segundos, :size => 5, :maxlength => 2) %></td>
+	  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :decimos, :size => 5, :maxlength => 1) %></td>
+	  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :distancia, :size => 5, :maxlength => 6) %></td>
+	  <td style="text-align: center;"><%= text_field(name = :tempo_parcial, value = :parcial, :size => 5, :maxlength => 6) %></td>
+  </tr>
+</table>
 
-	<br/>
+<br/>
 
-  <input type='button' value='Calcular' onclick="calculaRitmoParcial()">
-  <span id="resultado_ritmo_parcial"></span>
-	
-<% end %>
+<input type='button' value='Calcular' onclick="calculaRitmoParcial()">
+<span id="resultado_ritmo_parcial"></span>
 
 <script type="text/javascript">
   function  calculaRitmoParcial() {
@@ -99,7 +92,4 @@ function calculaRitmo() {
     resultado.innerHTML = "Ritmo desejado: " + (ritmo_em_decimos/6000).toFixed(1) + " min/km" ;
   }
 </script>
-
-
-
 

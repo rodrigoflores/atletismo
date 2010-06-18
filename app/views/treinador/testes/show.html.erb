@@ -1,25 +1,41 @@
-<h1><%= @atleta.nome %></h1>
-<table>
-  <tr>
-    <td>Teste:</td>
-    <td><%= @teste.nome %></td>
-  </tr>
-  <tr>
-    <td>Data:</td>
-    <td><%= @teste.data %></td>
-  </tr>
-  <% if (@teste.minutos || @teste.segundos || @teste.decimos) %>
-    <tr>
-      <td>Tempo:</td>
-      <td><%= @teste.minutos %> " <%= @teste.segundos %>''<%= @teste.decimos %>'</td>
-    </tr>
-  <% end %>
-  <tr>
-    <td>Distância:</td>
-    <td><%= @teste.metros %></td>
-  </tr>
-  <tr>
-    <td>Comentários:</td>
-    <td><%= @teste.comentarios %></td>
-  </tr>
-</table>
+<h1>Teste do <%= @atleta.nome %></h1>
+
+<p>
+	<strong>Nome: </strong>
+	<%= @teste.nome %>
+</p>
+
+<p>
+	<strong>Data: </strong>
+	<%= @teste.data %>
+</p>
+
+
+<p>
+	<strong>Descrição: </strong>
+	<br/>
+	<%= @teste.descricao %>
+</p>
+
+<% if not @teste.volume.blank? %>
+	<p>
+		<strong>Resultado: </strong>
+		<br/>
+		<%= @teste.volume %> 
+		<%= @teste.grandeza %> 
+	</p>
+<% elsif not (@teste.minutos.blank? or @teste.segundos.blank? or @teste.decimos.blank?)%>
+	<p>
+		<strong>Resultado: </strong>
+		<br/>
+		<%= @teste.minutos || 0 %> ' 
+		<%= @teste.segundos || 0 %> ''
+		<%= @teste.decimos || 0 %> 
+	</p>		
+<% end %>
+
+<p>
+	<strong>Comentários: </strong>
+	<br/>
+	<%= @teste.comentarios %>
+</p>
