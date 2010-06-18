@@ -74,6 +74,7 @@ rake db:create
 ``
 
 3. Do the migrations
+
 ``
 rake db:migrate
 ``
