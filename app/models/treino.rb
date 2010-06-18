@@ -22,4 +22,12 @@ class Treino < ActiveRecord::Base
     return somatorio
   end
   
+  protected
+
+  def after_create   
+    self.visualizado = true
+    self.comentario = ""
+    self.save
+  end
+  
 end
