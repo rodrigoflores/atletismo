@@ -53,7 +53,7 @@ Set up the environment for the project
 
 1. Create a file called 'database.yml' with this content (this example is using SQLite3)
 
-``
+`
 development: 
   adapter: sqlite3 
   database: db/development.sqlite3 
@@ -65,7 +65,7 @@ test:
   database: db/test.sqlite3 
   pool: 5 
   timeout: 5000 
-``
+`
 
 2. Create the database
 
