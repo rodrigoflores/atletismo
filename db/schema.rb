@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(:version => 20100622122205) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "observacao"
-    t.boolean  "visualizacao"
+    t.boolean  "visualizado"
   end
 
   create_table "users", :force => true do |t|
