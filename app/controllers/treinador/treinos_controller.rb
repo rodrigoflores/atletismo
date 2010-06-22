@@ -48,5 +48,7 @@ class Treinador::TreinosController < ApplicationController
     @item_treino = @treino.itens_treino.new
     @exercicios = Exercicio.find(:all,  :conditions => {:treinador_id => current_treinador})
     @objetivos = Objetivo.find(:all,  :conditions => {:treinador_id => current_treinador})
+    @treino.visualizado = true
+    @treino.save
   end
 end

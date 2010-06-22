@@ -10,6 +10,10 @@ class Atleta::TreinosController < ApplicationController
   def update
     @atleta = Atleta.find(current_user.atleta_id)
     @treino = @atleta.treinos.find(params[:id])
+    @comentario = @treino.comentario
+    if @comentario != params[:treino][:comentario]
+      @treino.visualizado = false
+    end
     if @treino.update_attributes(params[:treino])
       redirect_to atleta_treino_path(@treino)
     else

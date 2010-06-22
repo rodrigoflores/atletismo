@@ -1,4 +1,3 @@
-
 <table>
   <tr>
     <th>Nome</th>
@@ -10,6 +9,10 @@
       <td><%= link_to "Treinos", treinador_atleta_treinos_path(atleta) %></td>
 			<td><%= link_to "Provas", treinador_atleta_provas_path(atleta) %></td>
       <td><%= link_to "Testes", treinador_atleta_testes_path(atleta) %></td>
+      <% @treinosNaoVisualizados = atleta.treinos.find_all_by_visualizado(false)%>
+      <% if @treinosNaoVisualizados.size > 0%>
+        <td><%= @treinosNaoVisualizados.size %> novo(s) comentário(s)</td>
+      <% end %>
     </tr>
   <% end %>
 </table>
