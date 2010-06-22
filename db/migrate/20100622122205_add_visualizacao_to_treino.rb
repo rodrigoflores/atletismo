@@ -1,9 +1,9 @@
 class AddVisualizacaoToTreino < ActiveRecord::Migration
   def self.up
-    add_column :treinos, :visualizacao, :boolean
+    add_column :treinos, :visualizado, :boolean
   end
 
   def self.down
-    remove_column :treinos, :visualizacao
+    remove_column :treinos, :visualizado
   end
 end
