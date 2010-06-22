@@ -28,7 +28,7 @@
 		<%= link_to "Treino", treinador_atleta_treino_path(@atleta,treino) %>
 		<%= link_to "Excluir", treinador_atleta_treino_path(@atleta.id, treino), :method => :delete %>
 		<br/>
-		<% if treino.visualizado == false %><%= "* Novo Comentario" %><%end%>
+		<p><% if treino.visualizado == false %><%= "* Novo Comentario" %><%end%></p>
 	<% end %>
 <% end %>
 

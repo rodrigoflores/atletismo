@@ -176,7 +176,8 @@ function copiar(){
     <tr>
     	<td align=center><%= item_treino.objetivo.nome%></td>
 			<% if item_treino.video_link%>
-				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link %></td>
+				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link, :target => "_blank"
+ %></td>
 			<% else %>
 				<td align=center><%=item_treino.exercicio.exercicio%></td>
 			<% end %>

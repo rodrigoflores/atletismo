@@ -310,12 +310,13 @@ table.time {
 #calendar th {
   border: 1px solid #ccc;
   background: #ccc;
-  color: #666;
+  color: #444;
   text-align: left;
 }
 
 #calendar td {
   background: #f0f0f0;
+  color: #aaa;
   border: 1px solid #ddd;
 }
 
@@ -329,13 +330,17 @@ table.time {
 
 #calendar td.today {
   background: #ffc;
-  color: #666;
+  color: #444;
+}
+
+#calendar p {
+  color: #F00;
 }
 
 #calendar caption {
   border: 1px solid #ccc;
   background: #fff;
-  color: #666;
+  color: #555;
   text-align: center;
 }
 
