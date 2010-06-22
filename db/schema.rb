@@ -9,16 +9,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100618173533) do
+ActiveRecord::Schema.define(:version => 20100622122205) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "atletas", :force => true do |t|
     t.date     "nasc"
-    t.decimal  "peso"
-    t.decimal  "altura"
+    t.integer  "peso",         :limit => 10, :precision => 10, :scale => 0
+    t.integer  "altura",       :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "treinador_id"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cor_periodos", :force => true do |t|
@@ -91,13 +107,25 @@ ActiveRecord::Schema.define(:version => 20100618173533) do
     t.integer  "minutos"
     t.integer  "decimos"
     t.string   "clima"
-    t.decimal  "distancia"
+    t.integer  "distancia",      :limit => 10, :precision => 10, :scale => 0
     t.string   "tipoTempo"
     t.string   "comentarios"
     t.integer  "colocacao"
     t.integer  "horas"
     t.integer  "cor_periodo_id"
   end
+
+  create_table "slugs", :force => true do |t|
+    t.string   "name"
+    t.integer  "sluggable_id"
+    t.integer  "sequence",                     :default => 1, :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.string   "scope",          :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "slugs", ["name", "sluggable_type", "scope", "sequence"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "testes", :force => true do |t|
     t.integer  "atleta_id"
@@ -134,7 +162,7 @@ ActiveRecord::Schema.define(:version => 20100618173533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "observacao"
-    t.boolean  "visualizado"
+    t.boolean  "visualizacao"
   end
 
   create_table "users", :force => true do |t|
