@@ -24,13 +24,13 @@
 		<%= @teste.volume %> 
 		<%= @teste.grandeza %> 
 	</p>
-<% elsif not (@teste.minutos.blank? or @teste.segundos.blank? or @teste.decimos.blank?)%>
+<% elsif (@teste.minutos or @teste.segundos or @teste.decimos)%>
 	<p>
 		<strong>Resultado: </strong>
 		<br/>
-		<%= @teste.minutos || 0 %> ' 
+		<%= @teste.minutos  || 0 %> ' 
 		<%= @teste.segundos || 0 %> ''
-		<%= @teste.decimos || 0 %> 
+		<%= @teste.decimos  || 0 %> 
 	</p>		
 <% end %>
 

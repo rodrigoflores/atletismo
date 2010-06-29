@@ -1,12 +1,52 @@
-<script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
-
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 <script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
 
 
 
 <script type='text/javascript'>
+function calculadoraDeRitmo(minutos, segundos, decimos, distancia, intensidade) {
+  decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
+  distancia = distancia/1000;
+  ritmo = (decimos/distancia)*((200-intensidade)/100);
+  minutos = (ritmo/600).floor();
+  segundos = ((ritmo%600)/10).toFixed(0);
+  return "Ritmo: " + (minutos > 0 ? (minutos) + "'" : "") + (segundos > 0 ? (segundos) + "''": "") + "/km" ;
+  
+}
+
+function calculadoraDeRitmo_calc(minutos, segundos, decimos, distancia, intensidade) {
+  decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
+  distancia = distancia/1000;
+  ritmo = (decimos/distancia)*((200-intensidade)/100);
+  minutos = (ritmo/600).floor();
+  segundos = ((ritmo%600)/10).toFixed(0);
+  document.getElementById("calculadora_ritmo_minutos").value = minutos;
+  document.getElementById("calculadora_ritmo_segundos").value = segundos;
+}
+
+function calculaRitmo_calc(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade) { 
+
+  var minutos = document.getElementById(campo_minutos).value;
+  var segundos = document.getElementById(campo_segundos).value;
+  var decimos = document.getElementById(campo_decimos).value; 
+  var volume = document.getElementById(campo_volume).value;
+  if(volume <= 0) {
+    alert("Volume deve ser maior que zero");
+    document.getElementById(campo_volume).focus();
+    return;
+  }
+  var intensidade = document.getElementById(campo_intensidade).value;
+  if(intensidade > 100 || intensidade <= 0)
+  {
+    alert("Intensidade deve estar no intervalo 1~100%");
+    document.getElementById(campo_intensidade).focus();
+    return;
+  
+  }
+  calculadoraDeRitmo_calc(minutos, segundos, decimos, volume, intensidade);
+  
+}
+
 function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade, campo_resultado) { 
 
   var minutos = document.getElementById(campo_minutos).value;
@@ -29,13 +69,6 @@ function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume
   var resultado = document.getElementById(campo_resultado);
   resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
   
-  
-  decimos = (10 * segundos) + (1 * decimos) + (minutos * 600);
-  decimos = (decimos)*((200-intensidade)/100);
-  
-  document.getElementById('calculadora_minutos').value = (decimos/600).floor();
-  document.getElementById('calculadora_segundos').value = ((decimos%600)/10).toFixed(0);
-  document.getElementById('calculadora_decimos').value = ((decimos%600)%10).floor();
 }
 
 function copiar(){
@@ -48,51 +81,58 @@ function copiar(){
 
 	
 
-  function calculaTempoPeloRitmo() {
- 
-  	var ritmo = document.getElementById("ritmo_ritmo").value;
-  	var distancia = document.getElementById("item_treino_volume").value / 1000;
-    var intensidade = document.getElementById('tempo_intensidade').value;
-    var tempo = ritmo * distancia * (2 - intensidade/100);
+function calculaTempoPeloRitmo() {
 
-    var tempo = tempo * 600;
+	var ritmo = document.getElementById("ritmo_ritmo").value;
+	var distancia = document.getElementById("item_treino_volume").value / 1000;
+  var intensidade = document.getElementById('tempo_intensidade').value;
+  var tempo = ritmo * distancia * (2 - intensidade/100);
 
-    var minutos = (tempo / 600).floor();
-    var segundos = ((tempo % 600) / 10).floor();
-    var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
+  var tempo = tempo * 600;
 
-    var campo_minutos = document.getElementById("item_treino_minutos");
-    var campo_segundos = document.getElementById("item_treino_segundos");
-    var campo_decimos = document.getElementById("item_treino_decimos"); 
-    
-    campo_minutos.value = minutos;
-    campo_segundos.value = segundos;
-    campo_decimos.value = decimos;
-    
+  var minutos = (tempo / 600).floor();
+  var segundos = ((tempo % 600) / 10).floor();
+  var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
+
+  var campo_minutos = document.getElementById("item_treino_minutos");
+  var campo_segundos = document.getElementById("item_treino_segundos");
+  var campo_decimos = document.getElementById("item_treino_decimos"); 
+  
+  campo_minutos.value = minutos;
+  campo_segundos.value = segundos;
+  campo_decimos.value = decimos;
+  
+}
+
+function calculaTempoPeloRitmo_calc() {
+
+	var ritmo = parseInt(document.getElementById("calculadora_ritmo_minutos").value) + (parseFloat(document.getElementById("calculadora_ritmo_segundos").value) / 60);
+	
+	var distancia = document.getElementById("calculadora_volume").value / 1000;
+  var intensidade = document.getElementById('calculadora_intensidade').value;
+  if(intensidade > 100 || intensidade <= 0)
+  {
+    alert("Intensidade deve estar no intervalo 1~100%");
+    document.getElementById('calculadora_intensidade').focus();
+    return;
   }
+  var tempo = ritmo * distancia * (2 - intensidade/100);
 
-  function calculaTempoPeloRitmo_calc() {
- 
-  	var ritmo = document.getElementById("calculadora_ritmo").value;
-  	var distancia = document.getElementById("calculadora_volume").value / 1000;
-    var intensidade = document.getElementById('calculadora_intensidade').value;
-    var tempo = ritmo * distancia * (2 - intensidade/100);
+  var tempo = tempo * 600;
 
-    var tempo = tempo * 600;
+  var minutos = (tempo / 600).floor();
+  var segundos = ((tempo % 600) / 10).floor();
+  var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
 
-    var minutos = (tempo / 600).floor();
-    var segundos = ((tempo % 600) / 10).floor();
-    var decimos = (tempo - (minutos * 600) - (segundos * 10)).toFixed(0);
-
-    var campo_minutos = document.getElementById("calculadora_minutos");
-    var campo_segundos = document.getElementById("calculadora_segundos");
-    var campo_decimos = document.getElementById("calculadora_decimos"); 
-    
-    campo_minutos.value = minutos;
-    campo_segundos.value = segundos;
-    campo_decimos.value = decimos;
-    
-  }
+  var campo_minutos = document.getElementById("calculadora_minutos");
+  var campo_segundos = document.getElementById("calculadora_segundos");
+  var campo_decimos = document.getElementById("calculadora_decimos"); 
+  
+  campo_minutos.value = minutos;
+  campo_segundos.value = segundos;
+  campo_decimos.value = decimos;
+  
+}
 
 </script>
 
@@ -126,17 +166,14 @@ function copiar(){
         </tr>
         <tr>
           <td><label for="calculadora_ritmo">Ritmo</label></td>
-          <td><input type="text" size="3" id="calculadora_ritmo"/></td>
+          <td><input type="text" size="3" id="calculadora_ritmo_minutos"/>"<input type="text" size="3" id="calculadora_ritmo_segundos"/>'/km</td>
         </tr>
         <tr>
           <td colspan="2">
-            <input type="button" value="Calcular Ritmo" onclick="javascript:calculaRitmo ('calculadora_minutos', 'calculadora_segundos', 'calculadora_decimos', 'calculadora_volume', 'calculadora_intensidade', 'popup_resultado')"/>
+            <input type="button" value="Calcular Ritmo" onclick="javascript:calculaRitmo_calc ('calculadora_minutos', 'calculadora_segundos', 'calculadora_decimos', 'calculadora_volume', 'calculadora_intensidade')"/>
             <input type="button" value="Calcular Tempo" onclick="javascript:calculaTempoPeloRitmo_calc()" />
             <input type="button" value="Copiar" onclick="javascript: copiar();"/>
           </td>
-        </tr>
-        <tr>
-          <td colspan="2" id="popup_resultado"></td>
         </tr>
       </table> 
     </div>
@@ -176,7 +213,8 @@ function copiar(){
     <tr>
     	<td align=center><%= item_treino.objetivo.nome%></td>
 			<% if item_treino.video_link%>
-				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link %></td>
+				<td align=center><%= link_to item_treino.exercicio.exercicio, item_treino.video_link, :target => "_blank"
+ %></td>
 			<% else %>
 				<td align=center><%=item_treino.exercicio.exercicio%></td>
 			<% end %>
