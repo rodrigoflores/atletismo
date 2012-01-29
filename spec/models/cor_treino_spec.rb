@@ -8,7 +8,7 @@ describe CorTreino do
     @user.id = 1
     @treinador = Treinador.new
     @treinador.id = 1
-    @treinador.user_id = @user 
+    @treinador.user_id = @user
     @treinador.save
     @cor_treino = CorTreino.new
     @cor_treino.treinador = @treinador

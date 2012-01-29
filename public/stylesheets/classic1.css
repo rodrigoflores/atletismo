@@ -1,4 +1,4 @@
-/* @override 
+/* @override
 	http://0.0.0.0:3000/stylesheets/classic1.css?1237318460
 	http://0.0.0.0:3000/stylesheets/classic1.css?1237470527
 	http://0.0.0.0:3000/stylesheets/classic1.css?1237470604
@@ -16,10 +16,10 @@ body {
 a:link, a:active, a:visited {
    color: #CD0000;
 }
-input { 
+input {
    margin-bottom: 5px;
 }
-p { 
+p {
    line-height: 150%;
 }
 div#container {

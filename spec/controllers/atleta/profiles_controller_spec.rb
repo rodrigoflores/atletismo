@@ -11,88 +11,88 @@ describe Atleta::ProfilesController do
 
 
 	describe "get show" do
-	
+
 		before :each do
-			get :show	
+			get :show
 		end
-		
+
 		it "should assign @atleta" do
 			assigns[:atleta].should == @atleta
 		end
-		
+
 		it "should render show" do
 			should render_template 'show'
 		end
-		
-	end	
 
-	
+	end
+
+
 	describe "get edit" do
 		before :each do
 			get :edit
 		end
-	
+
 		it "should assign @atleta" do
 			assigns[:atleta].should == @atleta
 		end
-		
+
 		it "should render edit" do
 			should render_template 'edit'
-		end	
+		end
 	end
-	
+
 	describe "put update" do
-		
+
 		describe "success" do
 			def put_it
 				put :update, :atleta => {"nasc(3i)" => "13", "nasc(2i)" => "10", "nasc(1i)" => "2000",
                         :altura => 1.74, :peso => 98, :treinador_id => @atleta.treinador_id,
                         :participa_provas => ["maratona1", "maratona2"]}
 			end
-			
+
 			it "should flash something" do
 				put_it
 				flash[:notice].should_not be_nil
 			end
-			
+
 			it "should update atleta" do
 				lambda {
 					put_it
 					@atleta.reload
 				}.should change(@atleta, :peso)
 			end
-			
+
 			it "should redirect to show" do
 				put_it
 				should redirect_to atleta_profile_path
 			end
-			
+
 		end
-	
+
 		describe "failure" do
 			def put_it
 				put :update, :atleta => {"nasc(3i)" => "13", "nasc(2i)" => "10", "nasc(1i)" => "2000",
                         :altura => 1.74, :peso => 98, :treinador_id => nil,
                         :participa_provas => ["maratona1", "maratona2"]}
 			end
-			
+
 			it "should not flash something" do
 				put_it
 				flash[:notice].should be_nil
 			end
-			
+
 			it "should not update atleta" do
 				lambda {
 					put_it
 					@atleta.reload
 				}.should_not change(@atleta, :peso)
 			end
-			
+
 			it "should render edit" do
 				put_it
 				should render_template "edit"
 			end
-			
-		end	
+
+		end
 	end
 end

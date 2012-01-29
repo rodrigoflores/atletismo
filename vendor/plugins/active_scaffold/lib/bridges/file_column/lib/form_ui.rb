@@ -3,12 +3,12 @@ module ActiveScaffold
     # Helpers that assist with the rendering of a Form Column
     module FormColumnHelpers
       def active_scaffold_input_file_column(column, options)
-        if @record.send(column.name) 
+        if @record.send(column.name)
           # we already have a value?  display the form for deletion.
           content_tag(
-            :div, 
+            :div,
             content_tag(
-              :div, 
+              :div,
               get_column_value(@record, column) + " " +
               hidden_field(:record, "delete_#{column.name}", :value => "false") +
               " | " +
@@ -26,7 +26,7 @@ module ActiveScaffold
           # no, just display the file_column_field
           file_column_field("record", column.name, options)
         end
-      end      
+      end
     end
   end
 end

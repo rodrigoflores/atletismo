@@ -174,13 +174,13 @@ CanvasTextFunctions.enable = function( ctx)
     ctx.fontAscent = function(font,size) { return CanvasTextFunctions.ascent(font,size); }
     ctx.fontDescent = function(font,size) { return CanvasTextFunctions.descent(font,size); }
 
-    ctx.drawTextRight = function(font,size,x,y,text) { 
+    ctx.drawTextRight = function(font,size,x,y,text) {
 	var w = CanvasTextFunctions.measure(font,size,text);
-	return CanvasTextFunctions.draw( ctx, font,size,x-w,y,text); 
+	return CanvasTextFunctions.draw( ctx, font,size,x-w,y,text);
     };
-    ctx.drawTextCenter = function(font,size,x,y,text) { 
+    ctx.drawTextCenter = function(font,size,x,y,text) {
 	var w = CanvasTextFunctions.measure(font,size,text);
-	return CanvasTextFunctions.draw( ctx, font,size,x-w/2,y,text); 
+	return CanvasTextFunctions.draw( ctx, font,size,x-w/2,y,text);
     };
 }
 
@@ -191,15 +191,15 @@ function drawFilterLabelText(target, message)
 	var canvas = $(target);//document.getElementById('demo');
 	if (!canvas.getContext) return;
 	var ctx = canvas.getContext('2d');
-	
+
 	// this adds the text functions to the ctx
 	CanvasTextFunctions.enable(ctx);
-	
+
 	var font = "sans";
 	var fontsize = 16;
 	var y = ctx.fontAscent(font,fontsize);
 	ctx.strokeStyle = "rgba(0,0,0,1)";
-	
+
 	fontsize = 10;
 	var sag = ctx.fontAscent(font,fontsize)/2;
 	var ang = 270;

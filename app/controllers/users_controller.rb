@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.new
     @treinadores = Treinador.find(:all)
   end
- 
+
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -15,12 +15,12 @@ class UsersController < ApplicationController
       render "new"
     end
   end
- 
+
   def activate
     @user = User.find_by_perishable_token(params[:activation_code])
     if @user
       @user.activate
-      flash[:notice] = "Sua confirmação foi realizada com sucesso"    
+      flash[:notice] = "Sua confirmação foi realizada com sucesso"
     else
       flash[:error] = "Código de ativação não encontrado"
     end
@@ -37,18 +37,18 @@ class UsersController < ApplicationController
       render "forgot_password_request"
     end
   end
-  
+
   def forgot_password_request
     @user = User.new
   end
-  
+
   def reset_password_request
     unless @user = User.find_by_perishable_token(params[:perishable_token])
       flash[:notice] = "Código de alteração de senha não encontrado."
-      redirect_to "/"     
+      redirect_to "/"
     end
   end
-  
+
   def reset_password
     @user = User.find(params[:user][:id])
     if @user.update_attributes(params[:user])
@@ -58,5 +58,5 @@ class UsersController < ApplicationController
       redirect_to :action => 'reset_password_request', :perishable_token => @user.perishable_token
     end
   end
-  
+
 end

@@ -1,18 +1,18 @@
 # coding: utf-8
 
 class ProvasController < ApplicationController
-  
+
   before_filter :login_required
   before_filter :get_atleta_com_seguranca
   before_filter :treinador_prohibited, :only => [:new, :edit, :create, :update]
   before_filter :provas_distancia_form
-  
-  
+
+
   active_scaffold :prova do |config|
     config.label = "Provas"
     config.columns = [:competicao, :data, :periodo, :distancia, :tempo, :tipoTempo, :clima]
-    list.sorting = {:data => 'ASC' } 
- 
+    list.sorting = {:data => 'ASC' }
+
     # Label
     columns[:competicao].label = "Competição"
     columns[:data].label = "Data"
@@ -21,13 +21,13 @@ class ProvasController < ApplicationController
     columns[:tipoTempo].label = "Tipo Tempo"
     columns[:tempo].sort_by :method => 'tempo_em_decimos'
     columns[:clima].label = "Clima"
-    config.list.columns.exclude :association_column  
-    
+    config.list.columns.exclude :association_column
+
     config.action_links.add "graphic",
     :type => :table,
     :label => "Gráfico",
     :inline => false
-    
+
     # Search
     config.search.columns << :distancia
     config.search.columns << :minutos
@@ -35,7 +35,7 @@ class ProvasController < ApplicationController
     config.search.columns << :decimos
     config.search.columns << :tipoTempo
     config.search.columns << :data
-    
+
   end
 
 
@@ -47,72 +47,72 @@ class ProvasController < ApplicationController
        make_graphic(@provas, 'tempo_em_minutos', 'Tempo (minutos)')
     else
       flash[:notice] = 'Filtre por distância!'
-      redirect_to atleta_provas_path(@atleta);    
+      redirect_to atleta_provas_path(@atleta);
     end
   end
-  
+
 
   def show
     @prova = Prova.find(params[:id])
     render :active_scaffold => 'provas'
   end
-  
+
   def new
     @prova = Prova.new
     render :active_scaffold => 'provas'
-    
+
   end
-  
+
   def edit
     @prova = Prova.find(params[:id])
     render :active_scaffold => 'provas'
-    
+
   end
-  
-  
+
+
   def create
     @prova = Prova.new(params[:prova])
     @atleta = Atleta.find(params[:atleta_id])
     @treinador = Treinador.find(@atleta.treinador_id)
 
-    if params[:atleta_id] 
+    if params[:atleta_id]
       @prova.atleta_id = params[:atleta_id]
     end
     if @prova.save
       flash[:notice] = 'Prova foi criada com sucesso.'
       @provas = Prova.find(:all, :conditions => {:atleta_id => @prova.atleta_id})
-      redirect_to atleta_provas_path(@atleta);     
+      redirect_to atleta_provas_path(@atleta);
     else
       render :action => "new"
     end
   end
-  
-  
+
+
   def update
     @prova = Prova.find(params[:id])
     p @prova
     if @prova.update_attributes(params[:prova])
       flash[:notice] = 'Prova foi atualizada com sucesso.'
-      redirect_to atleta_provas_path(@atleta);     
+      redirect_to atleta_provas_path(@atleta);
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
-  
-  
-  
+
+
+
   def distancia
-    @condition = "distancia = #{params[:distancia]}" 
+    @condition = "distancia = #{params[:distancia]}"
     index
   end
-  
+
   def conditions_for_collection
     @condition
   end
-  
-  
+
+
   protected
-  
+
   def provas_distancia_form
     @provas_distancia=true
     if params[:distancia]
@@ -120,9 +120,9 @@ class ProvasController < ApplicationController
       @distancia = params[:distancia]
     end
   end
-  
-  
-      
+
+
+
   # opções de active scaffold:
   # Apenas treinador pode criar/editar os testes do atleta
   def create_authorized?
@@ -134,5 +134,5 @@ class ProvasController < ApplicationController
   def delete_authorized?
     user_is_atleta?
   end
-  
+
 end

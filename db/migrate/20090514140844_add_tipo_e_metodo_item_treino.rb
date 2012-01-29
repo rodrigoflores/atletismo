@@ -11,7 +11,7 @@ class AddTipoEMetodoItemTreino < ActiveRecord::Migration
 
   def self.down
     add_column :itens_treino, :descricao, :string
-    add_column :itens_treino, :distancia, :integer 
+    add_column :itens_treino, :distancia, :integer
     remove_column :itens_treino, :tipo
     remove_column :itens_treino, :metodo
     remove_column :itens_treino, :cor

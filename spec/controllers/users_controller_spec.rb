@@ -7,7 +7,7 @@ describe UsersController do
   describe "get => new" do
     it "should render signup page" do
       get :new
-      should render_template "new"      
+      should render_template "new"
     end
 
     it "should assign user" do
@@ -56,7 +56,7 @@ describe UsersController do
       end
     end
   end
-  
+
   describe "put => activate" do
     before do
       @user = Factory(:user)
@@ -71,18 +71,18 @@ describe UsersController do
           @user.reload
         }.should change(@user, :perishable_token)
       end
-      
+
       it "should redirect to /" do
         put_it
         should redirect_to "/"
       end
-      
-      it "should flash something" do 
+
+      it "should flash something" do
         put_it
         flash[:notice].should == "Sua confirmação foi realizada com sucesso"
       end
     end
-    describe "failure" do 
+    describe "failure" do
       def post_it
         put :activate, :activation_code => "123"
       end
@@ -95,20 +95,20 @@ describe UsersController do
       it "should redirect to /" do
         post_it
         should redirect_to "/"
-      end 
+      end
       it "should flash something" do
         post_it
         flash[:error].should == "Código de ativação não encontrado"
       end
     end
   end
-  
+
   describe "put => forgot_password" do
     describe "success" do
       before do
         @user = Factory(:user)
       end
-    
+
       def put_it
         put :forgot_password, :user => { :email => @user.email }
       end
@@ -126,11 +126,11 @@ describe UsersController do
         flash[:notice].should == "Um link de alteração de senha foi enviado para o seu email"
       end
     end
-    describe "failure" do 
+    describe "failure" do
       def put_it
         put :forgot_password, :user => { :email => "not@an.email.valid" }
       end
-      it "should not send an email" do 
+      it "should not send an email" do
         lambda{
           put_it
         }.should_not change(ActionMailer::Base.deliveries, :size)
@@ -150,21 +150,21 @@ describe UsersController do
     before :each do
       get :forgot_password_request
     end
-    it "should assign user" do 
+    it "should assign user" do
         assigns[:user].should be_kind_of User
     end
     it "should render forgot_password_request" do
       should render_template "forgot_password_request"
     end
   end
-  
+
   describe "get => reset_password_request" do
     describe "success" do
       before :each do
         @user = Factory(:user)
         get :reset_password_request, :perishable_token => @user.perishable_token
       end
-      it "should assign user" do 
+      it "should assign user" do
           assigns[:user].should == @user
       end
       it "should render template" do
@@ -183,70 +183,70 @@ describe UsersController do
       end
     end
   end
-  
+
   describe "put => reset_password" do
     describe "success" do
       before :each do
         @user = Factory(:user)
       end
-      
+
       def put_it
         put :reset_password, :user => { :id => @user.id, :password => "abcd", :password_confirmation => "abcd" }
       end
-      
-      it "should change the password" do 
-        lambda { 
+
+      it "should change the password" do
+        lambda {
           put_it
           @user.reload
         }.should change(@user,:crypted_password)
       end
-      
-      it "should change the token" do 
-        lambda { 
+
+      it "should change the token" do
+        lambda {
           put_it
           @user.reload
         }.should change(@user,:perishable_token)
       end
-      
+
       it "should redirect to '/'" do
         put_it
         should redirect_to '/'
       end
-      
+
       it "should flash something" do
         put_it
         flash[:notice].should == "Senha alterada com sucesso"
       end
     end
-    
+
     describe "failure" do
       before :each do
         @user = Factory(:user)
       end
-      
+
       def put_it
         put :reset_password, :user => { :id => @user.id, :password => "abcd", :password_confirmation => "abcde" }
       end
-      
-      it "should not change the password" do 
-        lambda { 
+
+      it "should not change the password" do
+        lambda {
           put_it
           @user.reload
         }.should_not change(@user,:crypted_password)
       end
-      
-      it "should not change the token" do 
-        lambda { 
+
+      it "should not change the token" do
+        lambda {
           put_it
           @user.reload
         }.should_not change(@user,:perishable_token)
       end
-      
+
       it "should redirect to '/'" do
         put_it
         should redirect_to :action => 'reset_password_request', :perishable_token => @user.perishable_token
       end
-      
+
     end
   end
 end

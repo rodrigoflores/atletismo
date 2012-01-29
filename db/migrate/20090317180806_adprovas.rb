@@ -10,6 +10,6 @@ class Adprovas < ActiveRecord::Migration
     remove_column :atletas, :corre5,:boolean
     remove_column :atletas, :corre10,:boolean
     remove_column :atletas, :correMeiaMaratona,:boolean
-    remove_column :atletas, :correMaratona,:boolean    
+    remove_column :atletas, :correMaratona,:boolean
   end
 end

@@ -20,7 +20,7 @@ available_frontends = Dir[File.join(directory, 'frontends', '*')].collect { |d| 
 [ :stylesheets, :javascripts, :images].each do |asset_type|
   path = "/public/#{asset_type}/active_scaffold"
   copy_files(path, path, directory)
-  
+
   File.open(File.join(Rails.root, path, 'DO_NOT_EDIT'), 'w') do |f|
     f.puts "Any changes made to files in sub-folders will be lost."
     f.puts "See http://activescaffold.com/tutorials/faq#custom-css."

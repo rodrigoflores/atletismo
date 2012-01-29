@@ -5,7 +5,7 @@ class CreateTreinos < ActiveRecord::Migration
       t.string :text
       t.string :comentario
       t.integer :atleta_id
-      
+
       t.timestamps
     end
   end

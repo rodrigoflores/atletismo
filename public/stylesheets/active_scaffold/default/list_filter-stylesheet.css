@@ -35,7 +35,7 @@
 {
 	position: relative;
 	height: 150px;
-	
+
 	border: solid 1px #000;
 }
 
@@ -46,11 +46,11 @@
 	height: 150px;
 	width: 22px;
 	overflow: hidden;
-	
+
 	background-image: url(/images/active_scaffold/default/filter_handle.png);
-	
+
 	border-right: solid 1px #000;
-	
+
 	cursor: pointer;
 }
 .filter_accordion .filter_handle.active
@@ -65,14 +65,14 @@
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	
+
 	cursor: pointer;
 }
 
 .filter_accordion .filter_body
 {
 	height: 150px;
-	
+
 	overflow: auto;
 }
 .filter_accordion .filter_body.active

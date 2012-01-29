@@ -7,7 +7,7 @@ module ModelBuilder
     base.class_eval do
       after(:each) do
         if @defined_constants
-          @defined_constants.each do |class_name| 
+          @defined_constants.each do |class_name|
             Object.send(:remove_const, class_name)
           end
         end

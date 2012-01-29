@@ -17,13 +17,13 @@ ActionController::Routing::Routes.draw do |map|
   	atleta.resources :testes
   	atleta.resource :profile
   	atleta.root :controller => 'profiles', :action => 'show'
-  end 
+  end
 
  #Users
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.forgot_password_request '/forgot_password', :controller => 'users', :action => 'forgot_password_request'
   map.reset_password '/reset_password/:perishable_token', :controller => 'users', :action => 'reset_password_request'
-  
+
 
  #Routes padrão
   map.resources :users, :collection => { :forgot_password => :get, :reset_password_request => :get,  :reset_password => :get }

@@ -1,12 +1,12 @@
 # coding: utf-8
 
 class AtletasController < ApplicationController
-  
+
   before_filter :login_required
   before_filter :get_atleta, :except => [:index, :list, :create, :search_ranking, :ranking, :conditions_for_collection]
   before_filter :treinador_prohibited, :except => [:list, :show, :redirect_testes, :redirect_treinos, :redirect_provas, :row]
   before_filter :atleta_prohibited, :only => [:list]
-  
+
   active_scaffold :atleta do |config|
     config.label = "Atletas"
     config.actions.exclude :create, :update, :delete
@@ -27,51 +27,51 @@ class AtletasController < ApplicationController
     :type => :record,
     :label => "Treinos",
     :inline => false
-    
+
   end
-  
+
   def index
   end
-  
-  
+
+
   def show
     if user_is_treinador?
       render :active_scaffold => "show"
     end
-    
+
   end
-  
-  
+
+
   def showProvas
-    @provas = @atleta.provas    
+    @provas = @atleta.provas
   end
-  
-  
+
+
   def edit
     @treinadores = Treinador.find(:all)
   end
-  
-  
+
+
   def create
     @atleta = Atleta.new(params[:atleta])
     if @atleta.save
       flash[:notice] = 'Atleta foi criado com sucesso.'
       redirect_to(@atleta)
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
-  
-  
+
+
   def update
     participa_provas = [];
     if params[:atleta][:participa_provas].nil?
         params[:atleta][:participa_provas] = []
     end
     for participa_prova_string in params[:atleta][:participa_provas] do
-      if integer? participa_prova_string 
+      if integer? participa_prova_string
         pp = ParticipaProva.find(participa_prova_string)
-      else 
+      else
         pp = ParticipaProva.new(:atleta_id => params[:atleta][:id], :nome => participa_prova_string)
       end
       participa_provas <<  pp
@@ -79,41 +79,41 @@ class AtletasController < ApplicationController
     params[:atleta][:participa_provas] = participa_provas
     if @atleta.update_attributes(params[:atleta])
       flash[:notice] = 'Atleta foi atualizado com sucesso.'
-      redirect_to(@atleta) 
+      redirect_to(@atleta)
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
-  
-  
+
+
   def destroy
     @atleta.destroy
-    
+
     redirect_to(atletas_url)
   end
-  
-  
+
+
   #Redireções
   def redirect_testes
     redirect_to atleta_testes_path(@atleta)
   end
-  
+
   def redirect_treinos
-    redirect_to :controller => "treino", :action => "treino_atleta", :atleta_id => @atleta 
+    redirect_to :controller => "treino", :action => "treino_atleta", :atleta_id => @atleta
   end
-  
+
   def redirect_provas
     redirect_to atleta_provas_path(@atleta)
   end
-  
-  
+
+
   #Ranking
   def search_ranking
   end
-  
+
   def ranking
     @distancia = params[:distancia]
-    
+
     #@treinador = Treinador.find_by_user_id(current_user)
     #@atletas = Atleta.find_all_by_treinador_id(@treinador)
     @atletas = Atleta.find(:all)
@@ -123,8 +123,8 @@ class AtletasController < ApplicationController
     end
     @provas
   end
-  
-  
+
+
   #Seleção dos atletas do treinador atualmente logado
   #Isso é automaticamente chamado por active scaffold
   def conditions_for_collection
@@ -133,18 +133,18 @@ class AtletasController < ApplicationController
     else
       flash[:alert] = "Erro: Você não tem acesso a essa página"
       redirect_to root_path()
-    end 
-    
+    end
+
     #['user_type IN (?)', ['admin', 'sysop']]
   end
-  
+
   protected
-  
+
   # Segurança
   def get_atleta
     if (user_is_treinador?)
       @atleta = Atleta.find(params[:id])
-    else      
+    else
       if Atleta.find(params[:id]) == current_atleta
         @atleta = current_atleta
       else
@@ -153,12 +153,12 @@ class AtletasController < ApplicationController
       end
     end
   end
-  
+
   def integer?(object)
     true if Integer(object) rescue false
   end
 
   private :integer?
-  
-  
+
+
 end

@@ -1,9 +1,9 @@
-<p> 
+<p>
   <b>Nome:</b>
   <%= @atleta.user.name %>
 </p>
 
-<p> 
+<p>
   <b>E-mail:</b>
   <%= @atleta.user.email %>
 </p>
@@ -15,7 +15,7 @@
 
 <p>
   <b>Peso:</b>
-  <%=h @atleta.peso %> 
+  <%=h @atleta.peso %>
   <%= "kg" if @atleta.peso  %>
 </p>
 
@@ -34,5 +34,5 @@
 
 <%if user_is_atleta? %>
 	<%= link_to 'Editar', edit_atleta_profile_path %>
-<%end%>		
+<%end%>
 

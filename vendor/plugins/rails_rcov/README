@@ -54,10 +54,10 @@ controllers, and lib. These can be abbreviated to their first letters:
 
   # only show files from app/models
   rake test:units:rcov SHOW_ONLY=models
-  
+
   # only show files from app/helpers and app/controllers
   rake test:units:rcov SHOW_ONLY=helpers,controllers
-  
+
   # only show files from app/helpers and app/controllers, with less typing
   rake test:units:rcov SHOW_ONLY=h,c
 

@@ -9,16 +9,16 @@
 				<li><%= link_to "Cadastre-se", :controller => 'users', :action => 'new' %></li>
 				<% end %>
 			<%end%>
-			
+
   		</ul>
 </div>
-	
+
 <div id="login" >
   <% if current_session %>
-    <%= current_user.email %>(<%= link_to "Sair", user_session_path, :method => :delete %>)		
+    <%= current_user.email %>(<%= link_to "Sair", user_session_path, :method => :delete %>)
   <% else %>
     <%= render :partial => 'sessions/new' %>
   <% end %>
 </div>
 
-	
+

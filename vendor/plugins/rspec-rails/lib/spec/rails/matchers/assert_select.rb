@@ -13,7 +13,7 @@ module Spec # :nodoc:
           @selector_assertion = selector_assertion
           @block = block
         end
-        
+
         def matches?(response_or_text, &block)
           @block = block if block
 
@@ -28,7 +28,7 @@ module Spec # :nodoc:
             false
           end
         end
-        
+
         def failure_message_for_should; @error.message; end
         def failure_message_for_should_not; "should not #{description}, but did"; end
 
@@ -47,7 +47,7 @@ module Spec # :nodoc:
                                                !self.headers['Content-Type'].blank? and
                                                self.headers['Content-Type'].to_sym == :xml
           end
-        
+
           def string?
             String === self
           end
@@ -71,7 +71,7 @@ module Spec # :nodoc:
             arg.respond_to?(:description) ? arg.description : arg.inspect
           end.join(", ")
         end
-        
+
         def args_and_options(args)
           opts = {:xml => false, :strict => false}
           if args.last.is_a?(::Hash)
@@ -81,9 +81,9 @@ module Spec # :nodoc:
           end
           return [args, opts]
         end
-        
+
       end
-      
+
       # :call-seq:
       #   response.should have_tag(*args, &block)
       #   string.should have_tag(*args, &block)
@@ -91,7 +91,7 @@ module Spec # :nodoc:
       # wrapper for assert_select with additional support for using
       # css selectors to set expectation on Strings. Use this in
       # helper specs, for example, to set expectations on the results
-      # of helper methods. Also allow specification of how the 
+      # of helper methods. Also allow specification of how the
       # response is parsed using the options :xml and :strict options.
       # By default, these options are set to false.
       #
@@ -112,7 +112,7 @@ module Spec # :nodoc:
       def have_tag(*args, &block)
         @__current_scope_for_assert_select = AssertSelect.new(:assert_select, self, *args, &block)
       end
-    
+
       # wrapper for a nested assert_select
       #
       #   response.should have_tag("div#form") do
@@ -124,7 +124,7 @@ module Spec # :nodoc:
         args = prepare_args(args, @__current_scope_for_assert_select)
         @__current_scope_for_assert_select.should have_tag(*args, &block)
       end
-    
+
       # wrapper for a nested assert_select with false
       #
       #   response.should have_tag("div#1") do
@@ -136,7 +136,7 @@ module Spec # :nodoc:
         args = prepare_args(args, @__current_scope_for_assert_select)
         @__current_scope_for_assert_select.should_not have_tag(*args, &block)
       end
-    
+
       # :call-seq:
       #   response.should have_rjs(*args, &block)
       #
@@ -146,7 +146,7 @@ module Spec # :nodoc:
       def have_rjs(*args, &block)
         AssertSelect.new(:assert_select_rjs, self, *args, &block)
       end
-      
+
       # :call-seq:
       #   response.should send_email(*args, &block)
       #
@@ -156,7 +156,7 @@ module Spec # :nodoc:
       def send_email(*args, &block)
         AssertSelect.new(:assert_select_email, self, *args, &block)
       end
-      
+
       # wrapper for assert_select_encoded
       #
       # see documentation for assert_select_encoded at http://api.rubyonrails.org/
@@ -165,7 +165,7 @@ module Spec # :nodoc:
       end
 
     private
-    
+
       def prepare_args(args, current_scope = nil)
         return args if current_scope.nil?
         defaults = current_scope.options || {:strict => false, :xml => false}

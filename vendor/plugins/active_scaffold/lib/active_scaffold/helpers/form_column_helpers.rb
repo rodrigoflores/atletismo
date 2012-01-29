@@ -57,7 +57,7 @@ module ActiveScaffold
 
         { :name => name, :class => "#{column.name}-input", :id => id_control}
       end
- 
+
       ##
       ## Form input methods
       ##
@@ -123,7 +123,7 @@ module ActiveScaffold
         if [:has_one, :has_many].include?(column.association.macro)
           params.merge!({column.association.primary_key_name => ''})
         end
-        
+
         record_select_options = {:controller => remote_controller, :id => options[:id]}
         record_select_options.merge!(active_scaffold_input_text_options)
         record_select_options.merge!(column.options)
@@ -132,7 +132,7 @@ module ActiveScaffold
           record_select_field(options[:name], (@record.send(column.name) || column.association.klass.new), record_select_options)
         elsif column.plural_association?
           record_multi_select_field(options[:name], @record.send(column.name), record_select_options)
-        end   
+        end
       end
 
       def active_scaffold_input_checkbox(column, options)

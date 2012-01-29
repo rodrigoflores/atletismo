@@ -23,12 +23,12 @@ config.action_controller.perform_caching             = true
 # Disable delivery errors, bad email addresses will be ignored
 config.action_mailer.raise_delivery_errors = true
 
-ActionMailer::Base.smtp_settings = {  
-    :address => "mail.atletismo.rodrigoflores.org",  
-    :port => 587,  
-    :domain => "atletismo.rodrigoflores.org",  
-    :user_name => "dontreply@atletismo.rodrigoflores.org",  
-    :password => "alfredo",  
-    :authentication => :login 
+ActionMailer::Base.smtp_settings = {
+    :address => "mail.atletismo.rodrigoflores.org",
+    :port => 587,
+    :domain => "atletismo.rodrigoflores.org",
+    :user_name => "dontreply@atletismo.rodrigoflores.org",
+    :password => "alfredo",
+    :authentication => :login
 }
-   
+

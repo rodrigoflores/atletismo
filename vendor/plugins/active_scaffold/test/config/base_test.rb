@@ -4,7 +4,7 @@ class Config::BaseTest < Test::Unit::TestCase
   def setup
     @base = ActiveScaffold::Config::Base.new
   end
-  
+
   def test_formats
     assert_equal [], @base.formats
     @base.formats << :pdf

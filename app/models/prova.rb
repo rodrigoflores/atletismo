@@ -1,7 +1,7 @@
 class Prova < ActiveRecord::Base
   belongs_to :atleta
-  
-  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, 
+
+  attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos,
   				  :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
 
   validate :default_values
@@ -27,7 +27,7 @@ class Prova < ActiveRecord::Base
     tmp << "#{self.decimos}" if (self.decimos != nil) && self.decimos != 0
     return tmp
   end
-  
+
   def tempo_em_decimos
     dec = 0
     dec += 3600*self.horas if (self.horas != nil)
@@ -35,13 +35,13 @@ class Prova < ActiveRecord::Base
     dec += self.segundos if (self.segundos != nil)
     dec = dec*10
     dec += self.decimos if (self.decimos != nil)
-    
+
     return dec
   end
-  
+
   def tempo_em_minutos
     min = 0
-    min += 60*self.horas if (self.horas != nil)    
+    min += 60*self.horas if (self.horas != nil)
     min += self.minutos if (self.minutos != nil)
     min += (1.0/60)*self.segundos if (self.segundos != nil)
     min += (1.0/600)*self.decimos if (self.decimos != nil)

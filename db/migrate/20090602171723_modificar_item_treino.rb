@@ -5,7 +5,7 @@ class ModificarItemTreino < ActiveRecord::Migration
     add_column :itens_treino, :decimos, :integer
     add_column :itens_treino, :grandeza, :string
     add_column :itens_treino, :observacao, :text
-    add_column :itens_treino, :exercicio, :string    
+    add_column :itens_treino, :exercicio, :string
     remove_column :itens_treino, :intensidade
   end
 

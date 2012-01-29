@@ -87,7 +87,7 @@ class SortingTest < Test::Unit::TestCase
     assert_raise ArgumentError do
       @sorting.add :b
     end
-    
+
     #test pure sql sorting: false
     @sorting.clear
     @sorting.add :b

@@ -6,7 +6,7 @@ describe CorPeriodo do
   end
 
   it{should belong_to :treinador}
-  
+
   it "should find a CorPeriodo" do
       @user = User.new
       @user.id = 1
