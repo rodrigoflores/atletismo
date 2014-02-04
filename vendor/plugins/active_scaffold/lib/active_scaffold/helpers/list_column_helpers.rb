@@ -156,7 +156,7 @@ module ActiveScaffold
           clean_column_value(format_value(value))
         end
       end
-      
+
       def active_scaffold_inplace_edit(record, column)
         formatted_column = format_inplace_edit_column(record,column)
         id_options = {:id => record.id.to_s, :action => 'update_column', :name => column.name.to_s}

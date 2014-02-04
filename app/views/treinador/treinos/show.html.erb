@@ -11,7 +11,7 @@ function calculadoraDeRitmo(minutos, segundos, decimos, distancia, intensidade) 
   minutos = (ritmo/600).floor();
   segundos = ((ritmo%600)/10).toFixed(0);
   return "Ritmo: " + (minutos > 0 ? (minutos) + "'" : "") + (segundos > 0 ? (segundos) + "''": "") + "/km" ;
-  
+
 }
 
 function calculadoraDeRitmo_calc(minutos, segundos, decimos, distancia, intensidade) {
@@ -24,11 +24,11 @@ function calculadoraDeRitmo_calc(minutos, segundos, decimos, distancia, intensid
   document.getElementById("calculadora_ritmo_segundos").value = segundos;
 }
 
-function calculaRitmo_calc(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade) { 
+function calculaRitmo_calc(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade) {
 
   var minutos = document.getElementById(campo_minutos).value;
   var segundos = document.getElementById(campo_segundos).value;
-  var decimos = document.getElementById(campo_decimos).value; 
+  var decimos = document.getElementById(campo_decimos).value;
   var volume = document.getElementById(campo_volume).value;
   if(volume <= 0) {
     alert("Volume deve ser maior que zero");
@@ -41,17 +41,17 @@ function calculaRitmo_calc(campo_minutos, campo_segundos, campo_decimos, campo_v
     alert("Intensidade deve estar no intervalo 1~100%");
     document.getElementById(campo_intensidade).focus();
     return;
-  
+
   }
   calculadoraDeRitmo_calc(minutos, segundos, decimos, volume, intensidade);
-  
+
 }
 
-function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade, campo_resultado) { 
+function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume, campo_intensidade, campo_resultado) {
 
   var minutos = document.getElementById(campo_minutos).value;
   var segundos = document.getElementById(campo_segundos).value;
-  var decimos = document.getElementById(campo_decimos).value; 
+  var decimos = document.getElementById(campo_decimos).value;
   var volume = document.getElementById(campo_volume).value;
   if(volume <= 0) {
     alert("Volume deve ser maior que zero");
@@ -64,11 +64,11 @@ function calculaRitmo(campo_minutos, campo_segundos, campo_decimos, campo_volume
     alert("Intensidade deve estar no intervalo 1~100%");
     document.getElementById(campo_intensidade).focus();
     return;
-  
+
   }
   var resultado = document.getElementById(campo_resultado);
   resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, volume, intensidade);
-  
+
 }
 
 function copiar(){
@@ -79,7 +79,7 @@ function copiar(){
   document.getElementById('tempo_intensidade').value = document.getElementById('calculadora_intensidade').value;
 }
 
-	
+
 
 function calculaTempoPeloRitmo() {
 
@@ -96,18 +96,18 @@ function calculaTempoPeloRitmo() {
 
   var campo_minutos = document.getElementById("item_treino_minutos");
   var campo_segundos = document.getElementById("item_treino_segundos");
-  var campo_decimos = document.getElementById("item_treino_decimos"); 
-  
+  var campo_decimos = document.getElementById("item_treino_decimos");
+
   campo_minutos.value = minutos;
   campo_segundos.value = segundos;
   campo_decimos.value = decimos;
-  
+
 }
 
 function calculaTempoPeloRitmo_calc() {
 
 	var ritmo = parseInt(document.getElementById("calculadora_ritmo_minutos").value) + (parseFloat(document.getElementById("calculadora_ritmo_segundos").value) / 60);
-	
+
 	var distancia = document.getElementById("calculadora_volume").value / 1000;
   var intensidade = document.getElementById('calculadora_intensidade').value;
   if(intensidade > 100 || intensidade <= 0)
@@ -126,12 +126,12 @@ function calculaTempoPeloRitmo_calc() {
 
   var campo_minutos = document.getElementById("calculadora_minutos");
   var campo_segundos = document.getElementById("calculadora_segundos");
-  var campo_decimos = document.getElementById("calculadora_decimos"); 
-  
+  var campo_decimos = document.getElementById("calculadora_decimos");
+
   campo_minutos.value = minutos;
   campo_segundos.value = segundos;
   campo_decimos.value = decimos;
-  
+
 }
 
 </script>
@@ -175,7 +175,7 @@ function calculaTempoPeloRitmo_calc() {
             <input type="button" value="Copiar" onclick="javascript: copiar();"/>
           </td>
         </tr>
-      </table> 
+      </table>
     </div>
   </div>
 </div>
@@ -295,7 +295,7 @@ function calculaTempoPeloRitmo_calc() {
   <% form.buttons do %>
     <%= form.commit_button "Criar item treino" %>
   <% end %>
-  
+
 <% end %>
 
 </div>

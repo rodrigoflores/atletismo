@@ -56,7 +56,7 @@ hu:
     '<': '<'
     '!=': '!='
     between: 'Között'
-    
+
     # error_messages
     internal_error: 'A lekérés sikertelen (code 500, Internal Error)'
     version_inconsistency: 'Verzió ütközés - ezt a rekordot módosították mióta elkezdted szerkeszteni.'

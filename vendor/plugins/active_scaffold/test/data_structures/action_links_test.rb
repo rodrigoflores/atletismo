@@ -60,7 +60,7 @@ class ActionLinksTest < Test::Unit::TestCase
       assert_equal 'bar', link.action
     end
   end
-  
+
   def test_delete
     @links.add 'foo'
     @links.add 'bar'

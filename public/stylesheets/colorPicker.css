@@ -12,32 +12,32 @@
 }
 
 #colorpicker-hue-container {
-    position: absolute; 
+    position: absolute;
     top: 4px;
-    left: 120px; 
+    left: 120px;
     width: 18px;
-    height: 110px; 
+    height: 110px;
 }
 
 #colorpicker-hue-bg-img {
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
 }
 
 #colorpicker-hue-slider {
-    position: absolute; 
-    top: 0;
-    left: 0; 
-    width: 100%;
-    height: 100%; 
-}
-
-#colorpicker-hue-thumb { 
-    position: absolute; 
+    position: absolute;
     top: 0;
     left: 0;
-    width: 18px; 
-    height: 18px; 
+    width: 100%;
+    height: 100%;
+}
+
+#colorpicker-hue-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
     z-index: 1009;
     cursor: default;
 }
@@ -56,17 +56,17 @@
 }
 
 #colorpicker-div {
-  position: absolute; 
+  position: absolute;
   top: 8px;
-  left: 8px; 
+  left: 8px;
   width: 100px;
-  height: 100px; 
+  height: 100px;
   border: 1px solid #666;
 }
 
 #colorpicker-bg,
-#colorpicker-bg-overlay { 
-  position: absolute; 
+#colorpicker-bg-overlay {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -74,12 +74,12 @@
   z-index: 1001;
   overflow: hidden;
 }
-#colorpicker-selector { 
-  position: absolute; 
+#colorpicker-selector {
+  position: absolute;
   top: 0px;
   left: 0px;
-  width: 11px; 
-  height: 11px; 
+  width: 11px;
+  height: 11px;
   z-index: 1009;
   margin-top: -6px;
   margin-left: -6px;
@@ -91,9 +91,9 @@
   top: 0;
 }
 #colorpicker-footer {
-  position: absolute; 
+  position: absolute;
   top: 114px;
-  left: 10px; 
+  left: 10px;
   width: 127px;
 }
 

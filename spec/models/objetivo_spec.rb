@@ -7,9 +7,9 @@ describe Objetivo do
     activate_authlogic
     @treinador = Factory(:treinador)
     UserSession.create(@treinador)
-    
+
   end
-  
+
   describe "Objetivo" do
     it { should belong_to :treinador }
   end

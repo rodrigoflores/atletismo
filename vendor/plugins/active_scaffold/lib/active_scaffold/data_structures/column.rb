@@ -12,7 +12,7 @@ module ActiveScaffold::DataStructures
 
     # Whether this column set is collapsed by default in contexts where collapsing is supported
     attr_accessor :collapsed
-    
+
     # Any extra parameters this particular column uses.  This is for create/update purposes.
     def params
       # lazy initialize

@@ -20,7 +20,7 @@ class Atleta::TreinosController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def edit
     @atleta = Atleta.find(current_user.atleta_id)
     @treino = Treino.find(params[:id])
@@ -31,6 +31,6 @@ class Atleta::TreinosController < ApplicationController
     @treino = Treino.find(params[:id])
     @itens_treino = @treino.itens_treino
   end
-  
-  
+
+
 end

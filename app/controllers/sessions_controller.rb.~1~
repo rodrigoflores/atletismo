@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# This controller handles the login/logout function of the site.  
+# This controller handles the login/logout function of the site.
 class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
@@ -13,13 +13,13 @@ class SessionsController < ApplicationController
   def create
     logout_keeping_session!
     user = User.authenticate(params[:email], params[:password])
-    if user 
+    if user
       if !user.active?
         flash[:error] = "Seu usuário não está ativado. Verifique seu e-mail pelo código de ativação"
         redirect_to "/"
-        return 
+        return
       end
-      
+
       # Protects against session fixation attacks, causes request forgery
       # protection if user resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
         end
         redirect_to :controller => "atletas", :action => "index"
       end
-    
+
     else
       note_failed_signin
       @email       = params[:email]

@@ -33,18 +33,18 @@ Factory.define :treino do |treino|
   treino.date Date.new
   treino.text "aaaa"
   treino.comentario "bbbb"
-  treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) } 
+  treino.atleta { x = Factory(:atleta); Atleta.find_by_user_id(x.id) }
 end
 
 Factory.define :item_treino do |item_treino|
-  item_treino.treino { |x| x.association(:treino)} 
+  item_treino.treino { |x| x.association(:treino)}
   item_treino.objetivo_id { x = Factory(:objetivo); x.id }
   item_treino.series 12
   item_treino.repeticao 5
   item_treino.volume   10
   item_treino.exercicio_id { x = Factory(:exercicio); x.id }
   item_treino.intervalo 100
-  item_treino.pausa     10  
+  item_treino.pausa     10
 end
 
 Factory.define :prova, :class => Prova do |provas|

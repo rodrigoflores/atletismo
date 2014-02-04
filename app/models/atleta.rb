@@ -1,25 +1,25 @@
 class Atleta < ActiveRecord::Base
 
   has_one :user
- 
+
   has_many :treinos
 
   has_many :provas
- 
+
   has_many :testes
 
   belongs_to :treinador
 
   has_many :participa_provas
-  
+
   attr_accessible :usuario, :nasc, :treinador_id, :altura,:peso, :provas, :participa_provas
-  
+
   validates_presence_of :treinador_id
 
   def usuario
     @usuario = User.find(self.user_id) if(self.user_id)
   end
-  
+
   def nome
     usuario.name
   end
@@ -37,7 +37,7 @@ class Atleta < ActiveRecord::Base
     for participa_prova_string in atleta[:participa_provas] do
       if integer?(participa_prova_string)
         pp = ParticipaProva.find(participa_prova_string)
-      else 
+      else
         pp = ParticipaProva.new(:atleta_id => self.id, :nome => participa_prova_string)
       end
       participa_provas <<  pp

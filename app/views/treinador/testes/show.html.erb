@@ -21,17 +21,17 @@
 	<p>
 		<strong>Resultado: </strong>
 		<br/>
-		<%= @teste.volume %> 
-		<%= @teste.grandeza %> 
+		<%= @teste.volume %>
+		<%= @teste.grandeza %>
 	</p>
 <% elsif (@teste.minutos or @teste.segundos or @teste.decimos)%>
 	<p>
 		<strong>Resultado: </strong>
 		<br/>
-		<%= @teste.minutos  || 0 %> ' 
+		<%= @teste.minutos  || 0 %> '
 		<%= @teste.segundos || 0 %> ''
-		<%= @teste.decimos  || 0 %> 
-	</p>		
+		<%= @teste.decimos  || 0 %>
+	</p>
 <% end %>
 
 <p>

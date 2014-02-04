@@ -10,9 +10,9 @@ class Treinador::ItensTreinoController < ApplicationController
       @exercicios = Exercicio.find(:all,  :conditions => {:treinador_id => current_treinador})
       @objetivos = Objetivo.find(:all,  :conditions => {:treinador_id => current_treinador})
       render 'treinador/treinos/show'
-    end 
+    end
   end
-  
+
   def destroy
     @treino = Treino.find(params[:treino_id])
     @item_treino = @treino.itens_treino.find(params[:id])

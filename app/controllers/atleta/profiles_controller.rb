@@ -3,12 +3,12 @@ class Atleta::ProfilesController < ApplicationController
 	def show
 		@atleta = Atleta.find(current_atleta)
 	end
-	
+
 	def edit
 		@atleta = Atleta.find(current_atleta)
 		@treinadores = Treinador.all
 	end
-	
+
 	def update
 		@atleta = Atleta.find(current_atleta)
 		if @atleta.update_atleta(params[:atleta])

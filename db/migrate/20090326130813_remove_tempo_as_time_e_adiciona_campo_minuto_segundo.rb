@@ -7,7 +7,7 @@ class RemoveTempoAsTimeEAdicionaCampoMinutoSegundo < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :provas, :segundos 
+    remove_column :provas, :segundos
     remove_column :provas, :minutos
     remove_column :provas, :decimos
     add_column :provas, :tempo, :time

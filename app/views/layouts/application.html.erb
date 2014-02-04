@@ -23,12 +23,12 @@ end %>
   	<div id="banner-esq"></div>
   	<div id="vt"> <%= image_tag "vt.png" %></div>
   	<div id="banner-dir"></div>
-  </div>  
+  </div>
 
    <div id="barra">
 	  <%= render :partial => 'users/user_bar' %>
   </div>
-  
+
   <% if user_is_treinador? || !is_first_time?%>
 	  <div id="lateral">
 		  <div id="content_top">
@@ -49,7 +49,7 @@ end %>
 	    </div>
     </div>
   <% end %>
-  
+
   <% if !is_first_time? %>
   <div id="conteudo">
   <% else %>
@@ -74,8 +74,8 @@ end %>
   	<div id="rodape-esq"></div>
   	<div id="rodape-text">Laboratório de Programação eXtrema - IME-USP</div>
   	<div id="rodape-dir"></div>
-  </div>  
-</div>  
+  </div>
+</div>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

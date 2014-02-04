@@ -10,19 +10,19 @@ class PreferenciasController < ApplicationController
     elsif list_tipos
       @mostrar_tipos = true
     end
-    
-    @corPeriodo = CorPeriodo.find(:all, :conditions => {:treinador_id => current_treinador.id})   
+
+    @corPeriodo = CorPeriodo.find(:all, :conditions => {:treinador_id => current_treinador.id})
     @all_treino_cores = CorTreino.find(:all) # :conditions => {:treinador_id => current_treinador.id} não funciona
     @treino_cores = []
     @all_treino_cores.each do |treino_cor|
-      
+
       if treino_cor.tipo.treinador.id == current_treinador.id
         @treino_cores << treino_cor
       end
     end
-    
+
   end
-  
+
 
   def novoPeriodoCor
       @corPeriodo = CorPeriodo.new
@@ -42,22 +42,22 @@ class PreferenciasController < ApplicationController
     redirect_to :action => "index"
   end
 
-  def criaTreinoCor    
+  def criaTreinoCor
     if @corTreino = CorTreino.find_by_tipo_id(params[:tipo_id])
       @corTreino.cor = params[:cor_treino][:cor]
     else
-      @corTreino = CorTreino.new(params[:cor_treino])    
+      @corTreino = CorTreino.new(params[:cor_treino])
       @corTreino.tipo_id = params[:tipo_id]
     end
     @corTreino.save
-    
+
     redirect_to :action => "index"
   end
 
   def removePeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
     @corPeriodo.cor = "FFFFFF"
-    @corPeriodo.save 
+    @corPeriodo.save
     redirect_to :action => "index"
   end
 
@@ -72,7 +72,7 @@ class PreferenciasController < ApplicationController
     @treino_cores = CorTreino.find(:all) ### attention: somente do treinador logado
     @corTreino = CorTreino.find(params[:id])
   end
-  
+
   def apagarTipoTreinoCor
     @corTreino = CorTreino.find(params[:id])
     @corTreino.destroy
@@ -87,16 +87,16 @@ class PreferenciasController < ApplicationController
   def atualizaPeriodoCor
     @corPeriodo = CorPeriodo.find(params[:id])
     @corPeriodo.periodo = params[:cor_periodo][:periodo]
-    @corPeriodo.cor = params[:cor_periodo][:cor] 
+    @corPeriodo.cor = params[:cor_periodo][:cor]
     di = params[:cor_periodo]['inicio(1i)'] + '-' + params[:cor_periodo]['inicio(2i)'] + '-' + params[:cor_periodo]['inicio(3i)']
     df = params[:cor_periodo]['fim(1i)'] + '-' + params[:cor_periodo]['fim(2i)'] + '-' + params[:cor_periodo]['fim(3i)']
     @corPeriodo.inicio = Date.parse(di)
-    @corPeriodo.fim = Date.parse(df) 
-    
+    @corPeriodo.fim = Date.parse(df)
+
     @corPeriodo.save
     redirect_to :action => "index"
   end
-  
+
 
   def create_tipo
     @tipo = Tipo.new(params[:tipo])
@@ -112,20 +112,20 @@ class PreferenciasController < ApplicationController
       @exercicio.nome = "nenhum"
       @exercicio.metodo_id = @metodo.id
       @exercicio.save
-      
+
       @corTreino = CorTreino.new()
       @corTreino.cor = "#FFFFFF"
       @corTreino.tipo_id = @tipo.id
       @corTreino.save
-      
-      
-      flash[:notice] = "O tipo ", @tipo.nome, " foi criado."  
+
+
+      flash[:notice] = "O tipo ", @tipo.nome, " foi criado."
       redirect_to :action => "index", :tipo_id => @tipo.id
     else
-      flash[:notice] = "O tipo ", @tipo.nome, " foi selecionado." 
+      flash[:notice] = "O tipo ", @tipo.nome, " foi selecionado."
       redirect_to :action => "index", :tipo_id => @tipo_existe.id
     end
-    
+
   end
 
   def create_metodo
@@ -138,10 +138,10 @@ class PreferenciasController < ApplicationController
       @exercicio.nome = "nenhum"
       @exercicio.metodo_id = @metodo.id
       @exercicio.save
-      flash[:notice] = "O metodo ", @metodo.nome, " foi criado."  
+      flash[:notice] = "O metodo ", @metodo.nome, " foi criado."
       redirect_to :action => "index", :metodo_id => @metodo.id
     else
-      flash[:notice] = "O metodo ", @metodo.nome, " foi selecionado."  
+      flash[:notice] = "O metodo ", @metodo.nome, " foi selecionado."
       redirect_to :action => "index", :metodo_id => @metodo_existe.id
     end
   end
@@ -153,14 +153,14 @@ class PreferenciasController < ApplicationController
       @exercicio.metodo_id = params[:metodo_id]
       @exercicio.save
       flash[:notice] = "O exercicio ", @exercicio.nome, " foi criado."
-      redirect_to :action => "index" 
+      redirect_to :action => "index"
     else
       flash[:notice] = "O exercicio ", @exercicio.nome, " já existe..."
-      redirect_to :action => "index", :metodo_id => @exercicio.metodo_id   
+      redirect_to :action => "index", :metodo_id => @exercicio.metodo_id
     end
-    
+
   end
-  
+
 
   def destroy_tipo
     @tipo = Tipo.find_by_id(params[:id])
@@ -172,52 +172,52 @@ class PreferenciasController < ApplicationController
       item_treino.cor_treino = cor_treino
     end
     #implementar: modificar o item_treino (senao da erro)
-        
-    @corTreino.destroy    
+
+    @corTreino.destroy
     @tipo.destroy
-      
-    redirect_to :action => "index"    
+
+    redirect_to :action => "index"
   end
-  
+
   def destroy_metodo
     @metodo = Metodo.find_by_id(params[:id])
     @metodo.destroy
     #implementar: modificar o item_treino (senao da erro)
-    
-    redirect_to :action => "index"    
+
+    redirect_to :action => "index"
   end
-  
+
   def destroy_exercicio
     @exercicio = Exercicio.find_by_id(params[:id])
     @exercicio.destroy
     #implementar: modificar o item_treino (senao da erro)
-    
+
     redirect_to :action => "index"
-  end  
-  
+  end
+
   protected
-  
+
   def list_tipos
-    if @tipos = Tipo.find(:all,:conditions => {:treinador_id => current_treinador.id})    
+    if @tipos = Tipo.find(:all,:conditions => {:treinador_id => current_treinador.id})
       return true
     end
   end
-  
-  def list_metodo    
+
+  def list_metodo
     if @tipo = Tipo.find_by_id(params[:tipo_id])
       @metodos = Metodo.find(:all,:conditions =>  ['tipo_id = ? and nome not like ?', @tipo.id, "nenhum"])
       return true
     end
   end
-  
-  def list_exercicio    
+
+  def list_exercicio
     if @metodo = Metodo.find_by_id(params[:metodo_id])
       @tipo = @metodos.tipo
       @exercicios = Exercicio.find(:all,:conditions =>  ['metodo_id = ? and nome not like ?', @metodo.id, "nenhum"] )
       return true
     end
   end
-  
+
 
 
 end

@@ -8,7 +8,7 @@ SVN r113 from http://code.google.com/p/reallysimplehistory
 + Changed EncodeURIComponent -> EncodeURI
 + Changed DecodeURIComponent -> DecodeURI
 + Changed 'blank.html?' -> '/blank.html?'
- 
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
 (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
 publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
@@ -24,13 +24,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /*
        dhtmlHistory: An object that provides history, history data, and bookmarking for DHTML and Ajax applications.
-       
+
        dependencies:
                * the historyStorage object included in this file.
 
 */
 window.dhtmlHistory = {
-       
+
        /*Public: User-agent booleans*/
        isIE: false,
        isOpera: false,
@@ -38,10 +38,10 @@ window.dhtmlHistory = {
        isKonquerer: false,
        isGecko: false,
        isSupported: false,
-       
+
        /*Public: Create the DHTML history infrastructure*/
        create: function(options) {
-               
+
                /*
                        options - object to store initialization parameters
                        options.blankURL - string to override the default location of blank.html. Must end in "?"
@@ -52,10 +52,10 @@ window.dhtmlHistory = {
                */
 
                var that = this;
-               
+
                /*Set up the historyStorage object; pass in options bundle*/
                window.historyStorage.setup(options);
-               
+
                /*Set up our base title if one is passed in*/
                if (options && options.baseTitle) {
                        if (options.baseTitle.indexOf("@@@") < 0 && historyStorage.debugMode) {
@@ -64,7 +64,7 @@ window.dhtmlHistory = {
                        }
                        this.baseTitle = options.baseTitle;
                }
-               
+
                /*set user-agent flags*/
                var UA = navigator.userAgent.toLowerCase();
                var platform = navigator.platform.toLowerCase();
@@ -92,7 +92,7 @@ window.dhtmlHistory = {
                } else if (this.isOpera) {
                        this.createOpera();
                }
-               
+
                /*Get our initial location*/
                var initialHash = this.getCurrentLocation();
 
@@ -120,8 +120,8 @@ window.dhtmlHistory = {
                var unloadHandler = function() {
                        that.firstLoad = null;
                };
-               
-               this.addEventListener(window,'unload',unloadHandler);          
+
+               this.addEventListener(window,'unload',unloadHandler);
 
                /*Determine if this is our first page load; for IE, we do this in this.iframeLoaded(), which is fired on pageload. We do it
                there because we have no historyStorage at this point, which only exists after the page is finished loading in IE*/
@@ -151,15 +151,15 @@ window.dhtmlHistory = {
                        that.checkLocation();
                };
                setInterval(locationHandler, 100);
-       },      
-       
+       },
+
        /*Public: Initialize our DHTML history. You must call this after the page is finished loading. Optionally, you can pass your listener in
        here so you don't need to make a separate call to addListener*/
        initialize: function(listener) {
 
                /*save original document title to plug in when we hit a null-key history point*/
                this.originalTitle = document.title;
-               
+
                /*IE needs to be explicitly initialized. IE doesn't autofill form data until the page is finished loading, so we have to wait*/
                if (this.isIE) {
                        /*If this is the first time this page has loaded*/
@@ -172,7 +172,7 @@ window.dhtmlHistory = {
                        /*Else if this is a fake onload event*/
                        else {
                                this.fireOnNewListener = true;
-                               this.firstLoad = false;  
+                               this.firstLoad = false;
                        }
                }
                /*optional convenience to save a separate call to addListener*/
@@ -190,7 +190,7 @@ window.dhtmlHistory = {
                        this.fireOnNewListener = false;
                }
        },
-       
+
        /*Public: Change the current HTML title*/
        changeTitle: function(historyData) {
                var winTitle = (historyData && historyData.newTitle
@@ -214,7 +214,7 @@ window.dhtmlHistory = {
                if (this.isIE) {
                        this.iframe.contentWindow.document.title = winTitle;
                }
-               
+
                /*If non-IE, reload the hash so the new title "sticks" in the browser history object*/
                if (!this.isIE && !this.isOpera) {
                        var hash = decodeURI(document.location.hash);
@@ -226,7 +226,7 @@ window.dhtmlHistory = {
                        }
                }
        },
-       
+
        /*Public: Add a history point. Parameters available:
        * newLocation (required):
                This will be the #hash value in the URL. Users can bookmark it. It will persist across sessions, so
@@ -242,12 +242,12 @@ window.dhtmlHistory = {
                options bundle, the value will be plugged into the baseTitle by swapping out the @@@ replacement param.
        */
        add: function(newLocation, historyData) {
-               
+
                var that = this;
-               
+
                /*Escape the location and remove any leading hash symbols*/
                var encodedLocation = encodeURI(this.removeHash(newLocation));
-               
+
                if (this.isSafari) {
 
                        /*Store the history data into history storage - pass in unencoded newLocation since
@@ -256,22 +256,22 @@ window.dhtmlHistory = {
 
                        /*Save this as our current location*/
                        this.currentLocation = encodedLocation;
-       
+
                        /*Change the browser location*/
                        window.location.hash = encodedLocation;
-               
+
                        /*Save this to the Safari form field*/
                        this.putSafariState(encodedLocation);
 
                        this.changeTitle(historyData);
 
                } else {
-                       
+
                        /*Most browsers require that we wait a certain amount of time before changing the location, such
                        as 200 MS; rather than forcing external callers to use window.setTimeout to account for this,
                        we internally handle it by putting requests in a queue.*/
                        var addImpl = function() {
-                               
+
                                /*Indicate that the current wait time is now less*/
                                if (that.currentWaitTime > 0) {
                                        that.currentWaitTime = that.currentWaitTime - that.waitTime;
@@ -299,7 +299,7 @@ window.dhtmlHistory = {
 
                                /*Save this as our current location*/
                                that.currentLocation = encodedLocation;
-                               
+
                                /*Change the browser location*/
                                window.location.hash = encodedLocation;
 
@@ -310,9 +310,9 @@ window.dhtmlHistory = {
 
                                /*End of atomic location change block for IE*/
                                that.ieAtomicLocationChange = false;
-                               
+
                                that.changeTitle(historyData);
-                               
+
                        };
 
                        /*Now queue up this add request*/
@@ -332,33 +332,33 @@ window.dhtmlHistory = {
        getVersion: function() {
                return this.VERSIONNUMBER;
        },
-       
+
        /*- - - - - - - - - - - -*/
-       
+
        /*Private: Constant for our own internal history event called when the page is loaded*/
        PAGELOADEDSTRING: "DhtmlHistory_pageLoaded",
-       
+
        VERSIONNUMBER: "0.8",
-       
+
        /*
                Private: Pattern for title changes. Example: "Armchair DJ [@@@]" where @@@ will be relaced by values passed to add();
                Default is just the title itself, hence "@@@"
        */
        baseTitle: "@@@",
-       
+
        /*Private: Placeholder variable for the original document title; will be set in ititialize()*/
        originalTitle: null,
-       
+
        /*Private: URL for the blank html file we use for IE; can be overridden via the options bundle. Otherwise it must be served
        in same directory as this library*/
        blankURL: "/blank.html?",
-       
+
        /*Private: Our history change listener.*/
        listener: null,
 
        /*Private: MS to wait between add requests - will be reset for certain browsers*/
        waitTime: 200,
-       
+
        /*Private: MS before an add request can execute*/
        currentWaitTime: 0,
 
@@ -398,7 +398,7 @@ window.dhtmlHistory = {
        That signals to checkLocation() to ignore the change-in-progress. Once we're done with our chunk of location-change code in
        add(), we set this back to false. We'll do the same thing when capturing user-entered address changes in checkLocation itself.*/
        ieAtomicLocationChange: null,
-       
+
        /*Private: Generic utility function for attaching events*/
        addEventListener: function(o,e,l) {
                if (o.addEventListener) {
@@ -424,14 +424,14 @@ window.dhtmlHistory = {
                document.write(iframeHTML);
                this.iframe = document.getElementById(iframeID);
        },
-       
+
        /*Private: Create Opera-specific DOM nodes and overrides*/
        createOpera: function() {
                this.waitTime = 400;/*Opera needs longer between history updates*/
                var imgHTML = '<img src="javascript:location.href=\'javascript:dhtmlHistory.checkLocation();\';" style="' + historyStorage.hideStyles + '" />';
                document.write(imgHTML);
        },
-       
+
        /*Private: Create Safari-specific DOM nodes and overrides*/
        createSafari: function() {
                var formID = "rshSafariForm";
@@ -460,7 +460,7 @@ window.dhtmlHistory = {
                        this.safariHistoryStartPoint = this.safariLength.value;
                }
        },
-       
+
        /*TODO: make this public again?*/
        /*Private: Get browser's current hash location; for Safari, read value from a hidden form field*/
        getCurrentLocation: function() {
@@ -470,7 +470,7 @@ window.dhtmlHistory = {
                );
                return r;
        },
-       
+
        /*TODO: make this public again?*/
        /*Private: Manually parse the current url for a hash; tip of the hat to YUI*/
    getCurrentHash: function() {
@@ -481,7 +481,7 @@ window.dhtmlHistory = {
                        : ""
                );
    },
-       
+
        /*Private: Safari method to read the history stack from a hidden form field*/
        getSafariStack: function() {
                var r = this.safariStack.value;
@@ -492,7 +492,7 @@ window.dhtmlHistory = {
                var stack = this.getSafariStack();
                var state = stack[history.length - this.safariHistoryStartPoint - 1];
                return state;
-       },                      
+       },
        /*Private: Safari method to write the history stack to a hidden form field*/
        putSafariState: function(newLocation) {
            var stack = this.getSafariStack();
@@ -509,12 +509,12 @@ window.dhtmlHistory = {
                /*call our listener*/
                this.listener.call(null, decodedHash, historyData);
        },
-       
+
        /*Private: See if the browser has changed location. This is the primary history mechanism for Firefox. For IE, we use this to
        handle an important edge case: if a user manually types in a new hash value into their IE location bar and press enter, we want to
        to intercept this and notify any history listener.*/
        checkLocation: function() {
-               
+
                /*Ignore any location changes that we made ourselves for browsers other than IE*/
                if (!this.isIE && this.ignoreLocationChange) {
                        this.ignoreLocationChange = false;
@@ -525,15 +525,15 @@ window.dhtmlHistory = {
                if (!this.isIE && this.ieAtomicLocationChange) {
                        return;
                }
-               
+
                /*Get hash location*/
                var hash = this.getCurrentLocation();
-               
+
                /*Do nothing if there's been no change*/
                if (hash == this.currentLocation) {
                        return;
                }
-               
+
                /*In IE, users manually entering locations into the browser; we do this by comparing the browser's location against the
                iframe's location; if they differ, we are dealing with a manual event and need to place it inside our history, otherwise
                we can return*/
@@ -621,22 +621,22 @@ window.dhtmlHistory = {
        the fact that browsers save the text in form data for the life of the browser session, which means the text is still there when
        the user navigates back to the page. This object can be used independently of the dhtmlHistory object for caching of Ajax
        session information.
-       
+
        dependencies:
                * json2007.js (included in a separate file) or alternate JSON methods passed in through an options bundle.
 */
 window.historyStorage = {
-       
+
        /*Public: Set up our historyStorage object for use by dhtmlHistory or other objects*/
        setup: function(options) {
-               
+
                /*
                        options - object to store initialization parameters - passed in from dhtmlHistory or directly into historyStorage
                        options.debugMode - boolean that causes hidden form fields to be shown for development purposes.
                        options.toJSON - function to override default JSON stringifier
                        options.fromJSON - function to override default JSON parser
                */
-               
+
                /*process init parameters*/
                if (typeof options !== "undefined") {
                        if (options.debugMode) {
@@ -648,8 +648,8 @@ window.historyStorage = {
                        if (options.fromJSON) {
                                this.fromJSON = options.fromJSON;
                        }
-               }              
-               
+               }
+
                /*write a hidden form and textarea into the page; we'll stow our history stack here*/
                var formID = "rshStorageForm";
                var textareaID = "rshStorageField";
@@ -667,12 +667,12 @@ window.historyStorage = {
                        this.storageField.focus();/*Opera needs to focus this element before persisting values in it*/
                }
        },
-       
+
        /*Public*/
        put: function(key, value) {
-               
+
                var encodedKey = encodeURI(key);
-               
+
                this.assertValidKey(encodedKey);
                /*if we already have a value for this, remove the value before adding the new one*/
                if (this.hasKey(key)) {
@@ -688,7 +688,7 @@ window.historyStorage = {
        get: function(key) {
 
                var encodedKey = encodeURI(key);
-               
+
                this.assertValidKey(encodedKey);
                /*make sure the hash table has been loaded from the form*/
                this.loadHashTable();
@@ -701,7 +701,7 @@ window.historyStorage = {
 
        /*Public*/
        remove: function(key) {
-               
+
                var encodedKey = encodeURI(key);
 
                this.assertValidKey(encodedKey);
@@ -721,7 +721,7 @@ window.historyStorage = {
 
        /*Public*/
        hasKey: function(key) {
-               
+
                var encodedKey = encodeURI(key);
 
                this.assertValidKey(encodedKey);
@@ -735,13 +735,13 @@ window.historyStorage = {
                return (typeof key === "string");
                //TODO - should we ban hash signs and other special characters?
        },
-       
+
        /*- - - - - - - - - - - -*/
 
        /*Private - CSS strings utilized by both objects to hide or show behind-the-scenes DOM elements*/
        showStyles: 'border:0;margin:0;padding:0;',
        hideStyles: 'left:-1000px;top:-1000px;width:1px;height:1px;border:0;position:absolute;',
-       
+
        /*Private - debug mode flag*/
        debugMode: false,
 
@@ -793,13 +793,13 @@ window.historyStorage = {
 /* Client-side access to querystring name=value pairs
 	Version 1.3
 	28 May 2008
-	
+
 	License (Simplified BSD):
 	http://adamv.com/dev/javascript/qslicense.txt
 */
 function Querystring(qs) { // optionally pass a querystring to parse
 	this.params = {};
-	
+
 	if (qs == null) qs = location.search.substring(1, location.search.length);
 	if (qs.length == 0) return;
 
@@ -807,16 +807,16 @@ function Querystring(qs) { // optionally pass a querystring to parse
 // See: http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.13.4.1
 	qs = qs.replace(/\+/g, ' ');
 	var args = qs.split('&'); // parse out name/value pairs separated via &
-	
+
 // split out each name=value pair
 	for (var i = 0; i < args.length; i++) {
 		var pair = args[i].split('=');
 		var name = decodeURI(pair[0]);
-		
+
 		var value = (pair.length==2)
 			? decodeURI(pair[1])
 			: name;
-		
+
 		this.params[name] = value;
 	}
 }
@@ -842,7 +842,7 @@ window.dhtmlHistory.create({
         , fromJSON: function(s) {
                 return s.evalJSON();
         }
-        
+
         // Enable this to assist with debugging
 //        , debugMode: true
 

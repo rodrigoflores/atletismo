@@ -2,7 +2,7 @@
 
 class Prova < ActiveRecord::Base
   belongs_to :atleta
-  
+
   attr_accessible :competicao, :data, :horas, :minutos, :segundos, :decimos, :competicao, :atleta, :comentarios, :colocacao, :clima, :distancia, :tipoTempo, :periodo, :cor
 
   validate :default_values
@@ -28,27 +28,27 @@ class Prova < ActiveRecord::Base
     tmp << "#{self.decimos}" if self.decimos && self.decimos != 0
     return tmp
   end
-  
+
   def tempo_em_decimos
     return 10*(60*self.minutos+self.segundos)+self.decimos
   end
-  
+
   def tempo_em_minutos
     min = self.minutos if self.minutos
     min += self.segundos/60.0 if self.segundos
     min += self.horas*60.0 if self.horas
     return min
   end
-  
+
   def periodo
     corPeriodo = CorPeriodo.find(:first, :conditions => ["inicio <= ? and fim >= ?", self.data, self.data])
     if corPeriodo.nil?
       return ""
-    end    
+    end
     return corPeriodo.periodo
   end
-  
-  
+
+
 end
 
 

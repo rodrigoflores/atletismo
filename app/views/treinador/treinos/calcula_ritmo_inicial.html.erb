@@ -3,11 +3,11 @@
 <script type='text/javascript' src="/javascripts/calculadoraDeRitmo.js"></script>
 
 <script type="text/javascript">
-  
-function calculaRitmo() { 
+
+function calculaRitmo() {
   var minutos = document.getElementById('tempo_minutos').value;
   var segundos = document.getElementById('tempo_segundos').value;
-  var decimos = document.getElementById('tempo_decimos').value; 
+  var decimos = document.getElementById('tempo_decimos').value;
   var distancia = document.getElementById('tempo_distancia').value;
   if(distancia == 0)
   {
@@ -21,11 +21,11 @@ function calculaRitmo() {
     alert("Intensidade deve estar no intervalo 1~100%");
     document.getElementById('tempo_intensidade').focus();
     return;
-  
+
   }
   resultado = document.getElementById('resultado_ritmo');
   resultado.innerHTML = calculadoraDeRitmo(minutos, segundos, decimos, distancia, intensidade);
-  
+
 }
 </script>
 

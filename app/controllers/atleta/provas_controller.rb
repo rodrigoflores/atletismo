@@ -1,11 +1,11 @@
 class Atleta::ProvasController < ApplicationController
-  
+
   before_filter :require_login
 
 	def index
 		@atleta = Atleta.find(current_user.atleta_id)
 	end
-	
+
 	def show
 		@atleta = Atleta.find(current_user.atleta_id)
 		@prova = Prova.find(params[:id])
@@ -15,11 +15,11 @@ class Atleta::ProvasController < ApplicationController
 		@atleta = Atleta.find(current_user.atleta_id)
 		@prova = Prova.new
 	end
-	
+
 	def create
 		@atleta = Atleta.find(current_user.atleta_id)
 		@prova = Prova.new(params[:prova])
-		
+
 		@prova.atleta_id = @atleta.id
 		if @prova.save
 			flash[:notice] = "Prova foi criada com sucesso."

@@ -1,4 +1,4 @@
-/* @override 
+/* @override
 	http://0.0.0.0:3000/stylesheets/vt.css?1240506827
 	http://0.0.0.0:3000/stylesheets/vt.css?1243352101
 	http://0.0.0.0:3000/stylesheets/vt.css?1243964045
@@ -77,7 +77,7 @@ a:hover {
 }
 
 #geral {
-	position:absolute; 
+	position:absolute;
 	width: 84%;
 	min-height: 92%;
 }
@@ -129,7 +129,7 @@ a:hover {
 }
 
 #login input{
-	font-size: 0.75em; 
+	font-size: 0.75em;
 }
 
  #login a{
@@ -137,7 +137,7 @@ a:hover {
 	text-decoration: underline;
 	font-size: 12px;
 }
- 
+
  #login a:hover{
  	color: #FFFFFF;
  }
@@ -148,7 +148,7 @@ a:hover {
 	text-decoration: underline;
 	font-size: 12px;
 }
- 
+
  #menu a:hover{
  	color: #FFFFFF;
 }
@@ -156,7 +156,7 @@ a:hover {
 #menu ul {
 	margin: 0;
 	list-style: none;
-	
+
 }
 
 #menu li {
@@ -184,7 +184,7 @@ a:hover {
 
 #conteudo-texto{
 	padding-left: 3%;
-	
+
 	min-height: 450px;
 	padding-right: 3%;
 }
@@ -204,7 +204,7 @@ a:hover {
 	background-repeat: repeat-x;
 	height: 47px;
 	clear: both;
-	 
+
 }
 
 #rodape-text {
@@ -251,7 +251,7 @@ a:hover {
 	border-color: #fa1919;
 	background-color: #ffcfcf;
 	padding: 15px 15px 15px 30px;
-	
+
 }
 
 #errorExplanation ul li{
@@ -290,7 +290,7 @@ table.time {
 
 
 .preferencies td{
-	padding: 5px 7px 5px 7px;	
+	padding: 5px 7px 5px 7px;
 }
 
 #calendar {

@@ -5,8 +5,8 @@ class Treinador < ActiveRecord::Base
   has_many :atletas
   has_many :objetivos
   has_many :exercicios
-  
-  def usuario 
+
+  def usuario
     @user = User.find(self.user_id) if(self.user_id)
   end
 

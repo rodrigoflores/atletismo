@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   protected
 
-  def after_create   
+  def after_create
     self.activated = false
     self.activated_at = nil
     if self.treinador?
@@ -29,5 +29,5 @@ class User < ActiveRecord::Base
     self.save
     UserSession.find.destroy
   end
-  
+
 end

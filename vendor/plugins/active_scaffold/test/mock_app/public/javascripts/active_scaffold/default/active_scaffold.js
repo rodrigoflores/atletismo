@@ -476,12 +476,12 @@ ActiveScaffold.InPlaceEditor = Class.create(Ajax.InPlaceEditor, {
       this._form.appendChild(patternNode);
     }.bind(this));
   },
-  
+
   getPatternNodes: function(inplacePatternSelector) {
     var nodes = {editNode: null, additionalNodes: []};
     var selectedNodes = $$(inplacePatternSelector);
     var firstNode = selectedNodes.first();
-    
+
     if (typeof(firstNode) !== 'undefined') {
       // AS inplace_edit_control_container -> we have to select all child nodes
       // Workaround for ie which does not support css > selector
@@ -494,7 +494,7 @@ ActiveScaffold.InPlaceEditor = Class.create(Ajax.InPlaceEditor, {
     }
     return nodes;
   },
-  
+
   setValue: function(editField, textValue) {
     var function_name = 'setValueFor' + editField.nodeName.toLowerCase();
     if (typeof(this[function_name]) == 'function') {
@@ -503,7 +503,7 @@ ActiveScaffold.InPlaceEditor = Class.create(Ajax.InPlaceEditor, {
       editField.value = textValue;
     }
   },
-  
+
   setValueForselect: function(editField, textValue) {
     var len = editField.options.length;
     var i = 0;

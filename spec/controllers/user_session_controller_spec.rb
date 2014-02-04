@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UserSessionsController do
-  before do 
+  before do
     activate_authlogic
   end
 
-  describe "not logged in" do 
+  describe "not logged in" do
     describe "post => create" do
       describe "success" do
         describe "first time" do
@@ -52,14 +52,14 @@ describe UserSessionsController do
             flash[:notice].should == "Login efetuado com sucesso."
           end
         end
-          
-          
+
+
       end
 
       describe "failure" do
         before :each do
         end
-        def post_it 
+        def post_it
           post :create, :user_session => {:password => "1234", :email => ""}
         end
         it "should not create a session" do

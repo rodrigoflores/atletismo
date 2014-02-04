@@ -24,7 +24,7 @@ module ActiveScaffold::DataStructures
 
     # the action-path for this link. what page to request? this is required!
     attr_accessor :action
-    
+
     # the controller for this action link. if nil, the current controller should be assumed.
     attr_accessor :controller
 
@@ -48,7 +48,7 @@ module ActiveScaffold::DataStructures
     def confirm?
       @confirm ? true : false
     end
-    
+
     # if the action uses a DHTML based (i.e. 2-phase) confirmation
     attr_writer :dhtml_confirm
     def dhtml_confirm

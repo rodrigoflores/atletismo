@@ -9,16 +9,16 @@ describe Treinador::ProfilesController do
       @treinador = Treinador.find(@treinador_user.id)
       UserSession.create(@treinador_user)
     end
-    
+
 		describe "get show" do
-			before :each do 
+			before :each do
 				get :show
 			end
-		
+
 			it "should assign treinador" do
 				assigns[:treinador].should == @treinador
 			end
-			
+
 			it "should render show" do
 				render_template "show"
 			end

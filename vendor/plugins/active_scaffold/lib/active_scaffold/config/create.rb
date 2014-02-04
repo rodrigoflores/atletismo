@@ -38,6 +38,6 @@ module ActiveScaffold::Config
 
     # whether the form stays open after a create or not
     attr_accessor :edit_after_create
-    
+
   end
 end

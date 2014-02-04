@@ -99,7 +99,7 @@ Rico.Color.createColorFromBackground = function(elem) {
 
 /* next two functions changed to mootools color.js functions */
 Rico.Color.HSBtoRGB = function(hue, saturation, brightness) {
-			
+
 			var br = Math.round(brightness / 100 * 255);
 			if (this[1] == 0){
 				return [br, br, br];

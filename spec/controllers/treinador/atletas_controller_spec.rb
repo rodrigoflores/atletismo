@@ -9,7 +9,7 @@ describe Treinador::AtletasController do
       @atleta = Factory(:atleta, :treinador_id => @treinador.id)
       @treinador_2 = Factory(:treinador, :email => "aaa@bbb.com")
       @atleta_2 = Factory(:atleta, :treinador_id => @treinador_2.id, :email => "ac@ad.com")
-        
+
       UserSession.create @treinador
     end
 
@@ -26,7 +26,7 @@ describe Treinador::AtletasController do
     end
 
     describe "somatorio_de_cargas" do
-      
+
       def get_it
         get :somatorio_de_cargas, :id => @atleta.atleta_id, :somatorio_de_carga => {
               "data_inicial(1i)" => 2010, "data_inicial(2i)" => 1, "data_inicial(3i)" => 1,

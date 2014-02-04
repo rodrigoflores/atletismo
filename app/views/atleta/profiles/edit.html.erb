@@ -12,7 +12,7 @@
 			selectBox.options.add(option);
 		}
 	}
-	 
+
 	function removeProva() {
 		var selectBox = document.getElementById('atleta_participa_provas');
 		var i;
@@ -22,14 +22,14 @@
 			}
 		}
 	}
- 
+
 	 function selectAllProvas() {
 		var selectBox = document.getElementById('atleta_participa_provas');
 		for (var i = 0; i < selectBox.options.length; i++) {
 			selectBox.options[i].selected = true;
 		}
 	 }
-	 
+
 </script>
 
 <h1>Editar atleta</h1>
@@ -52,7 +52,7 @@
   </p>
 
   <p id="provas">
-  	Provas que corre: 
+  	Provas que corre:
 	<input id="nova_prova" type="text"/>
 	<input type="button" onclick="addProva()" value="+" alt="Adicionar Item" style="width: 30px"/>
 	<br />
@@ -60,9 +60,9 @@
 	<%= collection_select :atleta, :participa_provas, @atleta.participa_provas, :id, :nome, {}, :multiple => true, :size => 5 %>
   <input type="button" onclick="removeProva()" value="-" alt="Excluir Item" style="width: 30px"/>
   </p>
-  
-  
-  
+
+
+
   <p>
     <b><%= f.label :treinador %></b>
     <%= select :atleta, :treinador_id, @treinadores.collect { |p| [p.usuario.name, p.id]},  { :include_blank => false } %>

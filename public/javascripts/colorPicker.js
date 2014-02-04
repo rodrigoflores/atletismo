@@ -1,9 +1,9 @@
 
-/* 
+/*
    colorPicker for script.aculo.us, version 1.0
    REQUIRES prototype.js, yahoo.color.js and script.aculo.us
    written by Matthias Platzer AT knallgrau.at
-   for a detailled documentation go to http://www.knallgrau.at/code/colorpicker 
+   for a detailled documentation go to http://www.knallgrau.at/code/colorpicker
  */
 
 if(!Control) var Control = {};
@@ -35,7 +35,7 @@ Control.ColorPicker.prototype = {
       Control.ColorPicker.CONTROL = {};
       if (!$("colorpicker")) {
         var control = Builder.node('div', {id: 'colorpicker'});
-        control.innerHTML = 
+        control.innerHTML =
           '<div id="colorpicker-div">' + (
             // apply png fix for ie 5.5 and 6.0
             (/MSIE ((6)|(5\.5))/gi.test(navigator.userAgent) && /windows/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) ?
@@ -44,7 +44,7 @@ Control.ColorPicker.prototype = {
              ) +
           '<div id="colorpicker-bg-overlay" style="z-index: 1002;"></div>' +
           '<div id="colorpicker-selector"><img src="' + this.options.IMAGE_BASE + 'select.gif" width="11" height="11" alt="" /></div></div>' +
-          '<div id="colorpicker-hue-container"><img src="' + this.options.IMAGE_BASE + 'hue.png" id="colorpicker-hue-bg-img"><div id="colorpicker-hue-slider"><div id="colorpicker-hue-thumb"><img src="' + this.options.IMAGE_BASE + 'hline.png"></div></div></div>' + 
+          '<div id="colorpicker-hue-container"><img src="' + this.options.IMAGE_BASE + 'hue.png" id="colorpicker-hue-bg-img"><div id="colorpicker-hue-slider"><div id="colorpicker-hue-thumb"><img src="' + this.options.IMAGE_BASE + 'hline.png"></div></div></div>' +
           '<div id="colorpicker-footer"><span id="colorpicker-value">#<input type="text" onclick="this.select()" id="colorpicker-value-input" name="colorpicker-value" value=""></input></span><button id="colorpicker-okbutton">OK</button></div>'
         document.body.appendChild(control);
       }
@@ -58,7 +58,7 @@ Control.ColorPicker.prototype = {
         picker : new Draggable($('colorpicker-selector'), {
           snap: function(x, y) {
             return [
-              Math.min(Math.max(x, 0), Control.ColorPicker.activeColorPicker.control.pickerArea.offsetWidth), 
+              Math.min(Math.max(x, 0), Control.ColorPicker.activeColorPicker.control.pickerArea.offsetWidth),
               Math.min(Math.max(y, 0), Control.ColorPicker.activeColorPicker.control.pickerArea.offsetHeight)
             ];
           },
@@ -93,7 +93,7 @@ Control.ColorPicker.prototype = {
   },
   toggle : function(event) {
     this[(this.isOpen) ? "close" : "open"](event);
-    Event.stop(event);    
+    Event.stop(event);
   },
   open : function(event) {
     Control.colorPickers.each(function(colorPicker) {

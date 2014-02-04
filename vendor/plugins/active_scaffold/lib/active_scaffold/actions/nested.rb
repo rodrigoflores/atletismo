@@ -71,12 +71,12 @@ module ActiveScaffold::Actions
       else
         # Production mode is caching this link into a non nested scaffold
         active_scaffold_config.action_links.delete('new_existing') if active_scaffold_config.action_links['new_existing']
-        
+
         if active_scaffold_config.nested.shallow_delete
           active_scaffold_config.action_links.delete("destroy_existing") if active_scaffold_config.action_links['destroy_existing']
           active_scaffold_config.action_links.add('destroy', :label => 'Delete', :type => :record, :confirm => 'are_you_sure', :method => :delete, :position => false, :security_method => :delete_authorized?) unless active_scaffold_config.action_links['destroy']
         end
-        
+
       end
     end
 
@@ -176,7 +176,7 @@ module ActiveScaffold::Actions::Nested
         type.yaml { render :text => successful? ? "" : response_object.to_yaml, :content_type => Mime::YAML, :status => response_status }
       end
     end
-    
+
     protected
 
     def after_create_save(record)

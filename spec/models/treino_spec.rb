@@ -22,29 +22,29 @@ describe Treino do
   describe "Treino" do
     it { should belong_to :atleta }
   end
-  
+
   describe "Somatório de Cargas" do
     it "should calculate full charge" do
-      Treino.somatorio_de_cargas(@atleta_atleta, @date1, @date2).should == {"m" => 1200.0, "kg" => 600.0, "unidades" => 600.0}       
+      Treino.somatorio_de_cargas(@atleta_atleta, @date1, @date2).should == {"m" => 1200.0, "kg" => 600.0, "unidades" => 600.0}
     end
     it "should calculate nothing" do
-      Treino.somatorio_de_cargas(@atleta_atleta, @date2.next, @date2.next).should == {"m" => 0.0, "kg" => 0.0, "unidades" => 0.0}       
+      Treino.somatorio_de_cargas(@atleta_atleta, @date2.next, @date2.next).should == {"m" => 0.0, "kg" => 0.0, "unidades" => 0.0}
     end
     it "should calculate only first day" do
-      Treino.somatorio_de_cargas(@atleta_atleta, @date1, @date1.next).should == {"m" => 1200.0, "kg" => 0.0, "unidades" => 0.0}       
+      Treino.somatorio_de_cargas(@atleta_atleta, @date1, @date1.next).should == {"m" => 1200.0, "kg" => 0.0, "unidades" => 0.0}
     end
     it "should calculate only second day" do
-      Treino.somatorio_de_cargas(@atleta_atleta, @date1.next, @date2).should == {"m" => 0.0, "kg" => 600.0, "unidades" => 600.0}       
+      Treino.somatorio_de_cargas(@atleta_atleta, @date1.next, @date2).should == {"m" => 0.0, "kg" => 600.0, "unidades" => 600.0}
     end
-    
+
   end
-  
+
   describe "validation" do
   	before do
       @treino2 = Factory(:treino, :atleta => Atleta.find(@atleta.atleta_id), :date => "2010-05-11")
   	end
 		should_validate_uniqueness_of :date, :scope => :atleta_id
 	end
-  
-  
+
+
 end

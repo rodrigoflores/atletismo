@@ -12,8 +12,8 @@ class ChangeTestesTable < ActiveRecord::Migration
 		end
   end
 
-  def self.down 
-  	change_table :testes do |t| 
+  def self.down
+  	change_table :testes do |t|
 			t.integer :metros
 			t.integer :centimetros
 			t.integer :kg
